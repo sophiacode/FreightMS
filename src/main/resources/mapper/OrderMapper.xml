@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.freight.ms.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.freight.ms.model.Order">
+    <!--
+      @MBG Generated
+    -->
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="consignor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="driver_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="receiver_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="receiver_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="start_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="end_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="price" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="coupon_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="distance" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="goods_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="remark" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="order_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pay_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      @MBG Generated
+    -->
+    id, order_no, consignor_id, driver_id, receiver_name, receiver_phone, start_address, 
+    end_address, price, coupon_id, distance, goods_type, remark, order_status, pay_status, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      @MBG Generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      @MBG Generated
+    -->
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.freight.ms.model.Order">
+    <!--
+      @MBG Generated
+    -->
+    insert into order (id, order_no, consignor_id, 
+      driver_id, receiver_name, receiver_phone, 
+      start_address, end_address, price, 
+      coupon_id, distance, goods_type, 
+      remark, order_status, pay_status, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{consignorId,jdbcType=INTEGER}, 
+      #{driverId,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, 
+      #{startAddress,jdbcType=VARCHAR}, #{endAddress,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{couponId,jdbcType=INTEGER}, #{distance,jdbcType=DOUBLE}, #{goodsType,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, #{payStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.freight.ms.model.Order">
+    <!--
+      @MBG Generated
+    -->
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="consignorId != null">
+        consignor_id,
+      </if>
+      <if test="driverId != null">
+        driver_id,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone,
+      </if>
+      <if test="startAddress != null">
+        start_address,
+      </if>
+      <if test="endAddress != null">
+        end_address,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="couponId != null">
+        coupon_id,
+      </if>
+      <if test="distance != null">
+        distance,
+      </if>
+      <if test="goodsType != null">
+        goods_type,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null">
+        #{consignorId,jdbcType=INTEGER},
+      </if>
+      <if test="driverId != null">
+        #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddress != null">
+        #{startAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddress != null">
+        #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="couponId != null">
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsType != null">
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.Order">
+    <!--
+      @MBG Generated
+    -->
+    update order
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null">
+        consignor_id = #{consignorId,jdbcType=INTEGER},
+      </if>
+      <if test="driverId != null">
+        driver_id = #{driverId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddress != null">
+        start_address = #{startAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddress != null">
+        end_address = #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="couponId != null">
+        coupon_id = #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="distance != null">
+        distance = #{distance,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsType != null">
+        goods_type = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.freight.ms.model.Order">
+    <!--
+      @MBG Generated
+    -->
+    update order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      consignor_id = #{consignorId,jdbcType=INTEGER},
+      driver_id = #{driverId,jdbcType=INTEGER},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      start_address = #{startAddress,jdbcType=VARCHAR},
+      end_address = #{endAddress,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      coupon_id = #{couponId,jdbcType=INTEGER},
+      distance = #{distance,jdbcType=DOUBLE},
+      goods_type = #{goodsType,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      pay_status = #{payStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

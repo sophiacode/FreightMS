@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.freight.ms.dao.DriverMapper">
+  <resultMap id="BaseResultMap" type="com.freight.ms.model.Driver">
+    <!--
+      @MBG Generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="auth_state" jdbcType="INTEGER" property="authState" />
+    <result column="online_state" jdbcType="INTEGER" property="onlineState" />
+    <result column="work_state" jdbcType="INTEGER" property="workState" />
+    <result column="point" jdbcType="INTEGER" property="point" />
+    <result column="evaluate_grade" jdbcType="REAL" property="evaluateGrade" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="license_number" jdbcType="VARCHAR" property="licenseNumber" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="idcard_photo" jdbcType="VARCHAR" property="idcardPhoto" />
+    <result column="license_photo" jdbcType="VARCHAR" property="licensePhoto" />
+    <result column="driver_license_photo" jdbcType="VARCHAR" property="driverLicensePhoto" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      @MBG Generated
+    -->
+    id, telephone, password, salt, name, status, auth_state, online_state, work_state, 
+    point, evaluate_grade, idcard, license_number, photo, idcard_photo, license_photo, 
+    driver_license_photo, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      @MBG Generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from driver
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      @MBG Generated
+    -->
+    delete from driver
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.freight.ms.model.Driver">
+    <!--
+      @MBG Generated
+    -->
+    insert into driver (id, telephone, password, 
+      salt, name, status, 
+      auth_state, online_state, work_state, 
+      point, evaluate_grade, idcard, 
+      license_number, photo, idcard_photo, 
+      license_photo, driver_license_photo, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{telephone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{authState,jdbcType=INTEGER}, #{onlineState,jdbcType=INTEGER}, #{workState,jdbcType=INTEGER}, 
+      #{point,jdbcType=INTEGER}, #{evaluateGrade,jdbcType=REAL}, #{idcard,jdbcType=VARCHAR}, 
+      #{licenseNumber,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{idcardPhoto,jdbcType=VARCHAR}, 
+      #{licensePhoto,jdbcType=VARCHAR}, #{driverLicensePhoto,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.freight.ms.model.Driver">
+    <!--
+      @MBG Generated
+    -->
+    insert into driver
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="authState != null">
+        auth_state,
+      </if>
+      <if test="onlineState != null">
+        online_state,
+      </if>
+      <if test="workState != null">
+        work_state,
+      </if>
+      <if test="point != null">
+        point,
+      </if>
+      <if test="evaluateGrade != null">
+        evaluate_grade,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="licenseNumber != null">
+        license_number,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="idcardPhoto != null">
+        idcard_photo,
+      </if>
+      <if test="licensePhoto != null">
+        license_photo,
+      </if>
+      <if test="driverLicensePhoto != null">
+        driver_license_photo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="authState != null">
+        #{authState,jdbcType=INTEGER},
+      </if>
+      <if test="onlineState != null">
+        #{onlineState,jdbcType=INTEGER},
+      </if>
+      <if test="workState != null">
+        #{workState,jdbcType=INTEGER},
+      </if>
+      <if test="point != null">
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateGrade != null">
+        #{evaluateGrade,jdbcType=REAL},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null">
+        #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardPhoto != null">
+        #{idcardPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePhoto != null">
+        #{licensePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicensePhoto != null">
+        #{driverLicensePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.Driver">
+    <!--
+      @MBG Generated
+    -->
+    update driver
+    <set>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="authState != null">
+        auth_state = #{authState,jdbcType=INTEGER},
+      </if>
+      <if test="onlineState != null">
+        online_state = #{onlineState,jdbcType=INTEGER},
+      </if>
+      <if test="workState != null">
+        work_state = #{workState,jdbcType=INTEGER},
+      </if>
+      <if test="point != null">
+        point = #{point,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateGrade != null">
+        evaluate_grade = #{evaluateGrade,jdbcType=REAL},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNumber != null">
+        license_number = #{licenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardPhoto != null">
+        idcard_photo = #{idcardPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="licensePhoto != null">
+        license_photo = #{licensePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicensePhoto != null">
+        driver_license_photo = #{driverLicensePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.freight.ms.model.Driver">
+    <!--
+      @MBG Generated
+    -->
+    update driver
+    set telephone = #{telephone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      auth_state = #{authState,jdbcType=INTEGER},
+      online_state = #{onlineState,jdbcType=INTEGER},
+      work_state = #{workState,jdbcType=INTEGER},
+      point = #{point,jdbcType=INTEGER},
+      evaluate_grade = #{evaluateGrade,jdbcType=REAL},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      license_number = #{licenseNumber,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      idcard_photo = #{idcardPhoto,jdbcType=VARCHAR},
+      license_photo = #{licensePhoto,jdbcType=VARCHAR},
+      driver_license_photo = #{driverLicensePhoto,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

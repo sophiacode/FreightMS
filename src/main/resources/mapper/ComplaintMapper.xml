@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.freight.ms.dao.ComplaintMapper">
+  <resultMap id="BaseResultMap" type="com.freight.ms.model.Complaint">
+    <!--
+      @MBG Generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+    <result column="process" jdbcType="VARCHAR" property="process" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      @MBG Generated
+    -->
+    id, order_id, type, reason, status, admin_id, process
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      @MBG Generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from complaint
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      @MBG Generated
+    -->
+    delete from complaint
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.freight.ms.model.Complaint">
+    <!--
+      @MBG Generated
+    -->
+    insert into complaint (id, order_id, type, 
+      reason, status, admin_id, 
+      process)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{reason,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, 
+      #{process,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.freight.ms.model.Complaint">
+    <!--
+      @MBG Generated
+    -->
+    insert into complaint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="process != null">
+        process,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="process != null">
+        #{process,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.Complaint">
+    <!--
+      @MBG Generated
+    -->
+    update complaint
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="process != null">
+        process = #{process,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.freight.ms.model.Complaint">
+    <!--
+      @MBG Generated
+    -->
+    update complaint
+    set order_id = #{orderId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      process = #{process,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
