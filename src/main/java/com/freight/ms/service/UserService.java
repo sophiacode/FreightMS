@@ -1,5 +1,7 @@
 package com.freight.ms.service;
 
+import com.freight.ms.model.User;
+
 import java.util.Map;
 
 /**
@@ -8,5 +10,11 @@ import java.util.Map;
 
 public interface UserService {
 
+    User findUserByUsername(String username);
+
     String findUsers(Map<String, Object> paramMap);
+
+    String addUser(User user);
+
+
 }
