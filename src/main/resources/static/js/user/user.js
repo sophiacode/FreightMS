@@ -1,5 +1,3 @@
-var layerIndex = -1;
-
 var initTable = function() {
     $("#table_user").bootstrapTable({
         url: '/user_manage/list',         //请求后台的URL（*）
@@ -89,26 +87,10 @@ var reset = function() {
     $("#table_user").bootstrapTable('refresh');
 }
 
-var refresh = function() {
-    $("#table_user").bootstrapTable('refresh');
-}
-
-var showAdd = function() {
-    layerIndex = layer.open({
-        type: 2,
-        title: '添加用户',
-        maxmin: true,
-        shadeClose: true, //点击遮罩关闭层
-        area : ['800px' , '520px'],
-        content: URL_HEAD + '/user_manage/user_add'
-    });
-};
-
 $(function () {
     initTable();
     initDateTimePicker();
 
     $('#btn_search').click(search);
     $('#btn_reset').click(reset);
-    $('#btn_add').click(showAdd);
 });

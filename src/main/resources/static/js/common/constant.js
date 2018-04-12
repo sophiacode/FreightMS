@@ -1,1 +1,0 @@
-var URL_HEAD = "http://localhost:8000"
