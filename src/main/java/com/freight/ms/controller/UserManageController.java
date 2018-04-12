@@ -85,6 +85,7 @@ public class UserManageController {
         user.setAge(age);
         user.setTelephone(telephone);
         user.setType(type);
+        user.setStatus(0);
 
         userService.addUser(user);
 

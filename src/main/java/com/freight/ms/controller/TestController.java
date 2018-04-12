@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class TestController {
-
     @RequestMapping("/notification")
     String login(){
         return "/user/user.html";
     }
-
-
 }

@@ -11,16 +11,15 @@ var loginSubmit = function() {
 
     $.ajaxSetup({
         url:URL_HEAD + "/login",
-        async:false,
+        async:true,
         data:data,
         dataType:"json",
         success:function(result){
-            console.log("success");
-            console.log(result.toString());
+            if(result.url);
         },
         error:function(xhr,status,error){
+            console.log(xhr.responseText);
             var json = JSON.parse(xhr.responseText);
-
             console.log(json['msg']);
         }
     });

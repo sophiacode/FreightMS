@@ -15,6 +15,4 @@ public interface UserService {
     String findUsers(Map<String, Object> paramMap);
 
     String addUser(User user);
-
-
 }

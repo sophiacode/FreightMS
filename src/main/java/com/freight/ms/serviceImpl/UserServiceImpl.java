@@ -5,9 +5,9 @@ import com.freight.ms.dao.UserMapper;
 import com.freight.ms.model.User;
 import com.freight.ms.service.UserService;
 import com.freight.ms.util.PasswordUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService{
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     public User findUserByUsername(String username){

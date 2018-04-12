@@ -18,8 +18,11 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
     private Ehcache passwordRetryCache;
 
     public RetryLimitHashedCredentialsMatcher() {
-        CacheManager cacheManager = CacheManager.newInstance(CacheManager.class.getClassLoader().getResource("ehcache.xml"));
+        CacheManager cacheManager = CacheManager.newInstance(CacheManager.class.getClassLoader().getResource("config/ehcache.xml"));
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
+
+        this.setHashAlgorithmName("md5");
+        this.setHashIterations(2);
     }
 
     @Override
