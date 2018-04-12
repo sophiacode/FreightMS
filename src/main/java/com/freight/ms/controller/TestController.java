@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class TestController {
 
-    @RequestMapping("/")
+    @RequestMapping("/notification")
     String login(){
         return "/user/user.html";
     }

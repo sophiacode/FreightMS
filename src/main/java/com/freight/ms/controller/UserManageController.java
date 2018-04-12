@@ -1,5 +1,6 @@
 package com.freight.ms.controller;
 
+import com.freight.ms.model.User;
 import com.freight.ms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,11 @@ public class UserManageController {
         return "/user/user.html";
     }
 
+    @RequestMapping("/user_add")
+    public String addView() {
+        return "/user/user_add.html";
+    }
+
     @RequestMapping(value = "/list")
     @ResponseBody
      public String getList(@RequestParam(value = "username",required = false) String username,
@@ -38,8 +44,6 @@ public class UserManageController {
                           @RequestParam(value = "createEndTime",required = false) String createEndTime,
                           @RequestParam(value = "limit",required = false) Integer limit,
                           @RequestParam(value = "offset",required = false) Integer offset){
-        System.out.print("username:"+username+"\n");
-
         if(limit == null){
             limit = 10;
         }
@@ -61,5 +65,29 @@ public class UserManageController {
         paramMap.put("offset", offset);
 
         return userService.findUsers(paramMap);
+    }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public String addUser(@RequestParam(value = "username") String username,
+                          @RequestParam(value = "password") String password,
+                          @RequestParam(value = "name") String name,
+                          @RequestParam(value = "sex") Integer sex,
+                          @RequestParam(value = "age", required = false) Integer age,
+                          @RequestParam(value = "telephone", required = false) String telephone,
+                          @RequestParam(value = "type") Integer type){
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setName(name);
+        user.setSex(sex);
+        user.setAge(age);
+        user.setTelephone(telephone);
+        user.setType(type);
+
+        userService.addUser(user);
+
+        return "test ajax";
     }
 }

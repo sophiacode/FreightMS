@@ -56,4 +56,6 @@ public interface UserMapper {
     List<User> selectByParams(Map<String, Object> paramMap);
 
     int getCount();
+
+    User selectByUsername(String username);
 }
