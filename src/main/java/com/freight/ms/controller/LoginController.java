@@ -9,7 +9,10 @@ import com.freight.ms.model.User;
 import com.freight.ms.service.UserService;
 import com.freight.ms.util.JsonUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,14 +35,11 @@ public class LoginController {
 
     @RequestMapping("/")
     public String loginView(HttpSession session){
-        return "/sign-in.html";
-
-
-        /*if( session.getAttribute(SessionConstant.CURRENT_USER) == null ){
+        if( session.getAttribute(SessionConstant.CURRENT_USER) == null ){
             return "/sign-in.html";
         } else{
-            return URLConstant.REDIRECT + URLConstant.URL_NOTIFACTION;
-        }*/
+            return "redirect:" + URLConstant.URL_MANAGE;
+        }
     }
 
     @RequestMapping("/login")
@@ -59,17 +59,21 @@ public class LoginController {
             User user = userService.findUserByUsername(username);
             session.setAttribute(SessionConstant.CURRENT_USER, user);
 
-            return SuccessJson.getJson("登录成功", URLConstant.URL_NOTIFACTION);
-        }catch (AuthenticationException e){
-            if(e.getClass() == UnknownAccountException.class || e.getClass() == IncorrectCredentialsException.class){
-                throw new BusinessException(BusinessEnumException.LOGIN_ERROR);
-            }else if(e.getClass() == LockedAccountException.class){
-                throw new BusinessException(BusinessEnumException.LOGIN_USER_FREEZE);
-            }else{
-                throw new BusinessException(BusinessEnumException.LOGIN_UNKNOWN);
-            }
-        }catch (Exception e2){
-            throw new BusinessException(BusinessEnumException.UNKNOWN_ERROR);
+            return SuccessJson.getJson("登录成功", URLConstant.URL_MANAGE);
+        }catch (UnknownAccountException | IncorrectCredentialsException e1){
+            throw new BusinessException(BusinessEnumException.LOGIN_ERROR);
+        }catch (LockedAccountException e2){
+            throw new BusinessException(BusinessEnumException.LOGIN_USER_FREEZE);
+        } catch (Exception e3){
+            throw new BusinessException(BusinessEnumException.LOGIN_UNKNOWN);
         }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(){
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.logout();
+
+        return "redirect:" + URLConstant.URL_PREFIX;
     }
 }

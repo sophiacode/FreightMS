@@ -3,12 +3,12 @@ var table;
 
 var initTable = function() {
     table.bootstrapTable({
-        url: URL_USER_LIST,                 //请求后台的URL（*）
+        url: //TODO:URL,                    //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
         toolbar: '#toolbar',                //工具按钮用哪个容器
-        cache: false,                      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-        pagination: true,                  //是否显示分页（*）
-        sortable: false,                   //是否启用排序
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: false,                    //是否启用排序
         queryParamsType:'limit',
         sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
         pageNumber:1,                       //初始化加载第一页，默认第一页
@@ -24,35 +24,8 @@ var initTable = function() {
         }, {
             field: 'id',
             title: 'id'
-        }, {
-            field: 'username',
-            title: '用户名'
-        }, {
-            field: 'name',
-            title: '姓名'
-        }, {
-            field: 'sex',
-            title: '性别'
-        }, {
-            field: 'age',
-            title: '年龄'
-        }, {
-            field: 'telephone',
-            title: '手机号'
-        }, {
-            field: 'status',
-            title: '状态'
-        }, {
-            field: 'type',
-            title: '类型'
-        },
-            {
-            field: 'roleName',
-            title: '角色'
-        }, {
-            field: 'createTime',
-            title: '创建时间'
-        }]
+        }, //TODO:其他列
+        ]
     })
 };
 
@@ -65,13 +38,7 @@ var initDateTimePicker = function() {
 
 var search = function() {
     var queryParams = {
-        username : $("#username").val(),
-        name : $("#name").val(),
-        sex : $("#sex").val(),
-        age : $("#age").val(),
-        telephone : $("#telephone").val(),
-        status : $("#status").val(),
-        type : $("#type").val(),
+        //TODO:查询条件取值
         createStartTime : $("#createStartTime").val(),
         createEndTime : $("#createEndTime").val()
     };
@@ -80,13 +47,7 @@ var search = function() {
 };
 
 var reset = function() {
-    $("#username").val("");
-    $("#name").val("");
-    $("#sex").val("");
-    $("#age").val("");
-    $("#telephone").val("");
-    $("#status").val("");
-    $("#type").val("");
+    //TODO:查询条件清空
     $("#createStartTime").val("");
     $("#createEndTime").val("");
 
@@ -100,11 +61,11 @@ var refresh = function() {
 var showAdd = function() {
     layerIndex = layer.open({
         type: 2,
-        title: '添加用户',
+        title: '添加${config.modelCh}',
         maxmin: true,
         shadeClose: true, //点击遮罩关闭层
         area : ['800px' , '520px'],
-        content: URL_USER_ADD_VIEW
+        content: //TODO:URL
     });
 };
 
@@ -117,15 +78,15 @@ var showEdit = function() {
 
     layerIndex = layer.open({
         type: 2,
-        title: '修改用户资料',
+        title: '修改${config.modelCh}',
         maxmin: true,
         shadeClose: true,
         area: ['800px', '520px'],
-        content:URL_USER_EDIT_VIEW + "/" + selected[0].id
+        content: + "/" + selected[0].id //TODO:URL
     })
 };
 
-var deleteUser = function() {
+var delete${modelEn} = function() {
     var selected = table.bootstrapTable('getSelections');
     if(selected.length == 0){
         layer.msg("请先选择至少一条记录",{icon:2});
@@ -133,12 +94,12 @@ var deleteUser = function() {
     }
 
     var idArray = new Array();
-    var str = "确定要删除用户";
+    var str = "确定要删除${config.modelCh}";
     var i;
     for(i in selected){
         idArray.push(selected[i].id);
 
-        str += selected[i].username;
+        str += selected[i].username; //TODO:修改字段
         if(i != selected.length - 1){
             str += "、";
         }
@@ -146,7 +107,7 @@ var deleteUser = function() {
     str += "吗？";
 
     $.ajaxSetup({
-        url:URL_USER_DELETE,
+        url:,//TODO:URL
         async:true,
         traditional:true,
         contentType: "application/json",
@@ -172,59 +133,8 @@ var deleteUser = function() {
     });
 };
 
-var changeStatus = function() {
-    var selected = table.bootstrapTable('getSelections');
-    if(selected.length == 0){
-        layer.msg("请先选择至少一条记录",{icon:2});
-        return;
-    }
-
-    var idArray = new Array();
-    var i;
-    for(i in selected){
-        idArray.push(selected[i].id);
-    }
-
-    $.ajaxSetup({
-        url:URL_USER_STATUS,
-        async:true,
-        traditional:true,
-        contentType: "application/json",
-        data: {idArray : idArray},
-        dataType:"json",
-        success:function(data){
-            layer.msg(data.msg, {icon : 1});
-            refresh();
-        },
-        error:function(xhr){
-            console.log(xhr);
-            var json = JSON.parse(xhr.responseText);
-            layer.msg(json['msg'], { icon: 2} );
-        }
-    });
-
-    $.ajax();
-};
-
-var showSetRole = function() {
-    var selected = table.bootstrapTable('getSelections');
-    if(selected.length != 1){
-        layer.msg("请先选择一条记录", {icon : 2});
-        return;
-    }
-
-    layerIndex = layer.open({
-        type: 2,
-        title: '分配角色',
-        maxmin: true,
-        shadeClose: true,
-        area: ['400px', '300px'],
-        content:URL_USER_ROLE_VIEW + "/" + selected[0].id
-    })
-};
-
 $(function () {
-    table = $('#userTable');
+    table = $('#${config.modelEn}Table');
 
     initTable();
     initDateTimePicker();
@@ -233,7 +143,5 @@ $(function () {
     $('#btn_reset').click(reset);
     $('#btn_add').click(showAdd);
     $('#btn_edit').click(showEdit);
-    $('#btn_delete').click(deleteUser);
-    $('#btn_freeze').click(changeStatus);
-    $('#btn_role').click(showSetRole);
+    $('#btn_delete').click(delete${modelEn});
 });

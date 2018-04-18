@@ -1,53 +1,55 @@
 <%
-    layout("/WEB-INF/views/common/container.html",{"title":"添加用户"}){
+layout("/WEB-INF/views/common/container.html", {"title":"修改用户"}){
 %>
 
 <div class="row">
     <div class="col-sm-12">
-        <form role="form" id="userInfoForm" action="">
-            <input type="hidden" id="id">
+        <form role="form" id="userInfoForm">
+            <input type="hidden" id="id" value="${user.id}">
+            <input type="hidden" id="sexValue" value="${user.sex}">
+            <input type="hidden" id="typeValue" value="${user.type}">
+
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="username">用户名</label>
-                        <input type="text" class="form-control" id="username" name="username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="password2">确认密码</label>
-                        <input type="password" class="form-control" id="password2" name="password2">
+                        <input type="text" class="form-control" id="username" value="${user.username}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="name">姓名</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="name" name="name" value="${user.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">新密码</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password2">确认密码</label>
+                        <input type="password" class="form-control" id="new_password2" name="new_password2">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="sex">性别</label>
-                        <select class="form-control" id="sex">
+                        <select class="form-control" id="sex" name="sex">
                             <option value="1">男</option>
                             <option value="2">女</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="age">年龄</label>
-                        <input type="text" class="form-control" id="age" name="age">
+                        <input type="text" class="form-control" id="age" name="age" value="${user.age}">
                     </div>
                     <div class="form-group">
                         <label for="telephone">手机号</label>
-                        <input type="text" class="form-control" id="telephone" name="telephone">
+                        <input type="text" class="form-control" id="telephone" name="telephone" value="${user.telephone}">
                     </div>
                     <div class="form-group">
                         <label for="type">类型</label>
-                        <select class="form-control" id="type">
-                            <option value="0" selected="selected">普通用户</option>
+                        <select class="form-control" id="type" name="type">
+                            <option value="0">普通用户</option>
                             <option value="1">超级管理员</option>
                         </select>
-                        <input type="hidden" id="typeValue" value="0">
                     </div>
                 </div>
             </div>
@@ -55,7 +57,7 @@
             <div class="row" style="margin-top:20px">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3">
-                    <button type="button" id="btn_add_submit" class="btn btn-success btn-block">提交</button>
+                    <button type="button" id="btn_edit_submit" class="btn btn-success btn-block">提交</button>
                 </div>
                 <div class="col-sm-3">
                     <button type="button" id="btn_cancel" class="btn btn-default btn-block">取消</button>
@@ -69,5 +71,5 @@
 </div>
 
 <%
-    }
+}
 %>

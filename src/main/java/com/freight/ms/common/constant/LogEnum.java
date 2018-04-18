@@ -1,22 +1,16 @@
 package com.freight.ms.common.constant;
 
 /**
- * Created by wyq on 2018/4/9.
+ * Created by wyq on 2018/4/17.
  */
-public enum UserEnum{
-    USER_SEX_MAN(1, "男"),
-    USER_SEX_WOMAN(2, "女"),
-
-    USER_STATUS_OK(0, "正常"),
-    USER_STATUS_FREEZE(1, "冻结"),
-
-    USER_TYPE_NORMAL(0, "普通用户"),
-    USER_TYPE_ADMIN(1, "超级管理员");
+public enum LogEnum {
+    LOG_STATUS_SUCCESS(1, "成功"),
+    LOG_STATUS_FAIL(2, "失败");
 
     private int code;
     private String name;
 
-    UserEnum(int code, String name) {
+    LogEnum(int code, String name) {
         this.name = name;
         this.code = code;
     }

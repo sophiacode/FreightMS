@@ -1,5 +1,5 @@
 <%
-    layout("/WEB-INF/views/common/navbar.html"){
+    layout("/WEB-INF/views/common/navbar.html", {'title':'用户管理'}){
 %>
 
 <div class="row">
@@ -103,33 +103,33 @@
             </div>
         </div>
         <div class="btn-group" id="toolbar">
-            <% if(shiro.hasPermission("")){ %>
+            <% if(shiro.hasPermission("user:add")){ %>
             <button id="btn_add" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-plus"></span> 添加
             </button>
             <% } %>
-            <% if(shiro.hasPermission("")){ %>
+            <% if(shiro.hasPermission("user:edit")){ %>
             <button id="btn_edit" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-edit"></span> 修改
             </button>
             <% } %>
-            <% if(shiro.hasPermission("")){ %>
+            <% if(shiro.hasPermission("user:delete")){ %>
             <button id="btn_delete" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-remove"></span> 删除
             </button>
             <% } %>
-            <% if(shiro.hasPermission("")){ %>
+            <% if(shiro.hasPermission("user:change_status")){ %>
             <button id="btn_freeze" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-minus"></span> 冻结
+                <span class="glyphicon glyphicon-minus"></span> 冻结/解冻
             </button>
             <% } %>
-            <% if(shiro.hasPermission("")){ %>
-            <button id="btn_setrole" class="btn btn-default" type="button">
+            <% if(shiro.hasPermission("user:change_role")){ %>
+            <button id="btn_role" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-user"></span> 分配角色
             </button>
             <% } %>
         </div>
-        <table id="table_user"></table>
+        <table id="userTable"></table>
     </div>
 </div>
 

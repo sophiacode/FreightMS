@@ -10,7 +10,7 @@ public class SuccessJson {
         JSONObject object = new JSONObject();
 
         object.put("code", 0);
-        object.put("msg", "登录成功");
+        object.put("msg", msg);
 
         return object.toJSONString();
     }

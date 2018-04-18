@@ -94,6 +94,8 @@ public class User {
      */
     private Date updateTime;
 
+    private String roleName;
+
     /**
      *
      */
@@ -356,5 +358,13 @@ public class User {
 
     public String getCredentialsSalt(){
         return username + salt;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

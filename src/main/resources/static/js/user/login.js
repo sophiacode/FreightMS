@@ -10,17 +10,18 @@ var loginSubmit = function() {
     data['isRemember'] = r[0].checked;
 
     $.ajaxSetup({
-        url:URL_HEAD + "/login",
+        url:URL_LOGIN,
         async:true,
         data:data,
         dataType:"json",
         success:function(result){
-            if(result.url);
+            if(result.url!=null){
+                window.location.href = result.url;
+            }
         },
         error:function(xhr,status,error){
-            console.log(xhr.responseText);
             var json = JSON.parse(xhr.responseText);
-            console.log(json['msg']);
+            layer.msg(json['msg']);
         }
     });
 

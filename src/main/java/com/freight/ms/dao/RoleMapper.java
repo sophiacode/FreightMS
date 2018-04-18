@@ -2,6 +2,8 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Role;
 
+import java.util.List;
+
 public interface RoleMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +46,6 @@ public interface RoleMapper {
      * @param record
      */
     int updateByPrimaryKey(Role record);
+
+    List<Role> selectAll();
 }

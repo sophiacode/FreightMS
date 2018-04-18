@@ -11,18 +11,25 @@ public class Log {
     private Integer id;
 
     /**
-     * 日志名称
+     * 日志类型（如登录日志、业务日志、异常日志）
      * 表 : log
-     * 对应字段 : name
+     * 对应字段 : type
      */
-    private String name;
+    private String type;
 
     /**
-     * 产生日志的用户id
+     * 操作名称
      * 表 : log
-     * 对应字段 : user_id
+     * 对应字段 : operation
      */
-    private Integer userId;
+    private String operation;
+
+    /**
+     * 产生日志的用户
+     * 表 : log
+     * 对应字段 : username
+     */
+    private String username;
 
     /**
      * 操作状态（1：成功，2：失败）
@@ -48,10 +55,11 @@ public class Log {
     /**
      *
      */
-    public Log(Integer id, String name, Integer userId, Integer status, String message, Date createTime) {
+    public Log(Integer id, String type, String operation, String username, Integer status, String message, Date createTime) {
         this.id = id;
-        this.name = name;
-        this.userId = userId;
+        this.type = type;
+        this.operation = operation;
+        this.username = username;
         this.status = status;
         this.message = message;
         this.createTime = createTime;
@@ -85,37 +93,55 @@ public class Log {
     /**
      * get method 
      *
-     * @return log.name：日志名称
+     * @return log.type：日志类型（如登录日志、业务日志、异常日志）
      */
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
     /**
      * set method 
      *
-     * @param name  日志名称
+     * @param type  日志类型（如登录日志、业务日志、异常日志）
      */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     /**
      * get method 
      *
-     * @return log.user_id：产生日志的用户id
+     * @return log.operation：操作名称
      */
-    public Integer getUserId() {
-        return userId;
+    public String getOperation() {
+        return operation;
     }
 
     /**
      * set method 
      *
-     * @param userId  产生日志的用户id
+     * @param operation  操作名称
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setOperation(String operation) {
+        this.operation = operation == null ? null : operation.trim();
+    }
+
+    /**
+     * get method 
+     *
+     * @return log.username：产生日志的用户
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * set method 
+     *
+     * @param username  产生日志的用户
+     */
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     /**

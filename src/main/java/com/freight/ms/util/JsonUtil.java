@@ -6,11 +6,10 @@ import com.alibaba.fastjson.JSONObject;
  * Created by wyq on 2018/4/10.
  */
 public class JsonUtil {
-    public String getJson(int code, String msg){
+    public static String getTableListJson(int count, Object list){
         JSONObject object = new JSONObject();
-        object.put("code", code);
-        object.put("msg", msg);
+        object.put("total", count);
+        object.put("rows", list);
         return object.toJSONString();
     }
-
 }

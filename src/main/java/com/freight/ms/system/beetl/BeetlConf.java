@@ -23,6 +23,7 @@ public class BeetlConf {
         //BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlConfiguration();
         ResourcePatternResolver patternResolver = ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
+
         try {
             // WebAppResourceLoader 配置root路径是关键
             WebAppResourceLoader webAppResourceLoader =

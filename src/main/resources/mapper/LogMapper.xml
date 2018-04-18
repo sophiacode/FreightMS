@@ -5,18 +5,21 @@
     <!--
       @MBG Generated
     -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="message" jdbcType="VARCHAR" property="message" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="operation" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="message" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       @MBG Generated
     -->
-    id, name, user_id, status, message, create_time
+    id, type, operation, username, status, message, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -34,16 +37,16 @@
     delete from log
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.freight.ms.model.Log">
+  <insert id="insert" parameterType="com.freight.ms.model.Log" keyProperty="id" useGeneratedKeys="true">
     <!--
       @MBG Generated
     -->
-    insert into log (id, name, user_id, 
-      status, message, create_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into log (id, type, operation, 
+      username, status, message, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, 
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.freight.ms.model.Log">
     <!--
@@ -54,11 +57,14 @@
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="type != null">
+        type,
       </if>
-      <if test="userId != null">
-        user_id,
+      <if test="operation != null">
+        operation,
+      </if>
+      <if test="username != null">
+        username,
       </if>
       <if test="status != null">
         status,
@@ -74,11 +80,14 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+      <if test="operation != null">
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -97,11 +106,14 @@
     -->
     update log
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="operation != null">
+        operation = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -120,8 +132,9 @@
       @MBG Generated
     -->
     update log
-    set name = #{name,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
+    set type = #{type,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       message = #{message,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}

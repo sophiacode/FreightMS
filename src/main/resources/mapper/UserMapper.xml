@@ -57,7 +57,7 @@
       #{roleId,jdbcType=INTEGER}, now(), now()
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.freight.ms.model.User">
+  <insert id="insertSelective" parameterType="com.freight.ms.model.User" useGeneratedKeys="true" keyProperty="id">
     <!--
       @MBG Generated
     -->
@@ -96,12 +96,7 @@
       <if test="roleId != null">
         role_id,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
+      create_time,update_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -137,12 +132,7 @@
       <if test="roleId != null">
         #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.User">
@@ -184,9 +174,7 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      update_time = now()
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>

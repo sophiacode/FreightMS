@@ -23,8 +23,8 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = (String)principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        //authorizationInfo.setRoles(userService.findRoles(username));
-        //authorizationInfo.setStringPermissions(userService.findPermissions(username));
+        authorizationInfo.addRole(userService.getRoleID(username));
+        authorizationInfo.setStringPermissions(userService.getOperationID(username));
         return authorizationInfo;
     }
 
@@ -36,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
         if(user == null) {
             throw new UnknownAccountException();//用户名不存在
         }
-        if(user.getStatus() == UserEnum.USER_STATE_FREEZE.getCode()) {
+        if(user.getStatus() == UserEnum.USER_STATUS_FREEZE.getCode()) {
             throw new LockedAccountException(); //用户锁定
         }
 

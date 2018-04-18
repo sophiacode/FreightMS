@@ -5,14 +5,19 @@
     <!--
       @MBG Generated
     -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="identifier" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="parent_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       @MBG Generated
     -->
-    id, url
+    id, name, identifier, type, parent_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -34,8 +39,10 @@
     <!--
       @MBG Generated
     -->
-    insert into operation (id, url)
-    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR})
+    insert into operation (id, name, identifier, 
+      type, parent_id)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{identifier,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{parentId, jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.freight.ms.model.Operation">
     <!--
@@ -46,16 +53,34 @@
       <if test="id != null">
         id,
       </if>
-      <if test="url != null">
-        url,
+      <if test="name != null">
+        name,
+      </if>
+      <if test="identifier != null">
+        identifier,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="parent_id != null">
+        parent_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="parent_id != null">
+        #{parentId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -65,8 +90,17 @@
     -->
     update operation
     <set>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="parent_id != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -76,7 +110,25 @@
       @MBG Generated
     -->
     update operation
-    set url = #{url,jdbcType=VARCHAR}
+    set name = #{name,jdbcType=VARCHAR},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByRoleId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from operation
+    where id in
+    (SELECT operation_id from permission where role_id = #{role_id, jdbcType=INTEGER});
+  </select>
+
+  <select id="findChildren" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from operation
+    where parent_id = #{id, jdbcType=INTEGER}
+  </select>
 </mapper>

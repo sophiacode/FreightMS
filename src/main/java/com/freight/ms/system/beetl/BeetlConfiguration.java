@@ -11,6 +11,7 @@ public class BeetlConfiguration extends BeetlGroupUtilConfiguration {
     protected void initOther() {
         super.initOther();
 
+
         groupTemplate.registerFunctionPackage("shiro", new ShiroExt());
     }
 }

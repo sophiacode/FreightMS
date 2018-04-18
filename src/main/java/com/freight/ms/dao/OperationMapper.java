@@ -2,6 +2,8 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Operation;
 
+import java.util.List;
+
 public interface OperationMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +46,8 @@ public interface OperationMapper {
      * @param record
      */
     int updateByPrimaryKey(Operation record);
+
+    List<Operation> selectByRoleId(Integer role_id);
+
+    List<Operation> findChildren(Integer id);
 }

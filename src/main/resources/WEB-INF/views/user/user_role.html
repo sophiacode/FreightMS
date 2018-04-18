@@ -1,0 +1,27 @@
+<%
+layout("/WEB-INF/views/common/container.html", {"title":"分配角色"}){
+%>
+
+<div class="row" style="margin-left:30px;margin-right:30px">
+    <div class="col-sm-12">
+        <input type="hidden" id="user_id" value="${user_id}">
+        <div class="form-group">
+            <label for="roleSelect">请选择角色</label>
+            <select class="form-control" id="roleSelect">
+                <% for (role in roleList) { %>
+                <option value="${role.id}">${role.name}</option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="center-block">
+            <button type="button" class="btn btn-success" id="btn_submit">确认</button>
+            <button type="button" class="btn btn-default" id="btn_cancel">取消</button>
+        </div>
+    </div>
+    <script src="/static/js/user/user_role.js"></script>
+</div>
+
+<%
+    }
+%>

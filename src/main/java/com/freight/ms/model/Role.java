@@ -11,7 +11,7 @@ public class Role {
     private Integer id;
 
     /**
-     * 角色名
+     * 角色名，用于前端展示
      * 表 : role
      * 对应字段 : name
      */
@@ -20,9 +20,16 @@ public class Role {
     /**
      * 说明
      * 表 : role
-     * 对应字段 : comment
+     * 对应字段 : description
      */
-    private String comment;
+    private String description;
+
+    /**
+     * 标识符，用于后端权限判断
+     * 表 : role
+     * 对应字段 : identifier
+     */
+    private String identifier;
 
     /**
      * 创建时间
@@ -41,10 +48,11 @@ public class Role {
     /**
      *
      */
-    public Role(Integer id, String name, String comment, Date createTime, Date updateTime) {
+    public Role(Integer id, String name, String description, String identifier, Date createTime, Date updateTime) {
         this.id = id;
         this.name = name;
-        this.comment = comment;
+        this.description = description;
+        this.identifier = identifier;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -77,7 +85,7 @@ public class Role {
     /**
      * get method 
      *
-     * @return role.name：角色名
+     * @return role.name：角色名，用于前端展示
      */
     public String getName() {
         return name;
@@ -86,7 +94,7 @@ public class Role {
     /**
      * set method 
      *
-     * @param name  角色名
+     * @param name  角色名，用于前端展示
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -95,19 +103,37 @@ public class Role {
     /**
      * get method 
      *
-     * @return role.comment：说明
+     * @return role.description：说明
      */
-    public String getComment() {
-        return comment;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * set method 
      *
-     * @param comment  说明
+     * @param description  说明
      */
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    /**
+     * get method 
+     *
+     * @return role.identifier：标识符，用于后端权限判断
+     */
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    /**
+     * set method 
+     *
+     * @param identifier  标识符，用于后端权限判断
+     */
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier == null ? null : identifier.trim();
     }
 
     /**
