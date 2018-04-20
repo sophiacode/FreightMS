@@ -1,0 +1,20 @@
+package com.freight.ms.service;
+
+import com.freight.ms.model.${config.modelBig};
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public interface ${config.modelBig}Service {
+
+    ${config.modelBig} find${config.modelBig}ById(Integer id);
+
+    String find${config.modelBig}s(Map<String, Object> paramMap);
+
+    void add${config.modelBig}(${config.modelBig} ${config.modelEn});
+
+    void edit${config.modelBig}(${config.modelBig} ${config.modelEn});
+
+    void delete${config.modelBig}s(List<Integer> list);
+}

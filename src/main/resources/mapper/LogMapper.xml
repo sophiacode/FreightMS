@@ -72,9 +72,7 @@
       <if test="message != null">
         message,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
+      create_time,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -95,9 +93,7 @@
       <if test="message != null">
         #{message,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+      now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.Log">
@@ -140,4 +136,43 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getCount" resultType="Integer">
+    select count(*) from log;
+  </select>
+
+  <select id="selectByParams" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from log
+    <where>
+      <if test="type != null and type != ''">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+
+      <if test="operation != null and operation != ''">
+        and operation = #{operation,jdbcType=VARCHAR}
+      </if>
+
+      <if test="username != null and username != ''">
+        and username = #{username,jdbcType=VARCHAR}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''
+            and (createEndTime == null or createEndTime == '')">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="(createStartTime == null or createStartTime == '')
+            and createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
+    order by id
+    LIMIT #{offset},#{limit}
+  </select>
 </mapper>

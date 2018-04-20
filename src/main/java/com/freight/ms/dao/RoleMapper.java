@@ -3,6 +3,7 @@ package com.freight.ms.dao;
 import com.freight.ms.model.Role;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoleMapper {
     /**
@@ -48,4 +49,8 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     List<Role> selectAll();
+
+    List<Role> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
 }

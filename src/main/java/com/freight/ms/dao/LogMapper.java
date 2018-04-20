@@ -2,6 +2,9 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Log;
 
+import java.util.List;
+import java.util.Map;
+
 public interface LogMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,8 @@ public interface LogMapper {
      * @param record
      */
     int updateByPrimaryKey(Log record);
+
+    List<Log> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
 }

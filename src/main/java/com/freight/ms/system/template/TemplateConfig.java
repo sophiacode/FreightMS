@@ -10,15 +10,16 @@ public class TemplateConfig {
 
     private String servicePath = javaPath + "\\service";
     private String serviceImplPath = javaPath + "\\serviceImpl";
-    private String controllerPath = javaPath + "\\controllerImpl";
-    private String wrapperPath = javaPath + "\\wrapperImpl";
+    private String controllerPath = javaPath + "\\controller";
+    private String wrapperPath = javaPath + "\\wrapper";
     private String pagePath = resourcePath + "\\WEB-INF\\views";
-    private String jsPath = resourcePath + "\\static";
+    private String jsPath = resourcePath + "\\static\\js";
 
     private String moduleCh;
     private String moduleEn;
     private String modelCh;
     private String modelEn;
+    private String modelBig;
 
     public String getProjectPath() {
         return projectPath;
@@ -122,5 +123,13 @@ public class TemplateConfig {
 
     public void setModelEn(String modelEn) {
         this.modelEn = modelEn;
+    }
+
+    public String getModelBig() {
+        return modelBig;
+    }
+
+    public void setModelBig(String modelBig) {
+        this.modelBig = modelBig;
     }
 }

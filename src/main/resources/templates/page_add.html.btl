@@ -1,0 +1,42 @@
+layout("/WEB-INF/views/common/container.html", {'title':'${config.moduleCh}'}){
+
+<div class="row">
+    <div class="col-sm-12">
+        <form role="form" id="${config.modelEn}InfoForm">
+            <input type="hidden" id="id">
+            <div class="row">
+                <div class="col-sm-6">
+                    //TODO:具体表单
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input type="text" class="form-control" id="" name="">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    //TODO:具体表单
+                    <div class="form-group">
+                        <label for=""></label>
+                        <select class="form-control" id="">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:20px">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <button type="button" id="btn_add_submit" class="btn btn-success btn-block">提交</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" id="btn_cancel" class="btn btn-default btn-block">取消</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="/static/js/${config.modelEn}/${config.modelEn}_info.js"></script>
+</div>
+

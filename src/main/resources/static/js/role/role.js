@@ -3,7 +3,7 @@ var table;
 
 var initTable = function() {
     table.bootstrapTable({
-        url: ,//TODO:修改URL
+        url: URL_ROLE_LIST,
         method: 'get',
         toolbar: '#toolbar',
         cache: false,
@@ -24,8 +24,19 @@ var initTable = function() {
         }, {
             field: 'id',
             title: 'id'
-        }, //TODO:其他列
-        ]
+        }, {
+            field: 'name',
+            title: '角色名'
+        }, {
+            field: 'identifier',
+            title: '标识符'
+        }, {
+            field: 'description',
+            title: '说明'
+        }, {
+            field: 'createTime',
+            title: '创建时间'
+        }]
     })
 };
 
@@ -38,16 +49,18 @@ var initDateTimePicker = function() {
 
 var search = function() {
     var queryParams = {
-        //TODO:查询条件取值
+        name : $("#name").val(),
+        identifier : $("#identifier").val(),
         createStartTime : $("#createStartTime").val(),
         createEndTime : $("#createEndTime").val()
     };
 
-    table.bootstrapTable('refresh', {url:URL_USER_LIST, query: queryParams}); //TODO:修改URL
+    table.bootstrapTable('refresh', {url:URL_ROLE_LIST, query: queryParams});
 };
 
 var reset = function() {
-    //TODO:查询条件清空
+    $("#name").val("");
+    $("#identifier").val("");
     $("#createStartTime").val("");
     $("#createEndTime").val("");
 
@@ -61,11 +74,11 @@ var refresh = function() {
 var showAdd = function() {
     layerIndex = layer.open({
         type: 2,
-        title: '添加${config.modelCh}',
+        title: '添加角色',
         maxmin: true,
         shadeClose: true, //点击遮罩关闭层
         area : ['800px' , '520px'],
-        content: //TODO:URL
+        content: URL_ROLE_ADD_VIEW
     });
 };
 
@@ -78,15 +91,15 @@ var showEdit = function() {
 
     layerIndex = layer.open({
         type: 2,
-        title: '修改${config.modelCh}',
+        title: '修改角色',
         maxmin: true,
         shadeClose: true,
         area: ['800px', '520px'],
-        content: + "/" + selected[0].id //TODO:URL
+        content: URL_ROLE_EDIT_VIEW + "/" + selected[0].id
     })
 };
 
-var delete${config.modelBig} = function() {
+var deleteRole = function() {
     var selected = table.bootstrapTable('getSelections');
     if(selected.length == 0){
         layer.msg("请先选择至少一条记录",{icon:2});
@@ -94,12 +107,12 @@ var delete${config.modelBig} = function() {
     }
 
     var idArray = new Array();
-    var str = "确定要删除${config.modelCh}";
+    var str = "确定要删除角色";
     var i;
     for(i in selected){
         idArray.push(selected[i].id);
 
-        str += selected[i].username; //TODO:修改字段
+        str += selected[i].name; //TODO:修改字段
         if(i != selected.length - 1){
             str += "、";
         }
@@ -107,7 +120,7 @@ var delete${config.modelBig} = function() {
     str += "吗？";
 
     $.ajaxSetup({
-        url:,//TODO:URL
+        url: URL_ROLE_DELETE,//TODO:URL
         async:true,
         traditional:true,
         contentType: "application/json",
@@ -134,7 +147,7 @@ var delete${config.modelBig} = function() {
 };
 
 $(function () {
-    table = $('#${config.modelEn}Table');
+    table = $('#roleTable');
 
     initTable();
     initDateTimePicker();
@@ -143,5 +156,5 @@ $(function () {
     $('#btn_reset').click(reset);
     $('#btn_add').click(showAdd);
     $('#btn_edit').click(showEdit);
-    $('#btn_delete').click(delete${config.modelBig});
+    $('#btn_delete').click(deleteRole);
 });

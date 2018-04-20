@@ -1,0 +1,58 @@
+package com.freight.ms.serviceImpl;
+
+import com.freight.ms.common.exception.BusinessEnumException;
+import com.freight.ms.common.exception.BusinessException;
+import com.freight.ms.dao.${config.modelBig}Mapper;
+import com.freight.ms.model.${config.modelBig};
+import com.freight.ms.service.${config.modelBig}Service;
+import com.freight.ms.util.JsonUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+import java.util.*;
+
+@Service
+public class ${config.modelBig}ServiceImpl implements ${config.modelBig}Service{
+    @Autowired
+    private ${config.modelBig}Mapper ${config.modelEn}Mapper;
+
+
+    public ${config.modelBig} find${config.modelBig}ById(Integer id) {
+        return ${config.modelEn}Mapper.selectByPrimaryKey(id);
+    }
+
+    public String find${config.modelBig}s(Map<String, Object> paramMap){
+        List<${config.modelBig}> ${config.modelEn}List = ${config.modelEn}Mapper.selectByParams(paramMap);
+        return JsonUtil.getTableListJson(${config.modelEn}Mapper.getCount(),
+                        new ${config.moduleEn}Wrapper(${config.modelEn}List).wrap());
+    }
+
+    public void add${config.modelBig}(${config.modelBig} ${config.modelEn}){
+        try{
+            ${config.modelEn}Mapper.insertSelective(${config.modelEn});
+        }catch (Exception e){
+            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
+        }
+    }
+
+    public void edit${config.modelBig}(${config.modelBig} ${config.modelEn}){
+        try{
+            ${config.modelEn}Mapper.updateByPrimaryKeySelective(${config.modelEn});
+        }catch (Exception e){
+            throw new BusinessException(BusinessEnumException.USER_EDIT_FAIL);   //TODO:异常
+        }
+    }
+
+    public void delete${config.modelBig}s(List<Integer> list){
+        try{
+            for(Integer id:list){
+                ${config.modelEn}Mapper.deleteByPrimaryKey(id);
+            }
+        }catch (Exception e){
+            throw new BusinessException(BusinessEnumException.USER_DELETE_FAIL);  //TODO:异常
+        }
+    }
+}

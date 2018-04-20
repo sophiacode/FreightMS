@@ -1,15 +1,22 @@
 package com.freight.ms.service;
 
 import com.freight.ms.model.Role;
-import com.freight.ms.model.User;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/12.
- */
 public interface RoleService {
-    Role getRoleOfUser(User user);
+
+    Role findRoleById(Integer id);
+
+    String findRoles(Map<String, Object> paramMap);
+
+    void addRole(Role role, List<Integer> permissions);
+
+    void editRole(Role role, List<Integer> permissions);
+
+    void deleteRoles(List<Integer> list);
 
     List<Role> getAllRole();
+
 }

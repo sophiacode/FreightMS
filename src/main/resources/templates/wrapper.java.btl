@@ -1,0 +1,24 @@
+package com.freight.ms.wrapper;
+
+import com.freight.ms.common.constant.ConstantFactory;
+import com.freight.ms.model.${config.modelBig};
+import com.freight.ms.util.DateUtil;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+public class ${config.moduleEn}Wrapper extends BaseWrapper{
+    public ${config.moduleEn}Wrapper(List<${config.modelBig}> obj) {
+        super(obj);
+    }
+
+    public ${config.moduleEn}Wrapper(${config.modelBig} obj){
+        super(obj);
+    }
+
+    @Override
+    protected void wrapMap(Map<String, Object> map) {
+        map.put("createTime", DateUtil.format((Date) map.get("createTime"), "yyyy.MM.dd"));
+    }
+}

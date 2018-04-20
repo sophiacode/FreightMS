@@ -1,0 +1,107 @@
+package com.freight.ms.controller;
+
+import com.freight.ms.common.exception.BusinessEnumException;
+import com.freight.ms.common.exception.BusinessException;
+import com.freight.ms.common.json.SuccessJson;
+import com.freight.ms.model.${config.modelBig};
+import com.freight.ms.service.${config.modelBig}Service;
+import com.freight.ms.system.log.BusinessLog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+@Controller
+@RequestMapping("/manage/${config.modelEn}")
+public class ${config.moduleEn}Controller {
+    @Autowired
+    private ${config.modelBig}Service ${config.modelEn}Service;
+
+    @RequestMapping("")
+    public String index(){
+        return "/${config.modelEn}/${config.modelEn}.html";
+    }
+
+    @RequestMapping("/add")
+    public String addView() {
+        return "/${config.modelEn}/${config.modelEn}_add.html";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String editView(@PathVariable Integer id, Model model){
+        if(id == null){
+            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
+        }
+
+        ${config.modelBig} ${config.modelEn} = ${config.modelEn}Service.find${config.modelBig}ById(id);
+        model.addAttribute(${config.modelEn});
+        return "/${config.modelEn}/${config.modelEn}_edit.html";
+    }
+
+    @BusinessLog(operation = "查看${config.modelCh}列表")
+    @RequestMapping(value = "/${config.modelEn}_list")
+    @ResponseBody
+     public String getList(//TODO:具体参数
+                          @RequestParam(value = "createStartTime",required = false) String createStartTime,
+                          @RequestParam(value = "createEndTime",required = false) String createEndTime,
+                          @RequestParam(value = "limit",required = false) Integer limit,
+                          @RequestParam(value = "offset",required = false) Integer offset){
+
+
+        if(limit == null){
+            limit = 10;
+        }
+        if(offset == null){
+            offset = 0;
+        }
+
+        Map<String, Object> paramMap = new HashMap<>();
+        //TODO:具体参数
+        paramMap.put("createStartTime", createStartTime);
+        paramMap.put("createEndTime", createEndTime);
+        paramMap.put("limit", limit);
+        paramMap.put("offset", offset);
+
+        return ${config.modelEn}Service.find${config.modelBig}s(paramMap);
+    }
+
+    @BusinessLog(operation = "添加${config.modelCh}")
+    @RequestMapping("/${config.modelEn}_add")
+    @ResponseBody
+    public String addUser() throws BusinessException { //TODO：具体参数
+        ${config.modelBig} ${config.modelEn} = new ${config.modelBig}();
+        //TODO：参数赋值
+
+        ${config.modelEn}Service.add${config.modelBig}(${config.modelEn});
+
+        return SuccessJson.getJson("添加成功");
+    }
+
+    @BusinessLog(operation = "修改${config.modelCh}")
+    @RequestMapping("/${config.modelEn}_edit")
+    @ResponseBody
+    public String edit${config.modelBig}() throws BusinessException{ //TODO:具体参数
+        ${config.modelBig} ${config.modelEn} = new ${config.modelBig}();
+        //TODO：参数赋值
+
+        ${config.modelEn}Service.edit${config.modelBig}(${config.modelEn});
+
+        return SuccessJson.getJson("修改成功");
+    }
+
+    @BusinessLog(operation = "删除${config.modelCh}")
+    @RequestMapping("/${config.modelEn}_delete")
+    @ResponseBody
+    public String delete${config.modelBig}(@RequestParam(value="idArray")List<Integer> idArray)
+            throws BusinessException{
+        ${config.modelEn}Service.delete${config.modelBig}s(idArray);
+        return SuccessJson.getJson("删除成功");
+    }
+}

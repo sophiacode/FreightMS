@@ -3,7 +3,7 @@ var table;
 
 var initTable = function() {
     table.bootstrapTable({
-        url: ,//TODO:修改URL
+        url: URL_NOTIFICATION_LIST,
         method: 'get',
         toolbar: '#toolbar',
         cache: false,
@@ -24,8 +24,19 @@ var initTable = function() {
         }, {
             field: 'id',
             title: 'id'
-        }, //TODO:其他列
-        ]
+        }, {
+            field: 'title',
+            title: '标题'
+        }, {
+            field: 'content',
+            title: '内容'
+        }, {
+            field: 'authorId',
+            title: '作者id'
+        }, {
+            field: 'createTime',
+            title: '创建时间'
+        }]
     })
 };
 
@@ -43,7 +54,7 @@ var search = function() {
         createEndTime : $("#createEndTime").val()
     };
 
-    table.bootstrapTable('refresh', {url:URL_USER_LIST, query: queryParams}); //TODO:修改URL
+    table.bootstrapTable('refresh', {url:URL_NOTIFICATION_LIST, query: queryParams}); //TODO:修改URL
 };
 
 var reset = function() {
@@ -61,11 +72,11 @@ var refresh = function() {
 var showAdd = function() {
     layerIndex = layer.open({
         type: 2,
-        title: '添加${config.modelCh}',
+        title: '添加通知',
         maxmin: true,
         shadeClose: true, //点击遮罩关闭层
         area : ['800px' , '520px'],
-        content: //TODO:URL
+        content: URL_NOTIFICATION_ADD_VIEW
     });
 };
 
@@ -78,15 +89,15 @@ var showEdit = function() {
 
     layerIndex = layer.open({
         type: 2,
-        title: '修改${config.modelCh}',
+        title: '修改通知',
         maxmin: true,
         shadeClose: true,
         area: ['800px', '520px'],
-        content: + "/" + selected[0].id //TODO:URL
+        content:URL_NOTIFICATION_EDIT_VIEW + "/" + selected[0].id //TODO:URL
     })
 };
 
-var delete${config.modelBig} = function() {
+var deleteNotification = function() {
     var selected = table.bootstrapTable('getSelections');
     if(selected.length == 0){
         layer.msg("请先选择至少一条记录",{icon:2});
@@ -94,20 +105,15 @@ var delete${config.modelBig} = function() {
     }
 
     var idArray = new Array();
-    var str = "确定要删除${config.modelCh}";
+    var str = "确定要删除这些通知吗？";
     var i;
     for(i in selected){
         idArray.push(selected[i].id);
-
-        str += selected[i].username; //TODO:修改字段
-        if(i != selected.length - 1){
-            str += "、";
-        }
     }
-    str += "吗？";
+
 
     $.ajaxSetup({
-        url:,//TODO:URL
+        url: URL_NOTIFICATION_DELETE,//TODO:URL
         async:true,
         traditional:true,
         contentType: "application/json",
@@ -134,7 +140,7 @@ var delete${config.modelBig} = function() {
 };
 
 $(function () {
-    table = $('#${config.modelEn}Table');
+    table = $('#notificationTable');
 
     initTable();
     initDateTimePicker();
@@ -143,5 +149,5 @@ $(function () {
     $('#btn_reset').click(reset);
     $('#btn_add').click(showAdd);
     $('#btn_edit').click(showEdit);
-    $('#btn_delete').click(delete${config.modelBig});
+    $('#btn_delete').click(deleteNotification);
 });

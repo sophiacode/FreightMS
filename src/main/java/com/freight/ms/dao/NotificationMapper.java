@@ -2,6 +2,9 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Notification;
 
+import java.util.List;
+import java.util.Map;
+
 public interface NotificationMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,8 @@ public interface NotificationMapper {
      * @param record
      */
     int updateByPrimaryKey(Notification record);
+
+    List<Notification> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
 }

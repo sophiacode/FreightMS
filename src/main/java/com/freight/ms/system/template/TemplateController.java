@@ -17,12 +17,14 @@ public class TemplateController {
     public String generate(@RequestParam(value = "moduleCh") String moduleCh,
                            @RequestParam(value = "moduleEn") String moduleEn,
                            @RequestParam(value = "modelCh") String modelCh,
-                           @RequestParam(value = "modelEn") String modelEn){
+                           @RequestParam(value = "modelEn") String modelEn,
+                           @RequestParam(value = "modelBig") String modelBig){
         TemplateConfig templateConfig = new TemplateConfig();
         templateConfig.setModuleCh(moduleCh);
         templateConfig.setModuleEn(moduleEn);
         templateConfig.setModelCh(modelCh);
         templateConfig.setModelEn(modelEn);
+        templateConfig.setModelBig(modelBig);
 
         TemplateGenerator templateGenerator = new TemplateGenerator(templateConfig);
         templateGenerator.initBeetlEngine();

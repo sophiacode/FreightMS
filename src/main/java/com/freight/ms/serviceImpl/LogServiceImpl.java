@@ -1,25 +1,38 @@
 package com.freight.ms.serviceImpl;
 
+import com.freight.ms.common.exception.BusinessEnumException;
+import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.dao.LogMapper;
 import com.freight.ms.model.Log;
 import com.freight.ms.service.LogService;
+import com.freight.ms.util.JsonUtil;
+import com.freight.ms.wrapper.LogWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by wyq on 2018/4/17.
- */
+import java.util.List;
+import java.util.Map;
 
-@Service("LogService")
-public class LogServiceImpl implements LogService {
+@Service
+public class LogServiceImpl implements LogService{
     @Autowired
     private LogMapper logMapper;
 
+    public Log findLogById(Integer id) {
+        return logMapper.selectByPrimaryKey(id);
+    }
+
+    public String findLogs(Map<String, Object> paramMap){
+        List<Log> logList = logMapper.selectByParams(paramMap);
+        return JsonUtil.getTableListJson(logMapper.getCount(),
+                        new LogWrapper(logList).wrap());
+    }
+
     public void addLog(Log log){
         try{
-            logMapper.insert(log);
+            logMapper.insertSelective(log);
         }catch (Exception e){
-            e.printStackTrace();
+            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
         }
     }
 }

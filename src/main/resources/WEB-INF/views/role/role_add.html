@@ -1,0 +1,44 @@
+<%
+    layout("/WEB-INF/views/common/container.html", {'title':'添加角色'}){
+%>
+
+<div class="row">
+    <div class="col-sm-12">
+        <form role="form" id="roleInfoForm">
+            <input type="hidden" id="id">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="name">角色名</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="identifier">标识符</label>
+                        <input type="text" class="form-control" id="identifier" name="identifier">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">描述</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:20px">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <button type="button" id="btn_add_submit" class="btn btn-success btn-block">提交</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" id="btn_cancel" class="btn btn-default btn-block">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="/static/js/role/role_info.js"></script>
+</div>
+
+<%
+    }
+%>
+

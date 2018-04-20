@@ -34,4 +34,14 @@ public class ConstantFactory {
 
         return "";
     }
+
+    public static String getLogStatus(int code){
+        if(code == LogEnum.LOG_STATUS_FAIL.getCode()){
+            return LogEnum.LOG_STATUS_FAIL.getName();
+        }else if(code == LogEnum.LOG_STATUS_SUCCESS.getCode()){
+            return LogEnum.LOG_STATUS_SUCCESS.getName();
+        }
+
+        return "";
+    }
 }

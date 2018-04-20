@@ -43,6 +43,7 @@ public class TemplateGenerator {
         generateService();
         generateServiceImpl();
         generateController();
+        generateWrapper();
         generatePage();
         generateJs();
     }
@@ -73,14 +74,14 @@ public class TemplateGenerator {
 
     public void generateService(){
         String templatePath = "templates/service.java.btl";
-        String fileName = templateConfig.getModuleEn() + "Service.java";
+        String fileName = templateConfig.getModelBig() + "Service.java";
         String filePath = templateConfig.getServicePath() + "/" + fileName;
         generateTemplate(templatePath, filePath);
     }
 
     public void generateServiceImpl() {
         String templatePath = "templates/serviceImpl.java.btl";
-        String fileName = templateConfig.getModuleEn() + "ServiceImpl.java";
+        String fileName = templateConfig.getModelBig() + "ServiceImpl.java";
         String filePath = templateConfig.getServiceImplPath() + "/" + fileName;
         generateTemplate(templatePath, filePath);
     }
@@ -109,13 +110,20 @@ public class TemplateGenerator {
 
     public void generateJs() {
         String path = templateConfig.getJsPath() + "/" + templateConfig.getModelEn() + "/";
-        String moduleTemplate = "templates/js.js.btl";
-        String infoTemplate = "templates/js_info.js.btl";
+        String moduleTemplate = "templates/page.js.btl";
+        String infoTemplate = "templates/page_info.js.btl";
 
         String moduleFile = templateConfig.getModelEn() + ".js";
         String infoFile = templateConfig.getModelEn() + "_info.js";
 
         generateTemplate(moduleTemplate, path + moduleFile);
         generateTemplate(infoTemplate, path + infoFile);
+    }
+
+    public void generateWrapper() {
+        String templatePath = "templates/wrapper.java.btl";
+        String fileName = templateConfig.getModuleEn() + "Wrapper.java";
+        String filePath = templateConfig.getWrapperPath() + "/" + fileName;
+        generateTemplate(templatePath, filePath);
     }
 }
