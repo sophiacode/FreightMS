@@ -1,0 +1,50 @@
+<%
+    layout("/WEB-INF/views/common/container.html", {'title':'积分兑换管理'}){
+%>
+
+<div class="row">
+    <div class="col-sm-12">
+        <form role="form" id="goodsInfoForm">
+            <input type="hidden" id="id">
+            <input type="hidden" id="statusValue" value="1">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="name">物品名称</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="point">所需积分</label>
+                        <input type="text" class="form-control" id="point" name="point">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">状态</label>
+                        <select class="form-control" id="status">
+                            <option value="1">当前可兑换</option>
+                            <option value="2">当前不可兑换</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:20px">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <button type="button" id="btn_add_submit" class="btn btn-success btn-block">提交</button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" id="btn_cancel" class="btn btn-default btn-block">取消</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="/static/js/goods/goods_info.js"></script>
+</div>
+
+<%
+    }
+%>

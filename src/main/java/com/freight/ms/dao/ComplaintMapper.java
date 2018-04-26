@@ -2,6 +2,9 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Complaint;
 
+import java.util.List;
+import java.util.Map;
+
 public interface ComplaintMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,8 @@ public interface ComplaintMapper {
      * @param record
      */
     int updateByPrimaryKey(Complaint record);
+
+    List<Complaint> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
 }

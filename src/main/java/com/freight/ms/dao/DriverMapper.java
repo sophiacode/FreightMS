@@ -2,6 +2,9 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Driver;
 
+import java.util.List;
+import java.util.Map;
+
 public interface DriverMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,10 @@ public interface DriverMapper {
      * @param record
      */
     int updateByPrimaryKey(Driver record);
+
+    List<Driver> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
+
+    Driver selectByName(String name);
 }

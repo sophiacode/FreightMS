@@ -1,5 +1,7 @@
 package com.freight.ms.model;
 
+import java.util.Date;
+
 public class Complaint {
     /**
      * 投诉id
@@ -50,10 +52,14 @@ public class Complaint {
      */
     private String process;
 
+    private Date createTime;
+
+    private Date updateTime;
+
     /**
      *
      */
-    public Complaint(Integer id, Integer orderId, Integer type, String reason, String status, Integer adminId, String process) {
+    public Complaint(Integer id, Integer orderId, Integer type, String reason, String status, Integer adminId, String process, Date createTime, Date updateTime) {
         this.id = id;
         this.orderId = orderId;
         this.type = type;
@@ -61,6 +67,8 @@ public class Complaint {
         this.status = status;
         this.adminId = adminId;
         this.process = process;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
     /**
@@ -194,5 +202,21 @@ public class Complaint {
      */
     public void setProcess(String process) {
         this.process = process == null ? null : process.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

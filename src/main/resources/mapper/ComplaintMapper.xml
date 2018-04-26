@@ -12,12 +12,14 @@
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="process" jdbcType="VARCHAR" property="process" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       @MBG Generated
     -->
-    id, order_id, type, reason, status, admin_id, process
+    id, order_id, type, reason, status, admin_id, process, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -41,10 +43,10 @@
     -->
     insert into complaint (id, order_id, type, 
       reason, status, admin_id, 
-      process)
+      process, create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
       #{reason,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, 
-      #{process,jdbcType=VARCHAR})
+      #{process,jdbcType=VARCHAR}, now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.freight.ms.model.Complaint">
     <!--
@@ -73,6 +75,7 @@
       <if test="process != null">
         process,
       </if>
+      create_time,update_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -96,6 +99,7 @@
       <if test="process != null">
         #{process,jdbcType=VARCHAR},
       </if>
+      now(),now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.Complaint">
@@ -122,6 +126,7 @@
       <if test="process != null">
         process = #{process,jdbcType=VARCHAR},
       </if>
+      update_time = now()
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -135,7 +140,43 @@
       reason = #{reason,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       admin_id = #{adminId,jdbcType=INTEGER},
-      process = #{process,jdbcType=VARCHAR}
+      process = #{process,jdbcType=VARCHAR},
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByParams" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from complaint
+    <where>
+      <if test="orderId != null and orderId != ''">
+        and order_id = #{orderId,jdbcType=VARCHAR}
+      </if>
+
+      <if test="type != null and type != ''">
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''
+            and (createEndTime == null or createEndTime == '')">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="(createStartTime == null or createStartTime == '')
+            and createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
+    order by id
+    LIMIT #{offset},#{limit}
+  </select>
+
+  <select id="getCount" resultType="Integer">
+    select count(*) from complaint;
+  </select>
 </mapper>

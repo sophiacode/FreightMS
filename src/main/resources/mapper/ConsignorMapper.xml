@@ -174,4 +174,42 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByParams" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from consignor
+    <where>
+      <if test="telephone != null and telephone != ''">
+        and telephone = #{telephone,jdbcType=VARCHAR}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''
+            and (createEndTime == null or createEndTime == '')">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="(createStartTime == null or createStartTime == '')
+            and createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
+    order by id
+    LIMIT #{offset},#{limit}
+  </select>
+
+  <select id="getCount" resultType="Integer">
+    select count(*) from consignor;
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from consignor
+    where name = #{name, jdbcType=VARCHAR}
+  </select>
 </mapper>

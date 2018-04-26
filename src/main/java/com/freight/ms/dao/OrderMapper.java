@@ -2,6 +2,9 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Order;
 
+import java.util.List;
+import java.util.Map;
+
 public interface OrderMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,10 @@ public interface OrderMapper {
      * @param record
      */
     int updateByPrimaryKey(Order record);
+
+    List<Order> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
+
+    Order selectByOrderNo(String orderNo);
 }

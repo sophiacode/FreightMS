@@ -243,10 +243,6 @@
         and role_id = #{roleId,jdbcType=INTEGER}
       </if>
 
-      <if test="create_time != null and name != ''">
-        and name = #{name,jdbcType=VARCHAR}
-      </if>
-
       <if test="createStartTime != null and createStartTime != ''
             and (createEndTime == null or createEndTime == '')">
         and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')

@@ -43,8 +43,7 @@
       price, start_price, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{activeTime,jdbcType=INTEGER}, 
-      #{price,jdbcType=DOUBLE}, #{startPrice,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{price,jdbcType=DOUBLE}, #{startPrice,jdbcType=DOUBLE}, now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.freight.ms.model.Coupon">
     <!--
@@ -67,12 +66,8 @@
       <if test="startPrice != null">
         start_price,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
+      create_time,
+      update_time,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -90,12 +85,8 @@
       <if test="startPrice != null">
         #{startPrice,jdbcType=DOUBLE},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.freight.ms.model.Coupon">
@@ -119,9 +110,7 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      update_time = now()
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -134,8 +123,34 @@
       active_time = #{activeTime,jdbcType=INTEGER},
       price = #{price,jdbcType=DOUBLE},
       start_price = #{startPrice,jdbcType=DOUBLE},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByParams" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from coupon
+    <where>
+      <if test="name != null and name != ''">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''
+            and (createEndTime == null or createEndTime == '')">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="(createStartTime == null or createStartTime == '')
+            and createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
+    order by id
+    LIMIT #{offset},#{limit}
+  </select>
+
+  <select id="getCount" resultType="Integer">
+    select count(*) from coupon;
+  </select>
 </mapper>

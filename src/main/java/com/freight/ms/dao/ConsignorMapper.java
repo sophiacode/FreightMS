@@ -2,6 +2,9 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Consignor;
 
+import java.util.List;
+import java.util.Map;
+
 public interface ConsignorMapper {
     /**
      * 根据主键删除数据库的记录
@@ -44,4 +47,10 @@ public interface ConsignorMapper {
      * @param record
      */
     int updateByPrimaryKey(Consignor record);
+
+    List<Consignor> selectByParams(Map<String, Object> paramMap);
+
+    int getCount();
+
+    Consignor selectByName(String name);
 }

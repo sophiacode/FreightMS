@@ -1,6 +1,7 @@
 var URL_PREFIX = "http://localhost:8000";
 
 var URL_LOGIN = URL_PREFIX + "/login";
+var URL_LOGOUT = URL_PREFIX + "/logout"
 
 var URL_MANAGE = URL_PREFIX + "/manage";
 
@@ -33,3 +34,44 @@ var URL_NOTIFICATION_DELETE = URL_NOTIFICATION_MANAGE + "/notification_delete";
 
 var URL_LOG_MANAGE = URL_MANAGE + "/log";
 var URL_LOG_LIST = URL_LOG_MANAGE + "/log_list";
+
+var URL_CONSIGNOR_MANAGE = URL_MANAGE + "/consignor";
+var URL_CONSIGNOR_LIST = URL_CONSIGNOR_MANAGE + "/consignor_list";
+var URL_CONSIGNOR_STATUS = URL_CONSIGNOR_MANAGE + "/consignor_status";
+
+var URL_DRIVER_MANAGE = URL_MANAGE + "/driver";
+var URL_DRIVER_LIST = URL_DRIVER_MANAGE + "/driver_list";
+var URL_DRIVER_STATUS = URL_DRIVER_MANAGE + "/driver_status";
+
+var URL_ORDER_MANAGE = URL_MANAGE + "/order";
+var URL_ORDER_LIST = URL_ORDER_MANAGE + "/order_list";
+
+var URL_COMPLAINT_MANAGE = URL_MANAGE + "/complaint";
+var URL_COMPLAINT_LIST = URL_COMPLAINT_MANAGE + "/complaint_list";
+var URL_COMPLAINT_HANDLE_VIEW = URL_COMPLAINT_MANAGE + "/handle";
+var URL_COMPLAINT_HANDLE = URL_COMPLAINT_MANAGE + "/complaint_handle";
+
+var URL_ACTIVITY_MANAGE = URL_MANAGE + "/activity";
+var URL_ACTIVITY_LIST = URL_ACTIVITY_MANAGE + "/activity_list";
+var URL_ACTIVITY_ADD_VIEW = URL_ACTIVITY_MANAGE + "/add";
+var URL_ACTIVITY_ADD = URL_ACTIVITY_MANAGE + "/activity_add";
+var URL_ACTIVITY_EDIT_VIEW = URL_ACTIVITY_MANAGE + "/edit";
+var URL_ACTIVITY_EDIT = URL_ACTIVITY_MANAGE + "/activity_edit";
+var URL_ACTIVITY_DELETE = URL_ACTIVITY_MANAGE + "/activity_delete";
+
+var URL_COUPON_MANAGE = URL_MANAGE + "/coupon";
+var URL_COUPON_LIST = URL_COUPON_MANAGE + "/coupon_list";
+var URL_COUPON_ADD_VIEW = URL_COUPON_MANAGE + "/add";
+var URL_COUPON_ADD = URL_COUPON_MANAGE + "/coupon_add";
+var URL_COUPON_EDIT_VIEW = URL_COUPON_MANAGE + "/edit";
+var URL_COUPON_EDIT = URL_COUPON_MANAGE + "/coupon_edit";
+var URL_COUPON_DELETE = URL_COUPON_MANAGE + "/coupon_delete";
+
+var URL_GOODS_MANAGE = URL_MANAGE + "/goods";
+var URL_GOODS_LIST = URL_GOODS_MANAGE + "/goods_list";
+var URL_GOODS_ADD_VIEW = URL_GOODS_MANAGE + "/add";
+var URL_GOODS_ADD = URL_GOODS_MANAGE + "/goods_add";
+var URL_GOODS_EDIT_VIEW = URL_GOODS_MANAGE + "/edit";
+var URL_GOODS_EDIT = URL_GOODS_MANAGE + "/goods_edit";
+var URL_GOODS_DELETE = URL_GOODS_MANAGE + "/goods_delete";
+

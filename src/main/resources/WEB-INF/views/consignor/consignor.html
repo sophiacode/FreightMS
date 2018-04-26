@@ -1,0 +1,78 @@
+<%
+    layout("/WEB-INF/views/common/navbar.html", {'title':'货主用户管理'}){
+%>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel-body" id="panel_search" style="margin-top:20px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#panel_search"
+                       href="#collapse" style="color:black">
+                        <span class="glyphicon glyphicon-chevron-down"/>查询条件
+                    </a>
+                </div>
+                <div id="collapse" class="panel-collapse collapse">
+                <div class="panel-body" >
+                    <form id="formSearch" class="form-horizontal col-sm-12" role="form">
+                        <div class="form-group" style="margin-top:15px">
+                            <div class="col-sm-2">
+                                <label class="control-label" for="telephone">手机号</label>
+                                <input id="telephone" type="text" class="form-control">
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label" for="status">状态</label>
+                                <select class="form-control" id="status">
+                                    <option value="">全部</option>
+                                    <option value="0">正常</option>
+                                    <option value="1">冻结</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label" for="createStartTime">创建时间</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">从</span>
+                                    <input id="createStartTime" class="form-control dateTime" type="text" name="dateTimePicker"/>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label" for="createEndTime">&nbsp;</label>
+                                <div class="input-append date" >
+                                    <div class="input-group">
+                                        <span class="input-group-addon">到</span>
+                                        <input id="createEndTime" class="form-control dateTime" type="text" name="dateTimePicker"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label" for="btn_search">&nbsp;</label>
+                                <button type="button" id="btn_search" class="btn btn-primary btn-block">查询</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label" for="btn_reset">&nbsp;</label>
+                                <button type="button" id="btn_reset" class="btn btn-primary btn-block">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group" id="toolbar">
+            <button id="btn_freeze" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-plus"></span> 冻结/解除冻结
+            </button>
+        </div>
+        <table id="consignorTable"></table>
+    </div>
+</div>
+
+<script src="/static/js/consignor/consignor.js"></script>
+
+<%
+    }
+%>

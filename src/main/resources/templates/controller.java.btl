@@ -75,7 +75,7 @@ public class ${config.moduleEn}Controller {
     @BusinessLog(operation = "添加${config.modelCh}")
     @RequestMapping("/${config.modelEn}_add")
     @ResponseBody
-    public String addUser() throws BusinessException { //TODO：具体参数
+    public String add${config.modelBig}() throws BusinessException { //TODO：具体参数
         ${config.modelBig} ${config.modelEn} = new ${config.modelBig}();
         //TODO：参数赋值
 

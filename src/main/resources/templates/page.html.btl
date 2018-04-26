@@ -51,21 +51,21 @@ layout("/WEB-INF/views/common/navbar.html", {'title':'${config.moduleCh}'}){
             </div>
         </div>
         <div class="btn-group" id="toolbar">
-            <% if(shiro.hasPermission("${config.modelEn}:add")){ %>
+            < if(shiro.hasPermission("${config.modelEn}:add")){ >
             <button id="btn_add" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-plus"></span> 添加
             </button>
-            <% } %>
-            <% if(shiro.hasPermission("${config.modelEn}:edit")){ %>
+            < } >
+            < if(shiro.hasPermission("${config.modelEn}:edit")){ >
             <button id="btn_edit" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-edit"></span> 修改
             </button>
-            <% } %>
-            <% if(shiro.hasPermission("${config.modelEn}:delete")){ %>
+            < } >
+            < if(shiro.hasPermission("${config.modelEn}:delete")){ >
             <button id="btn_delete" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-remove"></span> 删除
             </button>
-            <% } %>
+            < } >
             //TODO:其他按钮
         </div>
         <table id="${config.modelEn}Table"></table>
