@@ -31,8 +31,8 @@ var initTable = function() {
             field: 'content',
             title: '内容'
         }, {
-            field: 'authorId',
-            title: '作者id'
+            field: 'authorName',
+            title: '作者'
         }, {
             field: 'createTime',
             title: '创建时间'
@@ -49,16 +49,17 @@ var initDateTimePicker = function() {
 
 var search = function() {
     var queryParams = {
-        //TODO:查询条件取值
+        title : $("#title").val(),
         createStartTime : $("#createStartTime").val(),
         createEndTime : $("#createEndTime").val()
     };
 
-    table.bootstrapTable('refresh', {url:URL_NOTIFICATION_LIST, query: queryParams}); //TODO:修改URL
+    console.log(queryParams);
+    table.bootstrapTable('refresh', {url:URL_NOTIFICATION_LIST, query: queryParams});
 };
 
 var reset = function() {
-    //TODO:查询条件清空
+    $("#title").val("");
     $("#createStartTime").val("");
     $("#createEndTime").val("");
 
@@ -93,7 +94,7 @@ var showEdit = function() {
         maxmin: true,
         shadeClose: true,
         area: ['800px', '520px'],
-        content:URL_NOTIFICATION_EDIT_VIEW + "/" + selected[0].id //TODO:URL
+        content:URL_NOTIFICATION_EDIT_VIEW + "/" + selected[0].id
     })
 };
 
@@ -113,7 +114,7 @@ var deleteNotification = function() {
 
 
     $.ajaxSetup({
-        url: URL_NOTIFICATION_DELETE,//TODO:URL
+        url: URL_NOTIFICATION_DELETE,
         async:true,
         traditional:true,
         contentType: "application/json",

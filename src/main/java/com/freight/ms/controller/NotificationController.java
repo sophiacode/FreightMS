@@ -79,8 +79,8 @@ public class NotificationController {
     @BusinessLog(operation = "添加通知")
     @RequestMapping("/notification_add")
     @ResponseBody
-    public String addUser(@RequestParam(value = "title") String title,
-                          @RequestParam(value = "content", required = false) String content) throws BusinessException {
+    public String addNotification(@RequestParam(value = "title") String title,
+                                  @RequestParam(value = "content", required = false) String content) throws BusinessException {
         Notification notification = new Notification();
         notification.setTitle(title);
         notification.setContent(content);
@@ -97,9 +97,11 @@ public class NotificationController {
     @BusinessLog(operation = "修改通知")
     @RequestMapping("/notification_edit")
     @ResponseBody
-    public String editNotification(@RequestParam(value = "title") String title,
+    public String editNotification(@RequestParam(value = "id") Integer id,
+                                   @RequestParam(value = "title") String title,
                                    @RequestParam(value = "content", required = false) String content) throws BusinessException{
         Notification notification = new Notification();
+        notification.setId(id);
         notification.setTitle(title);
         notification.setContent(content);
 

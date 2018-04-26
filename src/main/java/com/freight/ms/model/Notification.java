@@ -45,6 +45,8 @@ public class Notification {
      */
     private Date updateTime;
 
+    private String authorName;
+
     /**
      *
      */
@@ -170,5 +172,13 @@ public class Notification {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 }

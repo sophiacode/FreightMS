@@ -243,13 +243,11 @@
         and role_id = #{roleId,jdbcType=INTEGER}
       </if>
 
-      <if test="createStartTime != null and createStartTime != ''
-            and (createEndTime == null or createEndTime == '')">
+      <if test="createStartTime != null and createStartTime != ''">
         and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
       </if>
 
-      <if test="(createStartTime == null or createStartTime == '')
-            and createEndTime != null and createEndTime != ''">
+      <if test="createEndTime != null and createEndTime != ''">
         and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
       </if>
     </where>

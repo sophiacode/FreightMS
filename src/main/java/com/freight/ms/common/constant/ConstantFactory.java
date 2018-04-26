@@ -44,4 +44,26 @@ public class ConstantFactory {
 
         return "";
     }
+
+    public static String getActivityStatus(int code) {
+        if(code == ActivityEnum.ACTIVITY_STATUS_FUTURE.getCode()){
+            return ActivityEnum.ACTIVITY_STATUS_FUTURE.getName();
+        }else if(code == ActivityEnum.ACTIVITY_STATUS_NOW.getCode()){
+            return ActivityEnum.ACTIVITY_STATUS_NOW.getName();
+        }else if(code == ActivityEnum.ACTIVITY_STATUS_PAST.getCode()){
+            return ActivityEnum.ACTIVITY_STATUS_PAST.getName();
+        }
+
+        return "";
+    }
+
+    public static String getGoodsStatus(int code) {
+        if(code == GoodsEnum.GOODS_STATUS_OK.getCode()){
+            return GoodsEnum.GOODS_STATUS_OK.getName();
+        }else if(code == GoodsEnum.GOODS_STATUS_NO.getCode()){
+            return GoodsEnum.GOODS_STATUS_NO.getName();
+        }
+
+        return "";
+    }
 }
