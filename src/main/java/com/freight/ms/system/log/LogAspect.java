@@ -1,20 +1,13 @@
 package com.freight.ms.system.log;
 
-import com.freight.ms.common.constant.LogEnum;
-import com.freight.ms.model.Log;
 import com.freight.ms.service.LogService;
-import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by wyq on 2018/4/16.
@@ -34,7 +27,7 @@ public class LogAspect {
     public Object writeBusinessLog(ProceedingJoinPoint point) throws Throwable{
         Object result = point.proceed();
 
-        try{
+        /*try{
             String username = SecurityUtils.getSubject().getPrincipal().toString();
 
             Signature signature = point.getSignature();
@@ -57,7 +50,7 @@ public class LogAspect {
             logService.addLog(log);
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
 
         return result;
     }

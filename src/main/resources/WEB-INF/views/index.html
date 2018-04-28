@@ -1,0 +1,21 @@
+<%
+    layout("/WEB-INF/views/common/navbar.html", {'title':'查看通知信息'}){
+%>
+
+<div class="row" style="margin-top: 20px">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <% for(notification in notificationList){ %>
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <strong> ${notification.title} </strong>
+            ${notification.content}
+        </div>
+        <% } %>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+<%
+    }
+%>

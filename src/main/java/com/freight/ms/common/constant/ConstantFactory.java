@@ -45,6 +45,50 @@ public class ConstantFactory {
         return "";
     }
 
+    public static String getDriverStatus(int code){
+        if(code == DriverEnum.DRIVER_STATUS_OK.getCode()){
+            return DriverEnum.DRIVER_STATUS_OK.getName();
+        }else if(code == DriverEnum.DRIVER_STATUS_FREEZE.getCode()){
+            return DriverEnum.DRIVER_STATUS_FREEZE.getName();
+        }
+
+        return "";
+    }
+
+    public static String getDriverAuthState(int code){
+        if(code == DriverEnum.DRIVER_AUTH_YET.getCode()){
+            return DriverEnum.DRIVER_AUTH_YET.getName();
+        }else if(code == DriverEnum.DRIVER_AUTH_DOING.getCode()){
+            return DriverEnum.DRIVER_AUTH_DOING.getName();
+        }else if(code == DriverEnum.DRIVER_AUTH_SUCCESS.getCode()){
+            return DriverEnum.DRIVER_AUTH_SUCCESS.getName();
+        }else if(code == DriverEnum.DRIVER_AUTH_FAIL.getCode()){
+            return DriverEnum.DRIVER_AUTH_FAIL.getName();
+        }
+
+        return "";
+    }
+
+    public static String getDriverOnlineState(int code){
+        if(code == DriverEnum.DRIVER_ONLINE_YES.getCode()){
+            return DriverEnum.DRIVER_ONLINE_YES.getName();
+        }else if(code == DriverEnum.DRIVER_ONLINE_NO.getCode()){
+            return DriverEnum.DRIVER_ONLINE_NO.getName();
+        }
+
+        return "";
+    }
+
+    public static String getDriverWorkState(int code){
+        if(code == DriverEnum.DRIVER_WORK_YES.getCode()){
+            return DriverEnum.DRIVER_WORK_YES.getName();
+        }else if(code == DriverEnum.DRIVER_WORK_NO.getCode()){
+            return DriverEnum.DRIVER_WORK_NO.getName();
+        }
+
+        return "";
+    }
+
     public static String getActivityStatus(int code) {
         if(code == ActivityEnum.ACTIVITY_STATUS_FUTURE.getCode()){
             return ActivityEnum.ACTIVITY_STATUS_FUTURE.getName();

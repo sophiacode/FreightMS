@@ -145,4 +145,11 @@
     order by id
     LIMIT #{offset},#{limit}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from notification
+    order by id
+  </select>
 </mapper>

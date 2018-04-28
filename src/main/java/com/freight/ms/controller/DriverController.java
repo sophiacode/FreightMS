@@ -29,12 +29,7 @@ public class DriverController {
         return "/driver/driver.html";
     }
 
-    @RequestMapping("/add")
-    public String addView() {
-        return "/driver/driver_add.html";
-    }
-
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/auth/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
             throw new BusinessException(BusinessEnumException.REQUEST_NULL);
@@ -42,7 +37,7 @@ public class DriverController {
 
         Driver driver = driverService.findDriverById(id);
         model.addAttribute(driver);
-        return "/driver/driver_edit.html";
+        return "/driver/driver_auth.html";
     }
 
     @BusinessLog(operation = "查看车主用户列表")
@@ -88,6 +83,4 @@ public class DriverController {
         driverService.changeStatus(idArray);
         return SuccessJson.getJson("修改状态成功");
     }
-
-
 }

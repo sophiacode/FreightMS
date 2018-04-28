@@ -35,7 +35,11 @@ public class NotificationServiceImpl implements NotificationService{
         }
 
         return JsonUtil.getTableListJson(notificationMapper.getCount(),
-                        new NotificationWrapper(notificationList).wrap());
+                new NotificationWrapper(notificationList).wrap());
+    }
+
+    public List<Notification> findAll(){
+        return notificationMapper.selectAll();
     }
 
     public void addNotification(Notification notification){

@@ -42,6 +42,7 @@ var URL_CONSIGNOR_STATUS = URL_CONSIGNOR_MANAGE + "/consignor_status";
 var URL_DRIVER_MANAGE = URL_MANAGE + "/driver";
 var URL_DRIVER_LIST = URL_DRIVER_MANAGE + "/driver_list";
 var URL_DRIVER_STATUS = URL_DRIVER_MANAGE + "/driver_status";
+var URL_DRIVER_AUTH_VIEW = URL_DRIVER_MANAGE + "/auth";
 
 var URL_ORDER_MANAGE = URL_MANAGE + "/order";
 var URL_ORDER_LIST = URL_ORDER_MANAGE + "/order_list";

@@ -1,4 +1,5 @@
 $(function (){
+    $("#notificationLink").attr("href", URL_MANAGE);
     $("#userManageLink").attr("href", URL_USER_MANAGE);
     $("#roleLink").attr("href", URL_ROLE_MANAGE);
     $("#notificationManageLink").attr("href", URL_NOTIFICATION_MANAGE);

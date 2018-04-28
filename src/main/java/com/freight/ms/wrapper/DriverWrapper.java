@@ -19,6 +19,10 @@ public class DriverWrapper extends BaseWrapper{
 
     @Override
     protected void wrapMap(Map<String, Object> map) {
+        map.put("status", ConstantFactory.getDriverStatus((Integer) map.get("status")));
+        map.put("authState", ConstantFactory.getDriverAuthState((Integer) map.get("authState")));
+        map.put("onlineState", ConstantFactory.getDriverOnlineState((Integer) map.get("onlineState")));
+        map.put("workState", ConstantFactory.getDriverWorkState((Integer) map.get("workState")));
         map.put("createTime", DateUtil.format((Date) map.get("createTime"), "yyyy.MM.dd"));
     }
 }

@@ -1,0 +1,27 @@
+<%
+layout("/WEB-INF/views/common/container.html", {'title':'车主认证管理'}){
+%>
+
+<div class="row">
+    <div class="col-sm-6">
+        <label class="control-label" for="photo">照片</label>
+        <img src="${driver.photo}" id="photo" class="img-responsive">
+
+        <label class="control-label" for="idcard_photo">身份证照片</label>
+        <img src="${driver.idcard_photo}" id="idcard_photo" class="img-responsive">
+    </div>
+
+    <div class="col-sm-6">
+        <label class="control-label" for="license_photo">车牌照片</label>
+        <img src="${driver.license_photo}" id="license_photo" class="img-responsive">
+
+        <label class="control-label" for="driver_license_photo">驾驶证照片</label>
+        <img src="${driver.driver_license_photo}" id="driver_license_photo" class="img-responsive">
+    </div>
+</div>
+
+<script src="/static/js/driver/driver_auth.js"></script>
+
+<%
+}
+%>

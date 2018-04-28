@@ -51,4 +51,6 @@ public interface NotificationMapper {
     List<Notification> selectByParams(Map<String, Object> paramMap);
 
     int getCount();
+
+    List<Notification> selectAll();
 }

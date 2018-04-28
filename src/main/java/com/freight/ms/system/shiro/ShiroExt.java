@@ -17,6 +17,10 @@ public class ShiroExt {
         //return subject != null && p != null && p.length() > 0 && subject.isPermitted(p);
     }
 
+    public String getCurrentUsername() {
+        return SecurityUtils.getSubject().getPrincipal().toString();
+    }
+
     public static void main(String[] args) {
         GroupTemplate gt = new GroupTemplate();
         gt.registerFunctionPackage("shiro", new ShiroExt());

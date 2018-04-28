@@ -131,6 +131,23 @@ var changeStatus = function() {
     $.ajax();
 };
 
+var showAuth = function() {
+    var selected = table.bootstrapTable('getSelections');
+    if(selected.length != 1){
+        layer.msg("请先选择一条记录", {icon : 2});
+        return;
+    }
+
+    layerIndex = layer.open({
+        type: 2,
+        title: '认证管理',
+        maxmin: true,
+        shadeClose: true,
+        area: ['800px', '520px'],
+        content: URL_DRIVER_AUTH_VIEW + "/" + selected[0].id
+    })
+};
+
 $(function () {
     table = $('#driverTable');
 
@@ -140,4 +157,5 @@ $(function () {
     $('#btn_search').click(search);
     $('#btn_reset').click(reset);
     $("#btn_freeze").click(changeStatus);
+    $("#btn_auth").click(showAuth);
 });
