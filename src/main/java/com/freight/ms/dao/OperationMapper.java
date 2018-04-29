@@ -50,4 +50,6 @@ public interface OperationMapper {
     List<Operation> selectByRoleId(Integer role_id);
 
     List<Operation> findChildren(Integer id);
+
+    List<Operation> selectAll();
 }

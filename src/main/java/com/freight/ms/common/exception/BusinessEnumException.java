@@ -24,6 +24,11 @@ public enum BusinessEnumException {
     USER_SET_ROLE_ERROR(208, "分配角色失败"),
 
     /**
+     * 角色管理
+     */
+    ROLE_PERMISSION_FAIL(310, "更新权限失败"),
+
+    /**
      * 其他
      */
     REQUEST_NULL(400, "错误的请求"),

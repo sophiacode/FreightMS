@@ -1,0 +1,20 @@
+<%
+layout("/WEB-INF/views/common/container.html", {'title':'分配权限'}){
+%>
+
+<div class="row">
+    <div class="col-sm-12">
+        <input type="hidden" id="roleId" value="${role.id}">
+        <ul id="ztree" class="ztree"/>
+    </div>
+</div>
+
+<div class="row">
+    <button type="button" id="btn_submit" class="btn btn-success">提交</button>
+    <button type="button" id="btn_cancel" class="btn btn-default">取消</button>
+</div>
+
+<script src="/static/js/role/role_permission.js"></script>
+<%
+}
+%>

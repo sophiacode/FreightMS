@@ -10,6 +10,8 @@ public interface PermissionMapper {
      */
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByRoleId(Integer roleId);
+
     /**
      * 插入数据库记录
      *

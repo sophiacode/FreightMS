@@ -36,6 +36,8 @@ public class Operation {
      */
     private Integer parentId;
 
+    private boolean open = false;
+
     /**
      *
      */
@@ -142,5 +144,13 @@ public class Operation {
      */
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 }

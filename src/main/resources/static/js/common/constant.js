@@ -23,6 +23,8 @@ var URL_ROLE_ADD = URL_ROLE_MANAGE + "/role_add";
 var URL_ROLE_EDIT_VIEW = URL_ROLE_MANAGE + "/edit";
 var URL_ROLE_EDIT = URL_ROLE_MANAGE + "/role_edit";
 var URL_ROLE_DELETE = URL_ROLE_MANAGE + "/role_delete";
+var URL_ROLE_PERMISSION_VIEW = URL_ROLE_MANAGE + "/permission";
+var URL_ROLE_PERMISSION = URL_ROLE_MANAGE + "/role_permission";
 
 var URL_NOTIFICATION_MANAGE = URL_MANAGE + "/notification";
 var URL_NOTIFICATION_LIST = URL_NOTIFICATION_MANAGE + "/notification_list";

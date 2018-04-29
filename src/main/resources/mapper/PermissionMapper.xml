@@ -33,6 +33,13 @@
     delete from permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+    <!--
+      @MBG Generated
+    -->
+    delete from permission
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.freight.ms.model.Permission">
     <!--
       @MBG Generated

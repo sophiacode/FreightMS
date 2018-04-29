@@ -1,9 +1,12 @@
 package com.freight.ms.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.freight.ms.common.exception.BusinessEnumException;
 import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.common.json.SuccessJson;
+import com.freight.ms.model.Operation;
 import com.freight.ms.model.Role;
+import com.freight.ms.service.OperationService;
 import com.freight.ms.service.RoleService;
 import com.freight.ms.system.log.BusinessLog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class RoleManageController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private OperationService operationService;
+
     @RequestMapping("")
     public String index(){
         return "/role/role.html";
@@ -43,6 +49,18 @@ public class RoleManageController {
         Role role = roleService.findRoleById(id);
         model.addAttribute(role);
         return "/role/role_edit.html";
+    }
+
+    @RequestMapping("/permission/{id}")
+    public String permissionView(@PathVariable Integer id, Model model){
+        if(id == null){
+            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
+        }
+
+        Role role = roleService.findRoleById(id);
+        model.addAttribute(role);
+
+        return "/role/role_permission.html";
     }
 
     @BusinessLog(operation = "查看角色列表")
@@ -116,4 +134,28 @@ public class RoleManageController {
         roleService.deleteRoles(idArray);
         return SuccessJson.getJson("删除成功");
     }
+
+    @RequestMapping("/role_permission")
+    @ResponseBody
+    public String operationList(@RequestParam(value = "roleId") int roleId) throws BusinessException{
+        JSONObject object = new JSONObject();
+
+        List<Operation> all = operationService.getAll();
+        object.put("all", all);
+
+        Role role = roleService.findRoleById(roleId);
+        List<Operation> checked = operationService.getOperationsOfRole(role);
+        object.put("checked", checked);
+
+        return object.toJSONString();
+    }
+
+    @RequestMapping("/change_permission")
+    @ResponseBody
+    public String changePermission(@RequestParam(value = "roleId") Integer roleId,
+                                   @RequestParam(value = "idArray") List<Integer> idArray) throws BusinessException{
+        operationService.updatePermissions(roleId, idArray);
+        return SuccessJson.getJson("修改成功");
+    }
+
 }
