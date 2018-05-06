@@ -277,7 +277,7 @@
       license_photo = #{licensePhoto,jdbcType=VARCHAR},
       driver_license_photo = #{driverLicensePhoto,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 

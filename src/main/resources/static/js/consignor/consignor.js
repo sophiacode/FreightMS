@@ -28,6 +28,9 @@ var initTable = function() {
             field: 'telephone',
             title: '手机号'
         }, {
+            field: 'name',
+            title: '姓名'
+        }, {
             field: 'point',
             title: '积分'
         }, {

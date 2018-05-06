@@ -2,6 +2,8 @@ package com.freight.ms.dao;
 
 import com.freight.ms.model.Exchange;
 
+import java.util.List;
+
 public interface ExchangeMapper {
     /**
      * 根据主键删除数据库的记录
@@ -30,6 +32,8 @@ public interface ExchangeMapper {
      * @param id
      */
     Exchange selectByPrimaryKey(Integer id);
+
+    List<Exchange> selectByGoodsId(Integer goodsId);
 
     /**
      * 根据主键来更新部分数据库记录

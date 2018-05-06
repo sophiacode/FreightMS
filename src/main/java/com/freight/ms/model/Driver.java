@@ -136,6 +136,8 @@ public class Driver {
      */
     private Date updateTime;
 
+    private String authStateStr;
+
     /**
      *
      */
@@ -508,5 +510,13 @@ public class Driver {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getAuthStateStr() {
+        return authStateStr;
+    }
+
+    public void setAuthStateStr(String authStateStr) {
+        this.authStateStr = authStateStr;
     }
 }

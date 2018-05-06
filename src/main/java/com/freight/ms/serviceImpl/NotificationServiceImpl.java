@@ -46,7 +46,7 @@ public class NotificationServiceImpl implements NotificationService{
         try{
             notificationMapper.insertSelective(notification);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
+            throw new BusinessException(BusinessEnumException.NOTIFICATION_ADD_FAIL);
         }
     }
 
@@ -54,7 +54,7 @@ public class NotificationServiceImpl implements NotificationService{
         try{
             notificationMapper.updateByPrimaryKeySelective(notification);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_EDIT_FAIL);   //TODO:异常
+            throw new BusinessException(BusinessEnumException.NOTIFICATION_EDIT_FAIL);
         }
     }
 
@@ -64,7 +64,7 @@ public class NotificationServiceImpl implements NotificationService{
                 notificationMapper.deleteByPrimaryKey(id);
             }
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_DELETE_FAIL);  //TODO:异常
+            throw new BusinessException(BusinessEnumException.NOTIFICATION_DELETE_FAIL);
         }
     }
 }

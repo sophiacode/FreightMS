@@ -14,4 +14,6 @@ public interface DriverService {
     String findDrivers(Map<String, Object> paramMap);
 
     void changeStatus(List<Integer> list);
+
+    void changeAuthState(Integer id, Integer authState);
 }

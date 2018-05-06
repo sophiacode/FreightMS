@@ -19,7 +19,10 @@ public class ExchangeWrapper extends BaseWrapper{
 
     @Override
     protected void wrapMap(Map<String, Object> map) {
-        map.put("status", ConstantFactory.getGoodsStatus( (Integer)map.get("status")));
+        if(map.containsKey("status")){
+            map.put("status", ConstantFactory.getGoodsStatus( (Integer)map.get("status")));
+        }
+
         map.put("createTime", DateUtil.format((Date) map.get("createTime"), "yyyy.MM.dd"));
     }
 }

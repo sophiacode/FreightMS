@@ -16,4 +16,6 @@ public interface GoodsService {
     void editGoods(Goods goods);
 
     void deleteGoodss(List<Integer> list);
+
+    String getExchangeRecord(Integer goodsId);
 }

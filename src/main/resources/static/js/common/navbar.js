@@ -6,7 +6,6 @@ $(function (){
     $("#logLink").attr("href", URL_LOG_MANAGE);
     $("#consignorLink").attr("href", URL_CONSIGNOR_MANAGE);
     $("#driverLink").attr("href",URL_DRIVER_MANAGE);
-    $("#driverAuthLink").attr("href", "#");//TODO
     $("#driverLocLink").attr("href", "#");//TODO
     $("#registerChartLink").attr("href", "#");//TODO
     $("#orderLink").attr("href", URL_ORDER_MANAGE);

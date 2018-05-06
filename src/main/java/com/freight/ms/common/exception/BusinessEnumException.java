@@ -26,7 +26,55 @@ public enum BusinessEnumException {
     /**
      * 角色管理
      */
+    ROLE_ADD_FAIL(301, "添加角色失败"),
+    ROLE_EDIT_FAIL(302, "修改角色失败"),
+    ROLE_DELETE_FAIL(303, "删除角色失败"),
     ROLE_PERMISSION_FAIL(310, "更新权限失败"),
+
+    /**
+     * 通知管理
+     */
+    NOTIFICATION_ADD_FAIL(401, "添加通知失败"),
+    NOTIFICATION_EDIT_FAIL(402, "修改通知失败"),
+    NOTIFICATION_DELETE_FAIL(403, "删除通知失败"),
+
+    /**
+     * 货主用户管理
+     */
+    CONSIGNOR_CHANGE_STATUS_FAIL(501, "对货主用户的状态修改失败"),
+
+    /**
+     * 车主用户管理
+     */
+    DRIVER_CHANGE_STATUS_FAIL(601, "对车主用户的状态修改失败"),
+    DRIVER_AUTH_FAIL(602, "对车主用户的认证状态修改失败"),
+
+    /**
+     * 投诉管理
+     */
+    COMPLAINT_HANDLE_FAIL(701, "添加投诉处理结果失败"),
+
+    /**
+     * 活动管理
+     */
+    ACTIVITY_ADD_FAIL(801, "添加活动失败"),
+    ACTIVITY_EDIT_FAIL(802, "修改活动失败"),
+    ACTIVITY_DELETE_FAIL(803, "删除活动失败"),
+
+    /**
+     * 优惠券管理
+     */
+    COUPON_ADD_FAIL(901, "添加优惠券失败"),
+    COUPON_EDIT_FAIL(902, "修改优惠券失败"),
+    COUPON_DELETE_FAIL(903, "删除优惠券失败"),
+    COUPON_RELEASE_FAIL(904, "发放优惠券失败"),
+
+    /**
+     * 积分兑换管理
+     */
+    GOODS_ADD_FAIL(1001, "添加积分兑换物品失败"),
+    GOODS_EDIT_FAIL(1002, "修改积分兑换物品失败"),
+    GOODS_DELETE_FAIL(1003, "删除积分兑换物品失败"),
 
     /**
      * 其他
