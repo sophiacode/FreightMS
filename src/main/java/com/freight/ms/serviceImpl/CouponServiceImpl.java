@@ -33,7 +33,7 @@ public class CouponServiceImpl implements CouponService{
         try{
             couponMapper.insertSelective(coupon);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
+            throw new BusinessException(BusinessEnumException.COUPON_ADD_FAIL);
         }
     }
 
@@ -41,7 +41,7 @@ public class CouponServiceImpl implements CouponService{
         try{
             couponMapper.updateByPrimaryKeySelective(coupon);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_EDIT_FAIL);   //TODO:异常
+            throw new BusinessException(BusinessEnumException.COUPON_EDIT_FAIL);
         }
     }
 
@@ -51,7 +51,7 @@ public class CouponServiceImpl implements CouponService{
                 couponMapper.deleteByPrimaryKey(id);
             }
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_DELETE_FAIL);  //TODO:异常
+            throw new BusinessException(BusinessEnumException.COUPON_DELETE_FAIL);
         }
     }
 }

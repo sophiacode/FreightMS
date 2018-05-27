@@ -24,6 +24,8 @@ public class Exchange {
      */
     private Integer userType;
 
+    private String user;
+
     /**
      * 物品id
      * 表 : exchange
@@ -222,5 +224,13 @@ public class Exchange {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

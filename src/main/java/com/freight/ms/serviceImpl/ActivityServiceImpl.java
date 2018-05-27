@@ -32,7 +32,7 @@ public class ActivityServiceImpl implements ActivityService{
         try{
             activityMapper.insertSelective(activity);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
+            throw new BusinessException(BusinessEnumException.ACTIVITY_ADD_FAIL);
         }
     }
 
@@ -40,7 +40,7 @@ public class ActivityServiceImpl implements ActivityService{
         try{
             activityMapper.updateByPrimaryKeySelective(activity);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_EDIT_FAIL);   //TODO:异常
+            throw new BusinessException(BusinessEnumException.ACTIVITY_EDIT_FAIL);
         }
     }
 
@@ -50,7 +50,7 @@ public class ActivityServiceImpl implements ActivityService{
                 activityMapper.deleteByPrimaryKey(id);
             }
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_DELETE_FAIL);  //TODO:异常
+            throw new BusinessException(BusinessEnumException.ACTIVITY_DELETE_FAIL);
         }
     }
 }

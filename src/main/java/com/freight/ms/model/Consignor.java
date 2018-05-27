@@ -17,6 +17,8 @@ public class Consignor {
      */
     private String telephone;
 
+    private String name;
+
     /**
      * 密码
      * 表 : consignor
@@ -76,9 +78,10 @@ public class Consignor {
     /**
      *
      */
-    public Consignor(Integer id, String telephone, String password, String salt, String profilePicture, Integer point, Float evaluateGrade, Integer status, Date createTime, Date updateTime) {
+    public Consignor(Integer id, String telephone, String name, String password, String salt, String profilePicture, Integer point, Float evaluateGrade, Integer status, Date createTime, Date updateTime) {
         this.id = id;
         this.telephone = telephone;
+        this.name = name;
         this.password = password;
         this.salt = salt;
         this.profilePicture = profilePicture;
@@ -274,5 +277,13 @@ public class Consignor {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

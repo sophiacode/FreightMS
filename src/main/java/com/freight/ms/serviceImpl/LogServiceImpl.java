@@ -1,7 +1,5 @@
 package com.freight.ms.serviceImpl;
 
-import com.freight.ms.common.exception.BusinessEnumException;
-import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.dao.LogMapper;
 import com.freight.ms.model.Log;
 import com.freight.ms.service.LogService;
@@ -32,7 +30,8 @@ public class LogServiceImpl implements LogService{
         try{
             logMapper.insertSelective(log);
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
+            //throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);
+            e.printStackTrace();
         }
     }
 }

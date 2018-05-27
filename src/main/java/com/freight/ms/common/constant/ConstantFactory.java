@@ -45,6 +45,16 @@ public class ConstantFactory {
         return "";
     }
 
+    public static String getConsignorStatus(int code){
+        if(code == ConsignorEnum.CONSIGNOR_STATUS_FREEZE.getCode()){
+            return ConsignorEnum.CONSIGNOR_STATUS_FREEZE.getName();
+        }else if(code == ConsignorEnum.CONSIGNOR_STATUS_OK.getCode()){
+            return ConsignorEnum.CONSIGNOR_STATUS_OK.getName();
+        }
+
+        return "";
+    }
+
     public static String getDriverStatus(int code){
         if(code == DriverEnum.DRIVER_STATUS_OK.getCode()){
             return DriverEnum.DRIVER_STATUS_OK.getName();

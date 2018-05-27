@@ -143,7 +143,7 @@ var showAuth = function() {
         title: '认证管理',
         maxmin: true,
         shadeClose: true,
-        area: ['800px', '520px'],
+        area: ['800px', '700px'],
         content: URL_DRIVER_AUTH_VIEW + "/" + selected[0].id
     })
 };

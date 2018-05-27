@@ -1,6 +1,6 @@
 package com.freight.ms.serviceImpl;
 
-import com.freight.ms.common.constant.UserEnum;
+import com.freight.ms.common.constant.DriverEnum;
 import com.freight.ms.common.exception.BusinessEnumException;
 import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.dao.DriverMapper;
@@ -38,20 +38,30 @@ public class DriverServiceImpl implements DriverService{
         for(Integer id:list){
             Driver driver = driverMapper.selectByPrimaryKey(id);
 
-            if(driver.getStatus() == UserEnum.USER_STATUS_OK.getCode()){
-                driver.setStatus(UserEnum.USER_STATUS_FREEZE.getCode());
+            if(driver.getStatus() == DriverEnum.DRIVER_STATUS_OK.getCode()){
+                driver.setStatus(DriverEnum.DRIVER_STATUS_FREEZE.getCode());
             }else{
-                driver.setStatus(UserEnum.USER_STATUS_OK.getCode());
+                driver.setStatus(DriverEnum.DRIVER_STATUS_OK.getCode());
             }
             drivers.add(driver);
         }
 
         try{
             for(Driver driver:drivers){
-                driverMapper.updateByPrimaryKeySelective(driver);
+                driverMapper.updateByPrimaryKey(driver);
             }
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_CHANGE_STATUS_FAIL);
+            throw new BusinessException(BusinessEnumException.DRIVER_CHANGE_STATUS_FAIL);
+        }
+    }
+
+    public void changeAuthState(Integer id, Integer authState){
+        try{
+            Driver driver = driverMapper.selectByPrimaryKey(id);
+            driver.setAuthState(authState);
+            driverMapper.updateByPrimaryKey(driver);
+        }catch (Exception e){
+            throw new BusinessException(BusinessEnumException.DRIVER_AUTH_FAIL);
         }
     }
 

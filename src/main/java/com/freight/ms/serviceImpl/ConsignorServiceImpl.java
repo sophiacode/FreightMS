@@ -1,6 +1,6 @@
 package com.freight.ms.serviceImpl;
 
-import com.freight.ms.common.constant.UserEnum;
+import com.freight.ms.common.constant.ConsignorEnum;
 import com.freight.ms.common.exception.BusinessEnumException;
 import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.dao.ConsignorMapper;
@@ -42,10 +42,10 @@ public class ConsignorServiceImpl implements ConsignorService{
         for(Integer id:list){
             Consignor consignor = consignorMapper.selectByPrimaryKey(id);
 
-            if(consignor.getStatus() == UserEnum.USER_STATUS_OK.getCode()){
-                consignor.setStatus(UserEnum.USER_STATUS_FREEZE.getCode());
+            if(consignor.getStatus() == ConsignorEnum.CONSIGNOR_STATUS_OK.getCode()){
+                consignor.setStatus(ConsignorEnum.CONSIGNOR_STATUS_FREEZE.getCode());
             }else{
-                consignor.setStatus(UserEnum.USER_STATUS_OK.getCode());
+                consignor.setStatus(ConsignorEnum.CONSIGNOR_STATUS_OK.getCode());
             }
             consignors.add(consignor);
         }
@@ -55,7 +55,7 @@ public class ConsignorServiceImpl implements ConsignorService{
                 consignorMapper.updateByPrimaryKeySelective(consignor);
             }
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_CHANGE_STATUS_FAIL);
+            throw new BusinessException(BusinessEnumException.CONSIGNOR_CHANGE_STATUS_FAIL);
         }
     }
 

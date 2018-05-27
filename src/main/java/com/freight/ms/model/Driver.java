@@ -150,6 +150,8 @@ public class Driver {
      */
     private Date updateTime;
 
+    private String authStateStr;
+
     /**
      *
      */
@@ -540,5 +542,14 @@ public class Driver {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getAuthStateStr() {
+        return authStateStr;
+    }
+
+    public void setAuthStateStr(String authStateStr) {
+        this.authStateStr = authStateStr;
+
     }
 }

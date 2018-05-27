@@ -3,21 +3,42 @@ layout("/WEB-INF/views/common/container.html", {'title':'车主认证管理'}){
 %>
 
 <div class="row">
+    <div class="col-sm-12">
+        车主${driver.name}的认证状态为：${driver.authStateStr}
+    </div>
+</div>
+<div class="row" style="margin-top:20px">
+    <input type="hidden" id="driverId" value="${driver.id}">
     <div class="col-sm-6">
         <label class="control-label" for="photo">照片</label>
         <img src="${driver.photo}" id="photo" class="img-responsive">
 
         <label class="control-label" for="idcard_photo">身份证照片</label>
-        <img src="${driver.idcard_photo}" id="idcard_photo" class="img-responsive">
+        <img src="${driver.idcardPhoto}" id="idcard_photo" class="img-responsive">
     </div>
 
     <div class="col-sm-6">
         <label class="control-label" for="license_photo">车牌照片</label>
-        <img src="${driver.license_photo}" id="license_photo" class="img-responsive">
+        <img src="${driver.licensePhoto}" id="license_photo" class="img-responsive">
 
         <label class="control-label" for="driver_license_photo">驾驶证照片</label>
-        <img src="${driver.driver_license_photo}" id="driver_license_photo" class="img-responsive">
+        <img src="${driver.driverLicensePhoto}" id="driver_license_photo" class="img-responsive">
     </div>
+</div>
+<div class="row" style="margin-top:20px">
+    <% if(driver.authState != 1) { %>
+    <div class="col-sm-4">
+        <button id="btn_pass" class="btn btn-success btn-block" type="button">通过认证</button>
+    </div>
+
+    <div class="col-sm-4">
+        <button id="btn_reject" class="btn btn-warning btn-block" type="button">拒绝认证</button>
+    </div>
+
+    <div class="col-sm-4">
+        <button id="btn_cancel" class="btn btn-default btn-block" type="button">取消</button>
+    </div>
+    <% } %>
 </div>
 
 <script src="/static/js/driver/driver_auth.js"></script>

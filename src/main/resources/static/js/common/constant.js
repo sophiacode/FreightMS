@@ -80,6 +80,7 @@ var URL_GOODS_EDIT_VIEW = URL_GOODS_MANAGE + "/edit";
 var URL_GOODS_EDIT = URL_GOODS_MANAGE + "/goods_edit";
 var URL_GOODS_DELETE = URL_GOODS_MANAGE + "/goods_delete";
 
+
 var URL_CHART_USER = URL_MANAGE + "/chart/user";
 
 

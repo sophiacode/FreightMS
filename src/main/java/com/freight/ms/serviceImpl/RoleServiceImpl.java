@@ -33,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
             roleMapper.insertSelective(role);
             //TODO:permission
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_ADD_FAIL);    //TODO:异常
+            throw new BusinessException(BusinessEnumException.ROLE_ADD_FAIL);
         }
     }
 
@@ -42,7 +42,7 @@ public class RoleServiceImpl implements RoleService {
             roleMapper.updateByPrimaryKeySelective(role);
             //TODO:permission
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_EDIT_FAIL);   //TODO:异常
+            throw new BusinessException(BusinessEnumException.ROLE_EDIT_FAIL);
         }
     }
 
@@ -52,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
                 roleMapper.deleteByPrimaryKey(id);
             }
         }catch (Exception e){
-            throw new BusinessException(BusinessEnumException.USER_DELETE_FAIL);  //TODO:异常
+            throw new BusinessException(BusinessEnumException.ROLE_DELETE_FAIL);
         }
     }
 

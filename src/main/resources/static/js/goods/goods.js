@@ -150,6 +150,23 @@ var deleteGoods = function() {
     });
 };
 
+var showExchange = function() {
+    var selected = table.bootstrapTable('getSelections');
+    if(selected.length != 1){
+        layer.msg("请先选择一条记录", {icon : 2});
+        return;
+    }
+
+    layerIndex = layer.open({
+        type: 2,
+        title: '查看兑换记录',
+        maxmin: true,
+        shadeClose: true,
+        area: ['800px', '520px'],
+        content: URL_GOODS_MANAGE + "/exchange/" + selected[0].id
+    })
+};
+
 $(function () {
     table = $('#goodsTable');
 
@@ -161,4 +178,5 @@ $(function () {
     $('#btn_add').click(showAdd);
     $('#btn_edit').click(showEdit);
     $('#btn_delete').click(deleteGoods);
+    $('#btn_exchange').click(showExchange);
 });

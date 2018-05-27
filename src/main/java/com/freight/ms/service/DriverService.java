@@ -17,4 +17,6 @@ public interface DriverService {
     void changeStatus(List<Integer> list);
 
     int getCountByTime(String start, String end);
+
+    void changeAuthState(Integer id, Integer authState);
 }

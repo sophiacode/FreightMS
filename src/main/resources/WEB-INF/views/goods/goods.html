@@ -96,6 +96,11 @@
                 <span class="glyphicon glyphicon-remove"></span> 删除
             </button>
             <% } %>
+            <% if(shiro.hasPermission("goods:exchange_record")){ %>
+            <button id="btn_exchange" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-remove"></span> 查看兑换记录
+            </button>
+            <% } %>
         </div>
         <table id="goodsTable"></table>
     </div>

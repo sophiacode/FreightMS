@@ -1,0 +1,17 @@
+<%
+    layout("/WEB-INF/views/common/container.html", {'title':'兑换记录'}){
+%>
+
+<div class="row">
+    <div class="col-sm-12">
+        <input type="hidden" id="goodsId" value="${goods.id}">
+        ${goodsName}的兑换记录为：
+        <table id="exchangeTable"></table>
+    </div>
+</div>
+
+<script src="/static/js/goods/goods_exchange.js"></script>
+
+<%
+    }
+%>

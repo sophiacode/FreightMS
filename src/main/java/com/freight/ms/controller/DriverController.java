@@ -1,5 +1,6 @@
 package com.freight.ms.controller;
 
+import com.freight.ms.common.constant.ConstantFactory;
 import com.freight.ms.common.exception.BusinessEnumException;
 import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.common.json.SuccessJson;
@@ -35,12 +36,13 @@ public class DriverController {
     }
 
     @RequestMapping("/auth/{id}")
-    public String editView(@PathVariable Integer id, Model model){
+    public String authView(@PathVariable Integer id, Model model){
         if(id == null){
             throw new BusinessException(BusinessEnumException.REQUEST_NULL);
         }
 
         Driver driver = driverService.findDriverById(id);
+        driver.setAuthStateStr(ConstantFactory.getDriverAuthState(driver.getAuthState()));
         model.addAttribute(driver);
         return "/driver/driver_auth.html";
     }
@@ -88,4 +90,16 @@ public class DriverController {
         driverService.changeStatus(idArray);
         return SuccessJson.getJson("修改状态成功");
     }
+
+    @BusinessLog(operation = "修改车主认证状态")
+    @RequestMapping("/driver_auth")
+    @ResponseBody
+    public String changeAuthState(@RequestParam(value="id") Integer id,
+                                  @RequestParam(value="authState") Integer authState)
+            throws BusinessException{
+        driverService.changeAuthState(id, authState);
+        return SuccessJson.getJson("修改认证状态成功");
+    }
+
+
 }

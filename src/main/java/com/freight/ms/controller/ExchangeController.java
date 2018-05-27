@@ -45,6 +45,17 @@ public class ExchangeController {
         return "/goods/goods_edit.html";
     }
 
+    @RequestMapping("/exchange/{id}")
+    public String exchangeView(@PathVariable Integer id, Model model){
+        if(id == null){
+            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
+        }
+
+        Goods goods = goodsService.findGoodsById(id);
+        model.addAttribute(goods);
+        return "/goods/goods_exchange.html";
+    }
+
     @BusinessLog(operation = "查看积分物品列表")
     @RequestMapping(value = "/goods_list")
     @ResponseBody
@@ -117,5 +128,11 @@ public class ExchangeController {
             throws BusinessException{
         goodsService.deleteGoodss(idArray);
         return SuccessJson.getJson("删除成功");
+    }
+
+    @RequestMapping("/goods_exchange")
+    @ResponseBody
+    public String goodsExchange(@RequestParam(value="goodsId") int goodsId){
+        return goodsService.getExchangeRecord(goodsId);
     }
 }
