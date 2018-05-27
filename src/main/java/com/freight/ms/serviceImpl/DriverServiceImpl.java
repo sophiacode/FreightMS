@@ -11,9 +11,7 @@ import com.freight.ms.wrapper.DriverWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class DriverServiceImpl implements DriverService{
@@ -55,5 +53,13 @@ public class DriverServiceImpl implements DriverService{
         }catch (Exception e){
             throw new BusinessException(BusinessEnumException.USER_CHANGE_STATUS_FAIL);
         }
+    }
+
+    public int getCountByTime(String start, String end){
+        Map<String, Object> map = new HashMap<>();
+        map.put("start", start);
+        map.put("end", end);
+
+        return driverMapper.getCountByTime(map);
     }
 }

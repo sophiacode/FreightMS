@@ -204,6 +204,19 @@
     select count(*) from consignor;
   </select>
 
+  <select id="getCountByTime" resultType="Integer">
+    select count(*) from consignor
+    <where>
+      <if test="start != null and start != ''">
+        and create_time &gt;= CONCAT(#{start},' 00:00:00')
+      </if>
+
+      <if test="end != null and end != ''">
+        and create_time &lt;= CONCAT(#{end},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
   <select id="selectByName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

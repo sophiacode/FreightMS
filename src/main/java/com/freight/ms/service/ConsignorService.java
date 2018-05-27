@@ -14,4 +14,6 @@ public interface ConsignorService {
     String findConsignors(Map<String, Object> paramMap);
 
     void changeStatus(List<Integer> list);
+
+    int getCountByTime(String start, String end);
 }

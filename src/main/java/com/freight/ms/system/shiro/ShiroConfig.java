@@ -9,10 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/12.
- */
-
 @Configuration
 public class ShiroConfig {
 

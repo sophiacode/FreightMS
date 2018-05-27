@@ -1,0 +1,26 @@
+<%
+    layout("/WEB-INF/views/common/navbar.html", {'title':'用户注册图表'}){
+%>
+
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3">
+        <button id="year_chart" class="btn btn-default btn-block" type="button">年度用户注册柱状图</button>
+    </div>
+    <div class="col-sm-3">
+        <button id="month_chart" class="btn btn-default btn-block" type="button">最近一个月注册趋势图</button>
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <canvas id="chart"></canvas>
+    </div>
+</div>
+
+<script src="/static/js/chart/user_chart.js"></script>
+
+<%
+    }
+%>

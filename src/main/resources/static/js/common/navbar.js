@@ -6,9 +6,8 @@ $(function (){
     $("#logLink").attr("href", URL_LOG_MANAGE);
     $("#consignorLink").attr("href", URL_CONSIGNOR_MANAGE);
     $("#driverLink").attr("href",URL_DRIVER_MANAGE);
-    $("#driverAuthLink").attr("href", "#");//TODO
-    $("#driverLocLink").attr("href", "#");//TODO
-    $("#registerChartLink").attr("href", "#");//TODO
+    $("#driverLocLink").attr("href", URL_DRIVER_MAP_VIEW);
+    $("#registerChartLink").attr("href", URL_CHART_USER);
     $("#orderLink").attr("href", URL_ORDER_MANAGE);
     $("#complaintLink").attr("href", URL_COMPLAINT_MANAGE);
     $("#chartLink").attr("href", "#");//TODO
@@ -16,4 +15,5 @@ $(function (){
     $("#couponLink").attr("href", URL_COUPON_MANAGE);
     $("#goodsLink").attr("href", URL_GOODS_MANAGE);
     $("#logoutLink").attr("href", URL_LOGOUT);
+    $("#profileLink").attr("href", URL_USER_PROFILE_VIEW);
 });

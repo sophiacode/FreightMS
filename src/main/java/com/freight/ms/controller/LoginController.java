@@ -7,6 +7,7 @@ import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.common.json.SuccessJson;
 import com.freight.ms.model.User;
 import com.freight.ms.service.UserService;
+import com.freight.ms.system.log.BusinessLog;
 import com.freight.ms.util.JsonUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -44,6 +45,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     @ResponseBody
+    @BusinessLog(operation = "用户登录")
     public String login(@RequestParam(value = "username") String username,
                         @RequestParam(value = "password") String password,
                         @RequestParam(value = "isRemember") Boolean isRemember,

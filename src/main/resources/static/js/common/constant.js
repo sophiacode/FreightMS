@@ -15,6 +15,7 @@ var URL_USER_DELETE = URL_USER_MANAGE + "/user_delete";
 var URL_USER_STATUS = URL_USER_MANAGE + "/user_status";
 var URL_USER_ROLE_VIEW = URL_USER_MANAGE + "/role";
 var URL_USER_ROLE = URL_USER_MANAGE + "/user_role";
+var URL_USER_PROFILE_VIEW = URL_USER_MANAGE + "/profile";
 
 var URL_ROLE_MANAGE = URL_MANAGE + "/role";
 var URL_ROLE_LIST = URL_ROLE_MANAGE + "/role_list";
@@ -45,6 +46,7 @@ var URL_DRIVER_MANAGE = URL_MANAGE + "/driver";
 var URL_DRIVER_LIST = URL_DRIVER_MANAGE + "/driver_list";
 var URL_DRIVER_STATUS = URL_DRIVER_MANAGE + "/driver_status";
 var URL_DRIVER_AUTH_VIEW = URL_DRIVER_MANAGE + "/auth";
+var URL_DRIVER_MAP_VIEW = URL_DRIVER_MANAGE + "/map";
 
 var URL_ORDER_MANAGE = URL_MANAGE + "/order";
 var URL_ORDER_LIST = URL_ORDER_MANAGE + "/order_list";
@@ -77,4 +79,8 @@ var URL_GOODS_ADD = URL_GOODS_MANAGE + "/goods_add";
 var URL_GOODS_EDIT_VIEW = URL_GOODS_MANAGE + "/edit";
 var URL_GOODS_EDIT = URL_GOODS_MANAGE + "/goods_edit";
 var URL_GOODS_DELETE = URL_GOODS_MANAGE + "/goods_delete";
+
+var URL_CHART_USER = URL_MANAGE + "/chart/user";
+
+
 

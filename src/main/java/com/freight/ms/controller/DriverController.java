@@ -29,6 +29,11 @@ public class DriverController {
         return "/driver/driver.html";
     }
 
+    @RequestMapping("/map")
+    public String mapView(){
+        return "/driver/driver_map.html";
+    }
+
     @RequestMapping("/auth/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){

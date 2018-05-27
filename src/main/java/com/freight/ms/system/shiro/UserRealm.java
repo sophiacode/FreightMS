@@ -12,9 +12,6 @@ import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
 
-/**
- * Created by wyq on 2018/4/9.
- */
 
 public class UserRealm extends AuthorizingRealm {
     @Resource

@@ -63,7 +63,7 @@ var validator = {
                 },
                 regexp: {
                     regexp: /^[a-zA-Z0-9_]+$/,
-                    message: '用户名只能由数字、字母和下划线组成'
+                    message: '密码只能由数字、字母和下划线组成'
                 },
                 identical: {
                     field: 'new_password2',

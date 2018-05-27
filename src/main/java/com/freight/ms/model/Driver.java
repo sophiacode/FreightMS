@@ -123,6 +123,20 @@ public class Driver {
     private String driverLicensePhoto;
 
     /**
+     * 经度
+     * 表 : driver
+     * 对应字段 : longitude
+     */
+    private Double longitude;
+
+    /**
+     * 纬度
+     * 表 : driver
+     * 对应字段 : latitude
+     */
+    private Double latitude;
+
+    /**
      * 创建时间
      * 表 : driver
      * 对应字段 : create_time
@@ -139,7 +153,7 @@ public class Driver {
     /**
      *
      */
-    public Driver(Integer id, String telephone, String password, String salt, String name, Integer status, Integer authState, Integer onlineState, Integer workState, Integer point, Float evaluateGrade, String idcard, String licenseNumber, String photo, String idcardPhoto, String licensePhoto, String driverLicensePhoto, Date createTime, Date updateTime) {
+    public Driver(Integer id, String telephone, String password, String salt, String name, Integer status, Integer authState, Integer onlineState, Integer workState, Integer point, Float evaluateGrade, String idcard, String licenseNumber, String photo, String idcardPhoto, String licensePhoto, String driverLicensePhoto, Double longitude, Double latitude, Date createTime, Date updateTime) {
         this.id = id;
         this.telephone = telephone;
         this.password = password;
@@ -157,6 +171,8 @@ public class Driver {
         this.idcardPhoto = idcardPhoto;
         this.licensePhoto = licensePhoto;
         this.driverLicensePhoto = driverLicensePhoto;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -508,5 +524,21 @@ public class Driver {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }

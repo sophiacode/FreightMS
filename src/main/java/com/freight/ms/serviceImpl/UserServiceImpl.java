@@ -157,4 +157,12 @@ public class UserServiceImpl implements UserService{
             throw new BusinessException(BusinessEnumException.USER_SET_ROLE_ERROR);
         }
     }
+
+    public void changePassword(Integer id, String oldPassword, String newPassword){
+        User user = userMapper.selectByPrimaryKey(id);
+        if(user == null){
+            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
+
+        }
+    }
 }

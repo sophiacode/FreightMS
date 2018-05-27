@@ -3,10 +3,13 @@ package com.freight.ms.controller;
 import com.freight.ms.common.exception.BusinessEnumException;
 import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.common.json.SuccessJson;
+import com.freight.ms.model.Role;
 import com.freight.ms.model.User;
 import com.freight.ms.service.RoleService;
 import com.freight.ms.service.UserService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +61,16 @@ public class UserManageController {
         model.addAttribute("user_id", id);
         model.addAttribute("roleList", roleService.getAllRole());
         return "/user/user_role.html";
+    }
+
+    @RequestMapping("/profile")
+    public String profileView(Model model){
+        String username = SecurityUtils.getSubject().getPrincipal().toString();
+        User user = userService.findUserByUsername(username);
+        Role role = roleService.findRoleById(user.getRoleId());
+        user.setRoleName(role.getName());
+        model.addAttribute(user);
+        return "/user/user_profile.html";
     }
 
     @BusinessLog(operation = "查看用户列表")
@@ -175,5 +188,13 @@ public class UserManageController {
             throws BusinessException{
         userService.setRole(userId, roleId);
         return SuccessJson.getJson("分配角色成功");
+    }
+
+    public String changePassword(@RequestParam(value="id") Integer id,
+                                 @RequestParam(value="old_password") String oldPassword,
+                                 @RequestParam(value="new_password") String newPassword){
+
+
+        return SuccessJson.getJson("修改密码成功");
     }
 }

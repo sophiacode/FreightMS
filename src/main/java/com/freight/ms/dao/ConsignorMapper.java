@@ -52,5 +52,7 @@ public interface ConsignorMapper {
 
     int getCount();
 
+    int getCountByTime(Map<String, Object> paramMap);
+
     Consignor selectByName(String name);
 }

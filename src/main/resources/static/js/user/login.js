@@ -1,10 +1,16 @@
 var loginSubmit = function() {
-    console.log("loginSubmit");
-
     var data = {};
 
     data['username'] = $("#username").val();
     data['password'] = $('#password').val();
+
+    console.log(data);
+
+    if($("#username").val()  == '' || $('#password').val() == ''){
+        layer.msg("请输入用户名与密码");
+        return;
+    }
+
 
     var r = document.getElementsByName("rememberMe");
     data['isRemember'] = r[0].checked;

@@ -1,0 +1,18 @@
+<%
+    layout("/WEB-INF/views/common/navbar.html", {'title':'车主位置查询'}){
+%>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lFcVPzDhY6SSlGcHBICVG6nlOs096hXq"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div id="map_container"></div>
+    </div>
+</div>
+
+<script src="/static/js/driver/driver_map.js"></script>
+<%
+    }
+%>

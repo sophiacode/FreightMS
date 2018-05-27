@@ -52,5 +52,7 @@ public interface DriverMapper {
 
     int getCount();
 
+    int getCountByTime(Map<String, Object> paramMap);
+
     Driver selectByName(String name);
 }
