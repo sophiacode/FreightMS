@@ -1,9 +1,5 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/14.
- */
-
 public class ConstantFactory {
     public static String getUserStatus(int code){
         if(code == UserEnum.USER_STATUS_FREEZE.getCode()){
@@ -116,6 +112,50 @@ public class ConstantFactory {
             return GoodsEnum.GOODS_STATUS_OK.getName();
         }else if(code == GoodsEnum.GOODS_STATUS_NO.getCode()){
             return GoodsEnum.GOODS_STATUS_NO.getName();
+        }
+
+        return "";
+    }
+
+    public static String getOrderStatus(int code) {
+        if(code == OrderEnum.ORDER_STATUS_WAITING.getCode()){
+            return OrderEnum.ORDER_STATUS_WAITING.getName();
+        }else if(code == OrderEnum.ORDER_STATUS_PROCESS.getCode()){
+            return OrderEnum.ORDER_STATUS_PROCESS.getName();
+        }else if(code == OrderEnum.ORDER_STATUS_FINISH.getCode()){
+            return OrderEnum.ORDER_STATUS_FINISH.getName();
+        }else if(code == OrderEnum.ORDER_STATUS_CANCEL.getCode()){
+            return OrderEnum.ORDER_STATUS_CANCEL.getName();
+        }
+
+        return "";
+    }
+
+    public static String getOrderPayStatus(int code){
+        if(code == OrderEnum.ORDER_PAY_YES.getCode()){
+            return OrderEnum.ORDER_PAY_YES.getName();
+        }else if(code == OrderEnum.ORDER_PAY_NO.getCode()){
+            return OrderEnum.ORDER_PAY_NO.getName();
+        }
+
+        return "";
+    }
+
+    public static String getComplaintStatus(int code){
+        if(code == ComplaintEnum.COMPLAINT_STATUS_WAITING.getCode()){
+            return ComplaintEnum.COMPLAINT_STATUS_WAITING.getName();
+        }else if(code == ComplaintEnum.COMPLAINT_STATUS_HANDLED.getCode()){
+            return ComplaintEnum.COMPLAINT_STATUS_HANDLED.getName();
+        }
+
+        return "";
+    }
+
+    public static String getComplaintType(int code){
+        if(code == ComplaintEnum.COMPLAINT_TYPE_CONSIGNOR.getCode()){
+            return ComplaintEnum.COMPLAINT_TYPE_CONSIGNOR.getName();
+        }else if(code == ComplaintEnum.COMPLAINT_TYPE_DRIVER.getCode()){
+            return ComplaintEnum.COMPLAINT_TYPE_DRIVER.getName();
         }
 
         return "";

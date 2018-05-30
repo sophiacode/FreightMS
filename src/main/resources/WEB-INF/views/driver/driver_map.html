@@ -1,18 +1,59 @@
-<%
-    layout("/WEB-INF/views/common/navbar.html", {'title':'车主位置查询'}){
-%>
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+        body,html,#container{
+            height: 100%;
+            margin: 0px;
+        }
+    </style>
+    <title>车主位置查询</title>
 
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lFcVPzDhY6SSlGcHBICVG6nlOs096hXq"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/static/js/common/constant.js"></script>
+    <script src="/static/js/plugin/layer/layer.js"></script>
+</head>
+<body>
+<input type="hidden" id="idArray" value="${idArray}">
+<div id="container" tabindex="0"></div>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=cd7bec685618ec06a4d90ac573df0d81"></script>
+<script type="text/javascript">
+    var idArray = $("#idArray").val();
+    var drivers;
 
-<div class="row">
-    <div class="col-sm-12">
-        <div id="map_container"></div>
-    </div>
-</div>
+    var map = new AMap.Map('container',{
+        resizeEnable: true,
+        zoom: 6,
+        center: [116.480983, 40.0958]
+    });
 
-<script src="/static/js/driver/driver_map.js"></script>
-<%
-    }
-%>
+    $.ajax({
+        url:URL_DRIVER_MAP_LIST,
+        async:true,
+        traditional:true,
+        contentType: "application/json",
+        data: {idArray : idArray},
+        dataType:"json",
+        success:function(data){
+            drivers = data;
+
+            var i;
+            for(i in drivers){
+                new AMap.Marker({
+                    position: new AMap.LngLat(drivers[i].longitude,drivers[i].latitude),
+                    title: drivers[i].name + "(" + drivers[i].longitude + "," + drivers[i].latitude + ")",
+                    map: map
+                });
+            }
+        },
+        error:function(xhr){
+            console.log(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
+            layer.msg(json['msg'], { icon: 2} );
+        }
+    })
+</script>
+</body>
+</html>

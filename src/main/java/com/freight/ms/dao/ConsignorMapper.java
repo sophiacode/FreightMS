@@ -50,7 +50,7 @@ public interface ConsignorMapper {
 
     List<Consignor> selectByParams(Map<String, Object> paramMap);
 
-    int getCount();
+    int getCount(Map<String, Object> map);
 
     int getCountByTime(Map<String, Object> paramMap);
 

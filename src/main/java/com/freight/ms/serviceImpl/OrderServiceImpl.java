@@ -1,6 +1,10 @@
 package com.freight.ms.serviceImpl;
 
+import com.freight.ms.dao.ConsignorMapper;
+import com.freight.ms.dao.DriverMapper;
 import com.freight.ms.dao.OrderMapper;
+import com.freight.ms.model.Consignor;
+import com.freight.ms.model.Driver;
 import com.freight.ms.model.Order;
 import com.freight.ms.service.OrderService;
 import com.freight.ms.util.JsonUtil;
@@ -16,6 +20,12 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderMapper orderMapper;
 
+    @Autowired
+    private DriverMapper driverMapper;
+
+    @Autowired
+    private ConsignorMapper consignorMapper;
+
     public Order findOrderById(Integer id) {
         return orderMapper.selectByPrimaryKey(id);
     }
@@ -26,7 +36,20 @@ public class OrderServiceImpl implements OrderService{
 
     public String findOrders(Map<String, Object> paramMap){
         List<Order> orderList = orderMapper.selectByParams(paramMap);
-        return JsonUtil.getTableListJson(orderMapper.getCount(),
+
+        for(Order order:orderList){
+            Driver driver = driverMapper.selectByPrimaryKey(order.getDriverId());
+            if(driver != null){
+                order.setDriverName(driver.getName());
+            }
+
+            Consignor consignor = consignorMapper.selectByPrimaryKey(order.getConsignorId());
+            if(consignor != null){
+                order.setConsignorName(consignor.getName());
+            }
+        }
+
+        return JsonUtil.getTableListJson(orderMapper.getCount(paramMap),
                         new OrderWrapper(orderList).wrap());
     }
 }

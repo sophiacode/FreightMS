@@ -256,7 +256,56 @@
   </select>
   
   <select id="getCount" resultType="Integer">
-    select count(*) from user;
+    select count(*) from user
+    <where>
+      <if test="username != null and username != ''">
+        and username = #{username,jdbcType=VARCHAR}
+      </if>
+
+      <if test="password != null and password != ''">
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+
+      <if test="salt != null and salt != ''">
+        and salt = #{salt,jdbcType=VARCHAR}
+      </if>
+
+      <if test="name != null and name != ''">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+
+      <if test="sex != null and sex != ''">
+        and sex = #{sex,jdbcType=INTEGER}
+      </if>
+
+      <if test="age != null and age != ''">
+        and age = #{age,jdbcType=INTEGER}
+      </if>
+
+      <if test="telephone != null and telephone != ''">
+        and telephone = #{telephone,jdbcType=VARCHAR}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="type != null and type != ''">
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+
+      <if test="roleId != null and roleId != ''">
+        and role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
   </select>
 
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -264,5 +313,12 @@
     <include refid="Base_Column_List" />
     from user
     where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where name = #{name,jdbcType=VARCHAR}
   </select>
 </mapper>

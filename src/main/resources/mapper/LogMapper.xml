@@ -138,7 +138,32 @@
   </update>
 
   <select id="getCount" resultType="Integer">
-    select count(*) from log;
+    select count(*) from log
+    <where>
+      <if test="type != null and type != ''">
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+
+      <if test="operation != null and operation != ''">
+        and operation = #{operation,jdbcType=VARCHAR}
+      </if>
+
+      <if test="username != null and username != ''">
+        and username = #{username,jdbcType=VARCHAR}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
   </select>
 
   <select id="selectByParams" resultMap="BaseResultMap">

@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/13.
- */
 public class UserManageWrapper extends BaseWrapper{
     public UserManageWrapper(List<User> obj) {
         super(obj);

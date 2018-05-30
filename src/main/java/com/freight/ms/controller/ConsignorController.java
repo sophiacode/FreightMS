@@ -6,6 +6,7 @@ import com.freight.ms.common.json.SuccessJson;
 import com.freight.ms.model.Consignor;
 import com.freight.ms.service.ConsignorService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,28 +25,14 @@ public class ConsignorController {
     @Autowired
     private ConsignorService consignorService;
 
+    @RequiresPermissions("consignor:list")
+    @BusinessLog(operation = "查看货主用户列表")
     @RequestMapping("")
     public String index(){
         return "/consignor/consignor.html";
     }
 
-    @RequestMapping("/add")
-    public String addView() {
-        return "/consignor/consignor_add.html";
-    }
-
-    @RequestMapping("/edit/{id}")
-    public String editView(@PathVariable Integer id, Model model){
-        if(id == null){
-            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
-        }
-
-        Consignor consignor = consignorService.findConsignorById(id);
-        model.addAttribute(consignor);
-        return "/consignor/consignor_edit.html";
-    }
-
-    @BusinessLog(operation = "查看货主用户列表")
+    @RequiresPermissions("consignor:list")
     @RequestMapping(value = "/consignor_list")
     @ResponseBody
      public String getList(@RequestParam(value = "telephone",required = false) String telephone,
@@ -72,6 +59,7 @@ public class ConsignorController {
         return consignorService.findConsignors(paramMap);
     }
 
+    @RequiresPermissions("consignor:change_status")
     @BusinessLog(operation = "修改货主用户状态")
     @RequestMapping("/consignor_status")
     @ResponseBody

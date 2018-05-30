@@ -24,7 +24,7 @@ public class RoleServiceImpl implements RoleService {
 
     public String findRoles(Map<String, Object> paramMap){
         List<Role> roleList = roleMapper.selectByParams(paramMap);
-        return JsonUtil.getTableListJson(roleMapper.getCount(),
+        return JsonUtil.getTableListJson(roleMapper.getCount(paramMap),
                 new RoleManageWrapper(roleList).wrap());
     }
 

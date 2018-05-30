@@ -16,6 +16,8 @@ var URL_USER_STATUS = URL_USER_MANAGE + "/user_status";
 var URL_USER_ROLE_VIEW = URL_USER_MANAGE + "/role";
 var URL_USER_ROLE = URL_USER_MANAGE + "/user_role";
 var URL_USER_PROFILE_VIEW = URL_USER_MANAGE + "/profile";
+var URL_USER_PASSWORD_VIEW = URL_USER_MANAGE + "/password";
+var URL_USER_PASSWORD = URL_USER_MANAGE + "/user_password";
 
 var URL_ROLE_MANAGE = URL_MANAGE + "/role";
 var URL_ROLE_LIST = URL_ROLE_MANAGE + "/role_list";
@@ -47,6 +49,7 @@ var URL_DRIVER_LIST = URL_DRIVER_MANAGE + "/driver_list";
 var URL_DRIVER_STATUS = URL_DRIVER_MANAGE + "/driver_status";
 var URL_DRIVER_AUTH_VIEW = URL_DRIVER_MANAGE + "/auth";
 var URL_DRIVER_MAP_VIEW = URL_DRIVER_MANAGE + "/map";
+var URL_DRIVER_MAP_LIST = URL_DRIVER_MANAGE + "/map/list"
 
 var URL_ORDER_MANAGE = URL_MANAGE + "/order";
 var URL_ORDER_LIST = URL_ORDER_MANAGE + "/order_list";
@@ -71,6 +74,8 @@ var URL_COUPON_ADD = URL_COUPON_MANAGE + "/coupon_add";
 var URL_COUPON_EDIT_VIEW = URL_COUPON_MANAGE + "/edit";
 var URL_COUPON_EDIT = URL_COUPON_MANAGE + "/coupon_edit";
 var URL_COUPON_DELETE = URL_COUPON_MANAGE + "/coupon_delete";
+var URL_COUPON_RELEASE_VIEW = URL_COUPON_MANAGE + "/release";
+var URL_COUPON_RELEASE = URL_COUPON_MANAGE + "/coupon_release";
 
 var URL_GOODS_MANAGE = URL_MANAGE + "/goods";
 var URL_GOODS_LIST = URL_GOODS_MANAGE + "/goods_list";
@@ -80,8 +85,7 @@ var URL_GOODS_EDIT_VIEW = URL_GOODS_MANAGE + "/edit";
 var URL_GOODS_EDIT = URL_GOODS_MANAGE + "/goods_edit";
 var URL_GOODS_DELETE = URL_GOODS_MANAGE + "/goods_delete";
 
-
 var URL_CHART_USER = URL_MANAGE + "/chart/user";
-
+var URL_CHART_BUSINESS = URL_MANAGE + "/chart/business";
 
 

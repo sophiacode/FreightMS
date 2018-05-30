@@ -6,6 +6,7 @@ import com.freight.ms.common.json.SuccessJson;
 import com.freight.ms.model.Goods;
 import com.freight.ms.service.GoodsService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +25,20 @@ public class ExchangeController {
     @Autowired
     private GoodsService goodsService;
 
+    @RequiresPermissions("goods:list")
+    @BusinessLog(operation = "查看积分物品列表")
     @RequestMapping("")
     public String index(){
         return "/goods/goods.html";
     }
 
+    @RequiresPermissions("goods:add")
     @RequestMapping("/add")
     public String addView() {
         return "/goods/goods_add.html";
     }
 
+    @RequiresPermissions("goods:edit")
     @RequestMapping("/edit/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -45,6 +50,7 @@ public class ExchangeController {
         return "/goods/goods_edit.html";
     }
 
+    @RequiresPermissions("goods:exchange_record")
     @RequestMapping("/exchange/{id}")
     public String exchangeView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -56,7 +62,7 @@ public class ExchangeController {
         return "/goods/goods_exchange.html";
     }
 
-    @BusinessLog(operation = "查看积分物品列表")
+    @RequiresPermissions("goods:list")
     @RequestMapping(value = "/goods_list")
     @ResponseBody
      public String getList(@RequestParam(value = "name",required = false) String name,
@@ -87,6 +93,7 @@ public class ExchangeController {
         return goodsService.findGoods(paramMap);
     }
 
+    @RequiresPermissions("goods:add")
     @BusinessLog(operation = "添加积分物品")
     @RequestMapping("/goods_add")
     @ResponseBody
@@ -103,6 +110,7 @@ public class ExchangeController {
         return SuccessJson.getJson("添加成功");
     }
 
+    @RequiresPermissions("goods:edit")
     @BusinessLog(operation = "修改积分物品")
     @RequestMapping("/goods_edit")
     @ResponseBody
@@ -121,6 +129,7 @@ public class ExchangeController {
         return SuccessJson.getJson("修改成功");
     }
 
+    @RequiresPermissions("goods:delete")
     @BusinessLog(operation = "删除积分物品")
     @RequestMapping("/goods_delete")
     @ResponseBody
@@ -130,9 +139,14 @@ public class ExchangeController {
         return SuccessJson.getJson("删除成功");
     }
 
+    @RequiresPermissions("goods:exchange_record")
     @RequestMapping("/goods_exchange")
     @ResponseBody
-    public String goodsExchange(@RequestParam(value="goodsId") int goodsId){
+    public String goodsExchange(@RequestParam(value="goodsId",required = false) Integer goodsId){
+        if(goodsId == null){
+            return null;
+        }
+
         return goodsService.getExchangeRecord(goodsId);
     }
 }

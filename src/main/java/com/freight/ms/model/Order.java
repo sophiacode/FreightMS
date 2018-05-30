@@ -122,6 +122,10 @@ public class Order {
      */
     private Date updateTime;
 
+    private String driverName;
+
+    private String consignorName;
+
     /**
      *
      */
@@ -456,5 +460,21 @@ public class Order {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getConsignorName() {
+        return consignorName;
+    }
+
+    public void setConsignorName(String consignorName) {
+        this.consignorName = consignorName;
     }
 }

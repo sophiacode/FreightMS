@@ -10,6 +10,7 @@ import com.freight.ms.service.UserService;
 import com.freight.ms.system.log.BusinessLog;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/2.
- */
-
 @Controller
 @RequestMapping("/manage/user")
 public class UserManageController {
@@ -35,16 +32,20 @@ public class UserManageController {
     @Autowired
     private RoleService roleService;
 
+    @RequiresPermissions("user:list")
+    @BusinessLog(operation = "查看用户列表")
     @RequestMapping("")
     public String index(){
         return "/user/user.html";
     }
 
+    @RequiresPermissions("user:add")
     @RequestMapping("/add")
     public String addView() {
         return "/user/user_add.html";
     }
 
+    @RequiresPermissions("user:edit")
     @RequestMapping("/edit/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -56,6 +57,7 @@ public class UserManageController {
         return "/user/user_edit.html";
     }
 
+    @RequiresPermissions("user:change_role")
     @RequestMapping("/role/{id}")
     public String setRoleView(@PathVariable Integer id, Model model){
         model.addAttribute("user_id", id);
@@ -67,13 +69,26 @@ public class UserManageController {
     public String profileView(Model model){
         String username = SecurityUtils.getSubject().getPrincipal().toString();
         User user = userService.findUserByUsername(username);
-        Role role = roleService.findRoleById(user.getRoleId());
-        user.setRoleName(role.getName());
+        if(user.getRoleId() != null){
+            Role role = roleService.findRoleById(user.getRoleId());
+            if(role != null){
+                user.setRoleName(role.getName());
+            }
+        }
+
         model.addAttribute(user);
         return "/user/user_profile.html";
     }
 
-    @BusinessLog(operation = "查看用户列表")
+    @RequestMapping("/password")
+    public String passwordView(Model model){
+        String username = SecurityUtils.getSubject().getPrincipal().toString();
+        User user = userService.findUserByUsername(username);
+        model.addAttribute(user);
+        return "/user/user_password.html";
+    }
+
+    @RequiresPermissions("user:list")
     @RequestMapping(value = "/user_list")
     @ResponseBody
      public String getList(@RequestParam(value = "username",required = false) String username,
@@ -112,6 +127,7 @@ public class UserManageController {
         return userService.findUsers(paramMap);
     }
 
+    @RequiresPermissions("user:add")
     @BusinessLog(operation = "添加用户")
     @RequestMapping("/user_add")
     @ResponseBody
@@ -137,6 +153,7 @@ public class UserManageController {
         return SuccessJson.getJson("添加成功");
     }
 
+    @RequiresPermissions("user:edit")
     @BusinessLog(operation = "修改用户资料")
     @RequestMapping("/user_edit")
     @ResponseBody
@@ -162,6 +179,7 @@ public class UserManageController {
         return SuccessJson.getJson("修改成功");
     }
 
+    @RequiresPermissions("user:delete")
     @BusinessLog(operation = "删除用户")
     @RequestMapping("/user_delete")
     @ResponseBody
@@ -171,6 +189,7 @@ public class UserManageController {
         return SuccessJson.getJson("删除成功");
     }
 
+    @RequiresPermissions("user:change_status")
     @BusinessLog(operation = "修改用户状态")
     @RequestMapping("/user_status")
     @ResponseBody
@@ -180,6 +199,7 @@ public class UserManageController {
         return SuccessJson.getJson("修改状态成功");
     }
 
+    @RequiresPermissions("user:change_role")
     @BusinessLog(operation = "分配角色")
     @RequestMapping("/user_role")
     @ResponseBody
@@ -190,11 +210,15 @@ public class UserManageController {
         return SuccessJson.getJson("分配角色成功");
     }
 
+    @BusinessLog(operation = "修改个人密码")
+    @RequestMapping("/user_password")
+    @ResponseBody
     public String changePassword(@RequestParam(value="id") Integer id,
                                  @RequestParam(value="old_password") String oldPassword,
-                                 @RequestParam(value="new_password") String newPassword){
-
-
+                                 @RequestParam(value="new_password") String newPassword)
+            throws BusinessException{
+        userService.changePassword(id, oldPassword, newPassword);
+        SecurityUtils.getSubject().logout();
         return SuccessJson.getJson("修改密码成功");
     }
 }

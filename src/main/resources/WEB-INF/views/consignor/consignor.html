@@ -25,8 +25,8 @@
                                 <label class="control-label" for="status">状态</label>
                                 <select class="form-control" id="status">
                                     <option value="">全部</option>
-                                    <option value="0">正常</option>
-                                    <option value="1">冻结</option>
+                                    <option value="1">正常</option>
+                                    <option value="2">冻结</option>
                                 </select>
                             </div>
 
@@ -63,9 +63,11 @@
             </div>
         </div>
         <div class="btn-group" id="toolbar">
+            <% if(shiro.hasPermission("consignor:change_status")){ %>
             <button id="btn_freeze" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-plus"></span> 冻结/解除冻结
+                <span class="glyphicon glyphicon-minus"></span> 冻结/解除冻结
             </button>
+            <% } %>
         </div>
         <table id="consignorTable"></table>
     </div>

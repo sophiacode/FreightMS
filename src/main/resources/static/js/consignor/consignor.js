@@ -9,6 +9,7 @@ var initTable = function() {
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams: queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -43,7 +44,18 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        return {
+            telephone : $("#telephone").val(),
+            status : $("#status").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -54,19 +66,13 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        telephone : $("telephone").val(),
-        status : $("status").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_CONSIGNOR_LIST, query: queryParams});
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_CONSIGNOR_LIST});
 };
 
 var reset = function() {
-    $("telephone").val("");
-    $("status").val("");
+    $("#telephone").val("");
+    $("#status").val("");
     $("#createStartTime").val("");
     $("#createEndTime").val("");
 
@@ -90,9 +96,9 @@ var changeStatus = function() {
         idArray.push(selected[i].id);
     }
 
-    $.ajaxSetup({
+    $.ajax({
         url:URL_CONSIGNOR_STATUS,
-        async:true,
+        async:false,
         traditional:true,
         contentType: "application/json",
         data: {idArray : idArray},
@@ -107,8 +113,6 @@ var changeStatus = function() {
             layer.msg(json['msg'], { icon: 2} );
         }
     });
-
-    $.ajax();
 };
 
 
@@ -121,5 +125,4 @@ $(function () {
     $('#btn_search').click(search);
     $('#btn_reset').click(reset);
     $('#btn_freeze').click(changeStatus);
-
 });

@@ -39,21 +39,21 @@
     -->
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       @MBG Generated
     -->
-    delete from order
+    delete from `order`
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.freight.ms.model.Order">
     <!--
       @MBG Generated
     -->
-    insert into order (id, order_no, consignor_id, 
+    insert into `order` (id, order_no, consignor_id,
       driver_id, receiver_name, receiver_phone, 
       start_address, end_address, price, 
       coupon_id, distance, goods_type, 
@@ -70,7 +70,7 @@
     <!--
       @MBG Generated
     -->
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -182,7 +182,7 @@
     <!--
       @MBG Generated
     -->
-    update order
+    update `order`
     <set>
       <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
@@ -239,7 +239,7 @@
     <!--
       @MBG Generated
     -->
-    update order
+    update `order`
     set order_no = #{orderNo,jdbcType=VARCHAR},
       consignor_id = #{consignorId,jdbcType=INTEGER},
       driver_id = #{driverId,jdbcType=INTEGER},
@@ -262,7 +262,7 @@
   <select id="selectByParams" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from order
+    from `order`
     <where>
       <if test="orderNo != null and orderNo != ''">
         and order_no = #{orderNo,jdbcType=VARCHAR}
@@ -301,13 +301,115 @@
   </select>
 
   <select id="getCount" resultType="Integer">
-    select count(*) from order;
+    select count(*) from `order`
+    <where>
+      <if test="orderNo != null and orderNo != ''">
+        and order_no = #{orderNo,jdbcType=VARCHAR}
+      </if>
+
+      <if test="consignorId != null and consignorId != ''">
+        and consignor_id = #{consignorId,jdbcType=INTEGER}
+      </if>
+
+      <if test="driverId != null and driverId != ''">
+        and driver_id = #{driverId,jdbcType=INTEGER}
+      </if>
+
+      <if test="receiverName != null and receiverName != ''">
+        and receiver_name = #{receiverName,jdbcType=VARCHAR}
+      </if>
+
+      <if test="orderStatus != null and orderStatus != ''">
+        and order_status = #{orderStatus,jdbcType=INTEGER}
+      </if>
+
+      <if test="payStatus != null and payStatus != ''">
+        and pay_status = #{payStatus,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
+  <select id="getTotal" resultType="Integer">
+    select count(*) from `order`
+    <where>
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
+  <select id="getProcess" resultType="Integer">
+    select count(*) from `order`
+    <where>
+      (order_status = 1 or order_status = 2)
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
+  <select id="getFinish" resultType="Integer">
+    select count(*) from `order`
+    <where>
+      order_status = 3
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
+  <select id="getCancel" resultType="Integer">
+    select count(*) from `order`
+    <where>
+      order_status = 4
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
+  <select id="getPrice" resultType="Double">
+    select ifnull(sum(price),0) from `order`
+    <where>
+      order_status = 3
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
   </select>
 
   <select id="selectByOrderNo" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from order
+    from `order`
     where order_no = #{orderNo, jdbcType=VARCHAR}
   </select>
 </mapper>

@@ -54,15 +54,23 @@ layout("/WEB-INF/views/common/navbar.html", {'title':'通知管理'}){
             </div>
         </div>
         <div class="btn-group" id="toolbar">
+            <% if(shiro.hasPermission("notification:add")){ %>
             <button id="btn_add" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-plus"></span> 添加
             </button>
+            <% } %>
+
+            <% if(shiro.hasPermission("notification:edit")){ %>
             <button id="btn_edit" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-edit"></span> 修改
             </button>
+            <% } %>
+
+            <% if(shiro.hasPermission("notification:delete")){ %>
             <button id="btn_delete" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-remove"></span> 删除
             </button>
+            <% } %>
         </div>
         <table id="notificationTable"></table>
     </div>

@@ -10,5 +10,6 @@ public interface ComplaintService {
 
     String findComplaints(Map<String, Object> paramMap);
 
+    void handleComplaint(Integer id, String process, Integer adminId);
 
 }

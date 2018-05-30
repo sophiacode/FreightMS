@@ -9,7 +9,7 @@
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
     <result column="process" jdbcType="VARCHAR" property="process" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -45,7 +45,7 @@
       reason, status, admin_id, 
       process, create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
-      #{reason,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, 
+      #{reason,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER},
       #{process,jdbcType=VARCHAR}, now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.freight.ms.model.Complaint">
@@ -91,7 +91,7 @@
         #{reason,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="adminId != null">
         #{adminId,jdbcType=INTEGER},
@@ -118,7 +118,7 @@
         reason = #{reason,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="adminId != null">
         admin_id = #{adminId,jdbcType=INTEGER},
@@ -138,7 +138,7 @@
     set order_id = #{orderId,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       reason = #{reason,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       admin_id = #{adminId,jdbcType=INTEGER},
       process = #{process,jdbcType=VARCHAR},
       update_time = now()
@@ -151,7 +151,7 @@
     from complaint
     <where>
       <if test="orderId != null and orderId != ''">
-        and order_id = #{orderId,jdbcType=VARCHAR}
+        and order_id = #{orderId,jdbcType=INTEGER}
       </if>
 
       <if test="type != null and type != ''">
@@ -175,6 +175,40 @@
   </select>
 
   <select id="getCount" resultType="Integer">
-    select count(*) from complaint;
+    select count(*) from complaint
+    <where>
+      <if test="orderId != null and orderId != ''">
+        and order_id = #{orderId,jdbcType=INTEGER}
+      </if>
+
+      <if test="type != null and type != ''">
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
+  </select>
+
+  <select id="getCountByTime" resultType="Integer">
+    select count(*) from complaint
+    <where>
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
   </select>
 </mapper>

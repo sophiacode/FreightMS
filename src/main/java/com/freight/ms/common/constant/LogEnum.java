@@ -1,8 +1,5 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/17.
- */
 public enum LogEnum {
     LOG_STATUS_SUCCESS(1, "成功"),
     LOG_STATUS_FAIL(2, "失败");

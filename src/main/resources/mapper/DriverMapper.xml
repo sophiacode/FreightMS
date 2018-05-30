@@ -325,7 +325,40 @@
   </select>
 
   <select id="getCount" resultType="Integer">
-    select count(*) from driver;
+    select count(*) from driver
+    <where>
+      <if test="name != null and name != ''">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+
+      <if test="telephone != null and telephone != ''">
+        and telephone = #{telephone,jdbcType=VARCHAR}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="authState != null and authState != ''">
+        and auth_state = #{authState,jdbcType=INTEGER}
+      </if>
+
+      <if test="onlineState != null and onlineState != ''">
+        and online_state = #{onlineState,jdbcType=INTEGER}
+      </if>
+
+      <if test="workState != null and workState != ''">
+        and work_state = #{workState,jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
   </select>
 
   <select id="getCountByTime" resultType="Integer">

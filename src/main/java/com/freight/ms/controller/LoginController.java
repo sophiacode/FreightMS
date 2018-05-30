@@ -10,10 +10,7 @@ import com.freight.ms.service.UserService;
 import com.freight.ms.system.log.BusinessLog;
 import com.freight.ms.util.JsonUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-
-/**
- * Created by sophia on 2018/3/23.
- */
 
 @Controller
 public class LoginController {
@@ -66,7 +59,9 @@ public class LoginController {
             throw new BusinessException(BusinessEnumException.LOGIN_ERROR);
         }catch (LockedAccountException e2){
             throw new BusinessException(BusinessEnumException.LOGIN_USER_FREEZE);
-        } catch (Exception e3){
+        } catch(ExcessiveAttemptsException e3) {
+            throw new BusinessException(BusinessEnumException.LOGIN_ERROR_REPEATEDLY);
+        } catch (Exception e4){
             throw new BusinessException(BusinessEnumException.LOGIN_UNKNOWN);
         }
     }

@@ -59,18 +59,29 @@
             </div>
         </div>
         <div class="btn-group" id="toolbar">
+            <% if(shiro.hasPermission("role:add")){ %>
             <button id="btn_add" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-plus"></span> 添加
             </button>
+            <% } %>
+
+            <% if(shiro.hasPermission("role:edit")){ %>
             <button id="btn_edit" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-edit"></span> 修改
             </button>
+            <% } %>
+
+            <% if(shiro.hasPermission("role:delete")){ %>
             <button id="btn_delete" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-remove"></span> 删除
             </button>
+            <% } %>
+
+            <% if(shiro.hasPermission("role:permission")){ %>
             <button id="btn_permission" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-edit"></span> 分配权限
+                <span class="glyphicon glyphicon-user"></span> 分配权限
             </button>
+            <% } %>
         </div>
         <table id="roleTable"></table>
     </div>

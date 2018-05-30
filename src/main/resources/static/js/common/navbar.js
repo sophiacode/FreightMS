@@ -6,14 +6,14 @@ $(function (){
     $("#logLink").attr("href", URL_LOG_MANAGE);
     $("#consignorLink").attr("href", URL_CONSIGNOR_MANAGE);
     $("#driverLink").attr("href",URL_DRIVER_MANAGE);
-    $("#driverLocLink").attr("href", URL_DRIVER_MAP_VIEW);
     $("#registerChartLink").attr("href", URL_CHART_USER);
     $("#orderLink").attr("href", URL_ORDER_MANAGE);
     $("#complaintLink").attr("href", URL_COMPLAINT_MANAGE);
-    $("#chartLink").attr("href", "#");//TODO
+    $("#chartLink").attr("href", URL_CHART_BUSINESS);
     $("#activityLink").attr("href", URL_ACTIVITY_MANAGE);
     $("#couponLink").attr("href", URL_COUPON_MANAGE);
     $("#goodsLink").attr("href", URL_GOODS_MANAGE);
     $("#logoutLink").attr("href", URL_LOGOUT);
     $("#profileLink").attr("href", URL_USER_PROFILE_VIEW);
+    $("#passwordLink").attr("href", URL_USER_PASSWORD_VIEW);
 });

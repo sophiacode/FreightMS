@@ -9,6 +9,7 @@ import com.freight.ms.service.NotificationService;
 import com.freight.ms.service.UserService;
 import com.freight.ms.system.log.BusinessLog;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,16 +31,20 @@ public class NotificationController {
     @Autowired
     private UserService userService;
 
+    @RequiresPermissions("notification:list")
+    @BusinessLog(operation = "查看通知列表")
     @RequestMapping("")
     public String index(){
         return "/notification/notification.html";
     }
 
+    @RequiresPermissions("notification:add")
     @RequestMapping("/add")
     public String addView() {
         return "/notification/notification_add.html";
     }
 
+    @RequiresPermissions("notification:edit")
     @RequestMapping("/edit/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -51,7 +56,7 @@ public class NotificationController {
         return "/notification/notification_edit.html";
     }
 
-    @BusinessLog(operation = "查看通知列表")
+    @RequiresPermissions("notification:list")
     @RequestMapping(value = "/notification_list")
     @ResponseBody
      public String getList(@RequestParam(value = "title", required = false) String title,
@@ -76,6 +81,7 @@ public class NotificationController {
         return notificationService.findNotifications(paramMap);
     }
 
+    @RequiresPermissions("notification:add")
     @BusinessLog(operation = "添加通知")
     @RequestMapping("/notification_add")
     @ResponseBody
@@ -94,6 +100,7 @@ public class NotificationController {
         return SuccessJson.getJson("添加成功");
     }
 
+    @RequiresPermissions("notification:edit")
     @BusinessLog(operation = "修改通知")
     @RequestMapping("/notification_edit")
     @ResponseBody
@@ -110,6 +117,7 @@ public class NotificationController {
         return SuccessJson.getJson("修改成功");
     }
 
+    @RequiresPermissions("notification:delete")
     @BusinessLog(operation = "删除通知")
     @RequestMapping("/notification_delete")
     @ResponseBody

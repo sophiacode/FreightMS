@@ -13,8 +13,7 @@ public class ShiroExt {
     public boolean hasPermission(String p){
         Subject subject = SecurityUtils.getSubject();
 
-        return true;
-        //return subject != null && p != null && p.length() > 0 && subject.isPermitted(p);
+        return subject != null && p != null && p.length() > 0 && subject.isPermitted(p);
     }
 
     public String getCurrentUsername() {

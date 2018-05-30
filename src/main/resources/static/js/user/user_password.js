@@ -58,7 +58,6 @@ var set = function(key, val) {
         userInfoData[key] = val;
     }
 
-    //userInfoData[key] = (typeof val == "undefined")? $("#" + key).val():val;
     return this;
 };
 
@@ -67,27 +66,29 @@ var clearData = function () {
 };
 
 var collectData = function () {
-    this.set('old_password').set('new_password').set('new_password2');
+    this.set('id').set('old_password').set('new_password').set('new_password2');
 };
 
 var submit = function() {
     clearData();
     collectData();
 
-    $("#userInfoForm").data("bootstrapValidator").validate();
-    if(!$("#userInfoForm").data("bootstrapValidator").isValid()){
+    $("#passwordForm").data("bootstrapValidator").validate();
+    if(!$("#passwordForm").data("bootstrapValidator").isValid()){
         return;
     }
 
     $.ajaxSetup({
-        url:URL_USER_EDIT,
+        url:URL_USER_PASSWORD,
         async:false,
         data:userInfoData,
         dataType:"json",
         success:function(data){
-            layer.msg(data.msg, {icon : 1});
-            window.parent.refresh();
-            parent.layer.close(window.parent.layerIndex);
+            layer.confirm(data.msg + ",请重新登录", {
+                btn: ['确认'] //按钮
+            }, function(){
+                window.location.href = URL_PREFIX;
+            });
         },
         error:function(xhr){
             var json = JSON.parse(xhr.responseText)
@@ -99,11 +100,14 @@ var submit = function() {
 };
 
 $(function (){
-    $("#userInfoForm").bootstrapValidator(validator);
+    $("#passwordForm").bootstrapValidator(validator);
 
     $("#btn_submit").click(submit);
 
-    $("#btn_cancel").click(function(){
-        parent.layer.close(window.parent.layerIndex);
+    $("#btn_reset").click(function(){
+        $("#old_password").val("");
+        $("#new_password").val("");
+        $("#new_password2").val("");
+
     })
 });

@@ -82,7 +82,7 @@ var validator = {
         telephone: {
             validators: {
                 regexp: {
-                    regexp: /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$/,
+                    regexp: /^1(3|4|5|7|8)\d{9}$/,
                     message: "请输入正确的手机号"
                 }
             }

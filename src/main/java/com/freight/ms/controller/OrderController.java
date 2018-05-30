@@ -6,6 +6,7 @@ import com.freight.ms.service.ConsignorService;
 import com.freight.ms.service.DriverService;
 import com.freight.ms.service.OrderService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +28,14 @@ public class OrderController {
     @Autowired
     private DriverService driverService;
 
+    @RequiresPermissions("order")
+    @BusinessLog(operation = "查看订单列表")
     @RequestMapping("")
     public String index(){
         return "/order/order.html";
     }
 
-    @BusinessLog(operation = "查看订单列表")
+    @RequiresPermissions("order")
     @RequestMapping(value = "/order_list")
     @ResponseBody
      public String getList(@RequestParam(value = "orderNo",required = false) String orderNo,

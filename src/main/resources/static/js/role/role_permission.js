@@ -64,6 +64,11 @@ var loadZTree = function() {
 
 var submit = function() {
     var checkedNodes = zTree.getCheckedNodes(true);
+    if(checkedNodes.length == 0){
+        layer.msg("请选择要设置的权限", {icon:2});
+        return;
+    }
+
     var idArray = new Array();
     for(var i in checkedNodes){
         idArray.push(checkedNodes[i].id);

@@ -31,8 +31,8 @@
                             </div>
 
                             <div class="col-sm-2">
-                                <label class="control-label" for="sex">状态</label>
-                                <select class="form-control" id="sex">
+                                <label class="control-label" for="status">状态</label>
+                                <select class="form-control" id="status">
                                     <option value="">全部</option>
                                     <option value="1">待处理</option>
                                     <option value="2">已处理</option>
@@ -76,7 +76,7 @@
         <div class="btn-group" id="toolbar">
             <% if(shiro.hasPermission("complaint:handle")){ %>
             <button id="btn_handle" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-plus"></span> 处理
+                <span class="glyphicon glyphicon-ok"></span> 处理
             </button>
             <% } %>
         </div>

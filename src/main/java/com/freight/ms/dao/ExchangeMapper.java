@@ -3,6 +3,7 @@ package com.freight.ms.dao;
 import com.freight.ms.model.Exchange;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ExchangeMapper {
     /**
@@ -48,4 +49,8 @@ public interface ExchangeMapper {
      * @param record
      */
     int updateByPrimaryKey(Exchange record);
+
+    int getDriverPoint(Map<String, Object> map);
+
+    int getConsignorPoint(Map<String, Object> map);
 }

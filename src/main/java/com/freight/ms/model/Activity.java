@@ -59,6 +59,8 @@ public class Activity {
      */
     private Date updateTime;
 
+    private String adminName;
+
     /**
      *
      */
@@ -222,5 +224,13 @@ public class Activity {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
 }

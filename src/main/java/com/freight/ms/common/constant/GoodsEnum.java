@@ -1,8 +1,5 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/26.
- */
 public enum GoodsEnum {
     GOODS_STATUS_OK(1, "当前可兑换"),
     GOODS_STATUS_NO(2, "当前不可兑换");

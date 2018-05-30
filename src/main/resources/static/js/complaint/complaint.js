@@ -3,12 +3,13 @@ var table;
 
 var initTable = function() {
     table.bootstrapTable({
-        url: URL_COMPLAINT_LIST,//TODO:修改URL
+        url: URL_COMPLAINT_LIST,
         method: 'get',
         toolbar: '#toolbar',
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams: queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -37,7 +38,7 @@ var initTable = function() {
             field: 'status',
             title: '状态'
         }, {
-            field: 'adminId',
+            field: 'adminName',
             title: '处理者'
         }, {
             field: 'process',
@@ -46,7 +47,19 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        return  {
+            orderNo : $("#orderNo").val(),
+            type : $("#type").val(),
+            status : $("#status").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        }
+    }
 };
 
 var initDateTimePicker = function() {
@@ -57,15 +70,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        orderNo : $("#orderNo").val(),
-        type : $("#type").val(),
-        status : $("#status").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_USER_LIST, query: queryParams}); //TODO:修改URL
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_COMPLAINT_LIST});
 };
 
 var reset = function() {
@@ -83,7 +89,20 @@ var refresh = function() {
 };
 
 var showHandle = function() {
-    //TODO:处理投诉
+    var selected = table.bootstrapTable('getSelections');
+    if(selected.length != 1){
+        layer.msg("请先选择一条记录", {icon : 2});
+        return;
+    }
+
+    layerIndex = layer.open({
+        type: 2,
+        title: '处理投诉',
+        maxmin: true,
+        shadeClose: true, //点击遮罩关闭层
+        area : ['600px' , '400px'],
+        content: URL_COMPLAINT_HANDLE_VIEW + "/" + selected[0].id
+    });
 };
 
 $(function () {
@@ -95,5 +114,4 @@ $(function () {
     $('#btn_search').click(search);
     $('#btn_reset').click(reset);
     $('#btn_handle').click(showHandle);
-
 });

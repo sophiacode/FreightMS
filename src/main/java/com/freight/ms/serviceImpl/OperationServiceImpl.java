@@ -13,10 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by wyq on 2018/4/12.
- */
-
 @Service("OperationService")
 public class OperationServiceImpl implements OperationService{
     @Autowired

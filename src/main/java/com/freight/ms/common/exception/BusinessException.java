@@ -2,9 +2,6 @@ package com.freight.ms.common.exception;
 
 import com.alibaba.fastjson.JSON;
 
-/**
- * Created by wyq on 2018/4/10.
- */
 public class BusinessException extends RuntimeException{
     private int code;
     private String msg;

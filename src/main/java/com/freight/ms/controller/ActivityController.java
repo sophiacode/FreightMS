@@ -9,6 +9,7 @@ import com.freight.ms.service.ActivityService;
 import com.freight.ms.service.UserService;
 import com.freight.ms.system.log.BusinessLog;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,17 +31,21 @@ public class ActivityController {
     @Autowired
     private UserService userService;
 
+    @BusinessLog(operation = "查看活动列表")
+    @RequiresPermissions("activity:list")
     @RequestMapping("")
     public String index(){
         return "/activity/activity.html";
     }
 
     @RequestMapping("/add")
+    @RequiresPermissions("activity:add")
     public String addView() {
         return "/activity/activity_add.html";
     }
 
     @RequestMapping("/edit/{id}")
+    @RequiresPermissions("activity:edit")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
             throw new BusinessException(BusinessEnumException.REQUEST_NULL);
@@ -51,8 +56,9 @@ public class ActivityController {
         return "/activity/activity_edit.html";
     }
 
-    @BusinessLog(operation = "查看活动列表")
+
     @RequestMapping(value = "/activity_list")
+    @RequiresPermissions("activity:list")
     @ResponseBody
      public String getList(@RequestParam(value = "title",required = false) String title,
                            @RequestParam(value = "authorName",required = false) String authorName,
@@ -76,21 +82,22 @@ public class ActivityController {
         paramMap.put("limit", limit);
         paramMap.put("offset", offset);
 
-        if(authorName != null){
-            User user = userService.findUserByUsername(authorName);
+        if(authorName != null && !authorName.equals("")){
+            User user = userService.findUserByName(authorName);
             if(user != null){
                 paramMap.put("authorId", user.getId());
             }else{
-                paramMap.put("authorId", 0);
+                paramMap.put("authorId", -1);
             }
         }else{
-            paramMap.put("authorId", 0);
+            //paramMap.put("authorId", 0);
         }
 
         return activityService.findActivitys(paramMap);
     }
 
     @BusinessLog(operation = "添加活动")
+    @RequiresPermissions("activity:add")
     @RequestMapping("/activity_add")
     @ResponseBody
     public String addActivity(@RequestParam(value = "title") String title,
@@ -116,6 +123,7 @@ public class ActivityController {
 
     @BusinessLog(operation = "修改活动")
     @RequestMapping("/activity_edit")
+    @RequiresPermissions("activity:edit")
     @ResponseBody
     public String editActivity(@RequestParam(value = "id") Integer id,
                                @RequestParam(value = "title") String title,
@@ -136,6 +144,7 @@ public class ActivityController {
 
     @BusinessLog(operation = "删除活动")
     @RequestMapping("/activity_delete")
+    @RequiresPermissions("activity:delete")
     @ResponseBody
     public String deleteActivity(@RequestParam(value="idArray") List<Integer> idArray)
             throws BusinessException{

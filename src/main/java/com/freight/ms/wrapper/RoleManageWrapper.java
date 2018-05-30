@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/20.
- */
 public class RoleManageWrapper extends BaseWrapper{
     public RoleManageWrapper(List<Role> obj) {
         super(obj);

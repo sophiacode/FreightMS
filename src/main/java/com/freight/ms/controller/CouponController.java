@@ -6,6 +6,7 @@ import com.freight.ms.common.json.SuccessJson;
 import com.freight.ms.model.Coupon;
 import com.freight.ms.service.CouponService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +25,20 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
+    @RequiresPermissions("coupon:list")
+    @BusinessLog(operation = "查看优惠券列表")
     @RequestMapping("")
     public String index(){
         return "/coupon/coupon.html";
     }
 
+    @RequiresPermissions("coupon:add")
     @RequestMapping("/add")
     public String addView() {
         return "/coupon/coupon_add.html";
     }
 
+    @RequiresPermissions("coupon:edit")
     @RequestMapping("/edit/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -45,7 +50,18 @@ public class CouponController {
         return "/coupon/coupon_edit.html";
     }
 
-    @BusinessLog(operation = "查看优惠券列表")
+    @RequiresPermissions("coupon:release")
+    @RequestMapping("/release/{id}")
+    public String releaseView(@PathVariable Integer id, Model model){
+        if(id == null){
+            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
+        }
+
+        model.addAttribute("couponId", id);
+        return "/coupon/coupon_release.html";
+    }
+
+    @RequiresPermissions("coupon:list")
     @RequestMapping(value = "/coupon_list")
     @ResponseBody
      public String getList(@RequestParam(value = "name",required = false) String name,
@@ -70,24 +86,31 @@ public class CouponController {
         return couponService.findCoupons(paramMap);
     }
 
+    @RequiresPermissions("coupon:add")
     @BusinessLog(operation = "添加优惠券")
     @RequestMapping("/coupon_add")
     @ResponseBody
     public String addUser(@RequestParam(value = "name",required = false) String name,
                           @RequestParam(value = "activeTime",required = false) Integer activeTime,
                           @RequestParam(value = "price",required = false) Double price,
-                          @RequestParam(value = "startPrice",required = false) Double startPrice) throws BusinessException { //TODO：具体参数
+                          @RequestParam(value = "startPrice",required = false) Double startPrice) throws BusinessException {
         Coupon coupon = new Coupon();
         coupon.setName(name);
         coupon.setActiveTime(activeTime);
         coupon.setPrice(price);
-        coupon.setStartPrice(startPrice);
+
+        if(startPrice == null){
+            coupon.setStartPrice(0.0);
+        }else{
+            coupon.setStartPrice(startPrice);
+        }
 
         couponService.addCoupon(coupon);
 
         return SuccessJson.getJson("添加成功");
     }
 
+    @RequiresPermissions("coupon:edit")
     @BusinessLog(operation = "修改优惠券")
     @RequestMapping("/coupon_edit")
     @ResponseBody
@@ -108,6 +131,7 @@ public class CouponController {
         return SuccessJson.getJson("修改成功");
     }
 
+    @RequiresPermissions("coupon:delete")
     @BusinessLog(operation = "删除优惠券")
     @RequestMapping("/coupon_delete")
     @ResponseBody
@@ -116,4 +140,26 @@ public class CouponController {
         couponService.deleteCoupons(idArray);
         return SuccessJson.getJson("删除成功");
     }
+
+    @RequiresPermissions("coupon:release")
+    @BusinessLog(operation = "发放优惠券")
+    @RequestMapping("/coupon_release")
+    @ResponseBody
+    public String releaseCoupon(@RequestParam(value = "couponId") Integer couponId,
+                                @RequestParam(value = "telephone", required = false) String telephone,
+                                @RequestParam(value = "minPoint", required = false) String minPoint,
+                                @RequestParam(value = "maxPoint", required = false) String maxPoint,
+                                @RequestParam(value = "createStartTime", required = false) String createStartTime,
+                                @RequestParam(value = "createEndTime", required = false) String createEndTime){
+        Map<String, Object> map = new HashMap<>();
+        map.put("telephone", telephone);
+        map.put("minPoint", minPoint);
+        map.put("maxPoint", maxPoint);
+        map.put("createStartTime", createStartTime);
+        map.put("createEndTime", createEndTime);
+
+        couponService.releaseCoupon(couponId, map);
+        return SuccessJson.getJson("发放成功");
+    }
+
 }

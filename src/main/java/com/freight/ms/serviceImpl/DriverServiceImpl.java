@@ -28,7 +28,7 @@ public class DriverServiceImpl implements DriverService{
 
     public String findDrivers(Map<String, Object> paramMap){
         List<Driver> driverList = driverMapper.selectByParams(paramMap);
-        return JsonUtil.getTableListJson(driverMapper.getCount(),
+        return JsonUtil.getTableListJson(driverMapper.getCount(paramMap),
                 new DriverWrapper(driverList).wrap());
     }
 

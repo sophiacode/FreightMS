@@ -5,6 +5,7 @@ import com.freight.ms.common.exception.BusinessException;
 import com.freight.ms.model.Log;
 import com.freight.ms.service.LogService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,28 +23,14 @@ public class LogController {
     @Autowired
     private LogService logService;
 
+    @RequiresPermissions("log:list")
+    @BusinessLog(operation = "查看日志列表")
     @RequestMapping("")
     public String index(){
         return "/log/log.html";
     }
 
-    @RequestMapping("/add")
-    public String addView() {
-        return "/log/log_add.html";
-    }
-
-    @RequestMapping("/edit/{id}")
-    public String editView(@PathVariable Integer id, Model model){
-        if(id == null){
-            throw new BusinessException(BusinessEnumException.REQUEST_NULL);
-        }
-
-        Log log = logService.findLogById(id);
-        model.addAttribute(log);
-        return "/log/log_edit.html";
-    }
-
-    @BusinessLog(operation = "查看日志列表")
+    @RequiresPermissions("log:list")
     @RequestMapping(value = "/log_list")
     @ResponseBody
      public String getList(@RequestParam(value = "type",required = false) String type,

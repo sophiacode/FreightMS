@@ -159,4 +159,40 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getDriverPoint" resultType="Integer">
+    select ifnull(sum(point),0) from goods
+    where id in
+    (select goods_id from exchange
+    <where>
+      user_type = 1
+
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
+    )
+  </select>
+
+  <select id="getConsignorPoint" resultType="Integer">
+    select ifnull(sum(point),0) from goods
+    where id in
+    (select goods_id from exchange
+    <where>
+      user_type = 2
+
+      <if test="startTime != null and startTime != ''">
+        and create_time &gt;= CONCAT(#{startTime},' 00:00:00')
+      </if>
+
+      <if test="endTime != null and endTime != ''">
+        and create_time &lt;= CONCAT(#{endTime},' 23:59:59')
+      </if>
+    </where>
+    )
+  </select>
 </mapper>

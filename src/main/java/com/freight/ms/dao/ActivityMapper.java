@@ -50,5 +50,5 @@ public interface ActivityMapper {
 
     List<Activity> selectByParams(Map<String, Object> paramMap);
 
-    int getCount();
+    int getCount(Map<String, Object> paramMap);
 }

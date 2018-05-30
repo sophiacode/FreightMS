@@ -50,5 +50,5 @@ public interface LogMapper {
 
     List<Log> selectByParams(Map<String, Object> paramMap);
 
-    int getCount();
+    int getCount(Map<String, Object> paramMap);
 }

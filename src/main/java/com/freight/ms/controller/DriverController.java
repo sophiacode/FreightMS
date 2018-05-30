@@ -1,5 +1,8 @@
 package com.freight.ms.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.freight.ms.common.constant.ConstantFactory;
 import com.freight.ms.common.exception.BusinessEnumException;
 import com.freight.ms.common.exception.BusinessException;
@@ -7,6 +10,7 @@ import com.freight.ms.common.json.SuccessJson;
 import com.freight.ms.model.Driver;
 import com.freight.ms.service.DriverService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +30,14 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
+    @RequiresPermissions("driver:list")
+    @BusinessLog(operation = "查看车主用户列表")
     @RequestMapping("")
     public String index(){
         return "/driver/driver.html";
     }
 
-    @RequestMapping("/map")
-    public String mapView(){
-        return "/driver/driver_map.html";
-    }
-
+    @RequiresPermissions("driver:auth")
     @RequestMapping("/auth/{id}")
     public String authView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -47,7 +50,30 @@ public class DriverController {
         return "/driver/driver_auth.html";
     }
 
-    @BusinessLog(operation = "查看车主用户列表")
+    @RequiresPermissions("driver:location")
+    @RequestMapping("/map/{idArray}")
+    public String mapView(@PathVariable String idArray, Model model){
+        model.addAttribute("idArray",idArray);
+        return "/driver/driver_map.html";
+    }
+
+    @RequiresPermissions("driver:location")
+    @RequestMapping("/map/list")
+    @ResponseBody
+    public String getDrivers(@RequestParam(value = "idArray") String idArray){
+        JSONArray jsonArray = JSON.parseArray("[" + idArray + "]");
+        List<Integer> idList = jsonArray.toJavaList(Integer.class);
+
+        List<Driver> drivers = new ArrayList<>();
+        for(Integer id:idList){
+            Driver driver = driverService.findDriverById(id);
+            drivers.add(driver);
+        }
+
+        return JSON.toJSONString(drivers);
+    }
+
+    @RequiresPermissions("driver:list")
     @RequestMapping(value = "/driver_list")
     @ResponseBody
      public String getList(@RequestParam(value = "telephone",required = false) String telephone,
@@ -82,6 +108,7 @@ public class DriverController {
         return driverService.findDrivers(paramMap);
     }
 
+    @RequiresPermissions("driver:change_status")
     @BusinessLog(operation = "修改车主用户状态")
     @RequestMapping("/driver_status")
     @ResponseBody
@@ -91,6 +118,7 @@ public class DriverController {
         return SuccessJson.getJson("修改状态成功");
     }
 
+    @RequiresPermissions("driver:auth")
     @BusinessLog(operation = "修改车主认证状态")
     @RequestMapping("/driver_auth")
     @ResponseBody
@@ -100,6 +128,4 @@ public class DriverController {
         driverService.changeAuthState(id, authState);
         return SuccessJson.getJson("修改认证状态成功");
     }
-
-
 }

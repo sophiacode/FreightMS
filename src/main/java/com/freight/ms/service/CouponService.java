@@ -17,4 +17,6 @@ public interface CouponService {
     void editCoupon(Coupon coupon);
 
     void deleteCoupons(List<Integer> list);
+
+    void releaseCoupon(Integer couponId, Map<String, Object> map);
 }

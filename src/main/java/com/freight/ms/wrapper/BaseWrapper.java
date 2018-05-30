@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/13.
- */
 public abstract class BaseWrapper {
     Object obj = null;
 

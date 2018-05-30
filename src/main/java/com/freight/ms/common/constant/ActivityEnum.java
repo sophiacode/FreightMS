@@ -1,8 +1,5 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/26.
- */
 public enum ActivityEnum {
     ACTIVITY_STATUS_FUTURE(1, "未开始"),
     ACTIVITY_STATUS_NOW(2, "进行中"),

@@ -1,11 +1,20 @@
 package com.freight.ms.controller;
 
+import com.freight.ms.common.json.SuccessJson;
+import com.freight.ms.model.Complaint;
 import com.freight.ms.model.Order;
+import com.freight.ms.model.User;
 import com.freight.ms.service.ComplaintService;
 import com.freight.ms.service.OrderService;
+import com.freight.ms.service.UserService;
 import com.freight.ms.system.log.BusinessLog;
+import com.freight.ms.util.JsonUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,12 +31,25 @@ public class ComplaintController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private UserService userService;
+
+    @RequiresPermissions("complaint:list")
+    @BusinessLog(operation = "查看投诉列表")
     @RequestMapping("")
     public String index(){
         return "/complaint/complaint.html";
     }
 
-    @BusinessLog(operation = "查看投诉列表")
+    @RequiresPermissions("complaint:handle")
+    @RequestMapping("/handle/{id}")
+    public String handleView(@PathVariable Integer id, Model model){
+        Complaint complaint = complaintService.findComplaintById(id);
+        model.addAttribute("complaint", complaint);
+        return "/complaint/complaint_handle.html";
+    }
+
+    @RequiresPermissions("complaint:list")
     @RequestMapping(value = "/complaint_list")
     @ResponseBody
      public String getList(@RequestParam(value = "orderNo",required = false) String orderNo,
@@ -66,5 +88,21 @@ public class ComplaintController {
         return complaintService.findComplaints(paramMap);
     }
 
-    //TODO:处理投诉
+    @RequiresPermissions("complaint:handle")
+    @BusinessLog(operation = "处理投诉")
+    @RequestMapping("/complaint_handle")
+    @ResponseBody
+    public String handleComplaint(@RequestParam(value = "id") Integer id,
+                                  @RequestParam(value = "process") String process){
+        Integer userId = null;
+
+        String username = SecurityUtils.getSubject().getPrincipal().toString();
+        User user = userService.findUserByUsername(username);
+        if(user != null){
+            userId = user.getId();
+        }
+
+        complaintService.handleComplaint(id, process, userId);
+        return SuccessJson.getJson("添加处理说明成功");
+    }
 }

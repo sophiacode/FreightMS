@@ -69,6 +69,11 @@
                 <span class="glyphicon glyphicon-remove"></span> 删除
             </button>
             <% } %>
+            <% if(shiro.hasPermission("coupon:release")){ %>
+            <button id="btn_release" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-hand-right"></span> 发放
+            </button>
+            <% } %>
         </div>
         <table id="couponTable"></table>
     </div>

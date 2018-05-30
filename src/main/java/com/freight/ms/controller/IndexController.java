@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-/**
- * Created by wyq on 2018/4/28.
- */
-
 @Controller
 @RequestMapping("/manage")
 public class IndexController {

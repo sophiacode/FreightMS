@@ -16,10 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-/**
- * Created by wyq on 2018/4/16.
- */
-
 @Aspect
 @Component
 @Configurable
@@ -49,13 +45,15 @@ public class LogAspect {
             BusinessLog annotation = method.getAnnotation(BusinessLog.class);
             String operation = annotation.operation();
 
-            String username = SecurityUtils.getSubject().getPrincipal().toString();
+            String username;
 
             String type;
             if(operation.equals("用户登录")) {
                 type="登录日志";
+                username = (String)point.getArgs()[0];
             }else{
                 type="业务日志";
+                username = SecurityUtils.getSubject().getPrincipal().toString();
             }
 
             Log log = new Log(null, type, operation, username, LogEnum.LOG_STATUS_SUCCESS.getCode(), message, null);

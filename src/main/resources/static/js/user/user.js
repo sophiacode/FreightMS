@@ -9,6 +9,7 @@ var initTable = function() {
         cache: false,                      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,                  //是否显示分页（*）
         sortable: false,                   //是否启用排序
+        queryParams : queryParams,
         queryParamsType:'limit',
         sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
         pageNumber:1,                       //初始化加载第一页，默认第一页
@@ -53,7 +54,23 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        return {
+            username : $("#username").val(),
+            name : $("#name").val(),
+            sex : $("#sex").val(),
+            age : $("#age").val(),
+            telephone : $("#telephone").val(),
+            status : $("#status").val(),
+            type : $("#type").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -64,19 +81,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        username : $("#username").val(),
-        name : $("#name").val(),
-        sex : $("#sex").val(),
-        age : $("#age").val(),
-        telephone : $("#telephone").val(),
-        status : $("#status").val(),
-        type : $("#type").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_USER_LIST, query: queryParams});
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_USER_LIST});
 };
 
 var reset = function() {
@@ -184,10 +190,11 @@ var changeStatus = function() {
     for(i in selected){
         idArray.push(selected[i].id);
     }
+    console.log(idArray);
 
-    $.ajaxSetup({
+    $.ajax({
         url:URL_USER_STATUS,
-        async:true,
+        async:false,
         traditional:true,
         contentType: "application/json",
         data: {idArray : idArray},
@@ -202,8 +209,6 @@ var changeStatus = function() {
             layer.msg(json['msg'], { icon: 2} );
         }
     });
-
-    $.ajax();
 };
 
 var showSetRole = function() {

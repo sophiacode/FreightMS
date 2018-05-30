@@ -7,9 +7,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by wyq on 2018/4/13.
- */
 public class BeanUtil {
     public static Map<String, Object> transBean2Map(Object obj) {
         if(obj == null){

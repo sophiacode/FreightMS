@@ -8,6 +8,7 @@ var initTable = function() {
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams : queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -55,7 +56,7 @@ var initTable = function() {
             title: '货物类型'
         },{
             field: 'remark',
-            title: '备注类型'
+            title: '备注信息'
         },{
             field: 'orderStatus',
             title: '订单状态'
@@ -66,7 +67,22 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params){
+        return {
+            orderNo : $("#orderNo").val(),
+            consignorName : $("#consignorName").val(),
+            driverName : $("#driverName").val(),
+            receiverName : $("#receiverName").val(),
+            orderStatus: $("#orderStatus").val(),
+            payStatus: $("#payStatus").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -77,18 +93,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        orderNo : $("#orderNo").val(),
-        consignorName : $("#consignorName").val(),
-        driverName : $("#driverName").val(),
-        receiverName : $("#receiverName").val(),
-        orderStatus: $("#orderStatus").val(),
-        payStatus: $("#payStatus").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_ORDER_LIST, query: queryParams}); //TODO:修改URL
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_ORDER_LIST});
 };
 
 var reset = function() {

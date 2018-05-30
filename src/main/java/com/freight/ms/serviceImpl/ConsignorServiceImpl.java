@@ -32,7 +32,7 @@ public class ConsignorServiceImpl implements ConsignorService{
 
     public String findConsignors(Map<String, Object> paramMap){
         List<Consignor> consignorList = consignorMapper.selectByParams(paramMap);
-        return JsonUtil.getTableListJson(consignorMapper.getCount(),
+        return JsonUtil.getTableListJson(consignorMapper.getCount(paramMap),
                 new ConsignorWrapper(consignorList).wrap());
     }
 

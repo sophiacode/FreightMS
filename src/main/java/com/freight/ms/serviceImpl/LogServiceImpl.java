@@ -22,7 +22,7 @@ public class LogServiceImpl implements LogService{
 
     public String findLogs(Map<String, Object> paramMap){
         List<Log> logList = logMapper.selectByParams(paramMap);
-        return JsonUtil.getTableListJson(logMapper.getCount(),
+        return JsonUtil.getTableListJson(logMapper.getCount(paramMap),
                         new LogWrapper(logList).wrap());
     }
 

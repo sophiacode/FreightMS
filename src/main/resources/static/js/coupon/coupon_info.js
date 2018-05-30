@@ -78,7 +78,7 @@ var addSubmit = function () {
     }
 
     $.ajaxSetup({
-        url: URL_COUPON_ADD, //TODO:URL
+        url: URL_COUPON_ADD,
         async:true,
         data:couponInfoData,
         dataType:"json",

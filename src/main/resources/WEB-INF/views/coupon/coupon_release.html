@@ -1,0 +1,46 @@
+<%
+layout("/WEB-INF/views/common/container.html", {'title':'发放优惠券'}){
+%>
+
+<div class="row" style="margin-left:20px; margin-right:20px">
+    <div class="col-sm-12">
+        <form role="form" id="couponReleaseForm">
+            <input type="hidden" id="couponId" value="${couponId}">
+
+            <input type="radio" name="condition" value="1">指定手机号码
+            <input type="text" class="form-control" id="telephone" name="telephone" placeholder="请输入手机号码">
+            <hr>
+
+            <input type="radio" name="condition" value="2">指定积分区间
+            <input type="text" class="form-control" id="minPoint" name="minPoint" placeholder="最小积分"/>
+            <input type="text" class="form-control" id="maxPoint" name="maxPoint" placeholder="最大积分"/>
+            <hr>
+
+            <input type="radio" name="condition" value="3">指定注册时间区间
+            <div class="input-group">
+                <span class="input-group-addon">从</span>
+                <input id="createStartTime" class="form-control dateTime" type="text" name="dateTimePicker"/>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">到</span>
+                <input id="createEndTime" class="form-control dateTime" type="text" name="dateTimePicker"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row" style="margin-left:20px; margin-right:20px; margin-top:20px">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3">
+        <button type="button" id="btn_submit" class="btn btn-success btn-block">确定</button>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btn_cancel" class="btn btn-default btn-block">取消</button>
+    </div>
+</div>
+
+<script src="/static/js/coupon/coupon_release.js"></script>
+
+<%
+}
+%>

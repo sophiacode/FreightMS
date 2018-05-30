@@ -9,6 +9,7 @@ import com.freight.ms.model.Role;
 import com.freight.ms.service.OperationService;
 import com.freight.ms.service.RoleService;
 import com.freight.ms.system.log.BusinessLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,16 +31,20 @@ public class RoleManageController {
     @Autowired
     private OperationService operationService;
 
+    @RequiresPermissions("role:list")
+    @BusinessLog(operation = "查看角色列表")
     @RequestMapping("")
     public String index(){
         return "/role/role.html";
     }
 
+    @RequiresPermissions("role:add")
     @RequestMapping("/add")
     public String addView() {
         return "/role/role_add.html";
     }
 
+    @RequiresPermissions("role:edit")
     @RequestMapping("/edit/{id}")
     public String editView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -51,6 +56,7 @@ public class RoleManageController {
         return "/role/role_edit.html";
     }
 
+    @RequiresPermissions("role:permission")
     @RequestMapping("/permission/{id}")
     public String permissionView(@PathVariable Integer id, Model model){
         if(id == null){
@@ -63,7 +69,7 @@ public class RoleManageController {
         return "/role/role_permission.html";
     }
 
-    @BusinessLog(operation = "查看角色列表")
+    @RequiresPermissions("role:list")
     @RequestMapping(value = "/role_list")
     @ResponseBody
      public String getList(@RequestParam(value = "name",required = false) String name,
@@ -90,12 +96,13 @@ public class RoleManageController {
         return roleService.findRoles(paramMap);
     }
 
+    @RequiresPermissions("role:add")
     @BusinessLog(operation = "添加角色")
     @RequestMapping("/role_add")
     @ResponseBody
     public String addUser(@RequestParam(value = "name") String name,
                           @RequestParam(value = "identifier") String identifier,
-                          @RequestParam(value = "description") String description,
+                          @RequestParam(value = "description", required = false) String description,
                           @RequestParam(value = "permissions", required = false) List<Integer> permissions) throws BusinessException {
         Role role = new Role();
         role.setName(name);
@@ -107,13 +114,14 @@ public class RoleManageController {
         return SuccessJson.getJson("添加成功");
     }
 
+    @RequiresPermissions("role:edit")
     @BusinessLog(operation = "修改角色")
     @RequestMapping("/role_edit")
     @ResponseBody
     public String editRole(@RequestParam(value = "id") Integer id,
                            @RequestParam(value = "name") String name,
                            @RequestParam(value = "identifier") String identifier,
-                           @RequestParam(value = "description") String description,
+                           @RequestParam(value = "description", required = false) String description,
                            @RequestParam(value = "permissions", required = false) List<Integer> permissions) throws BusinessException{
         Role role = new Role();
         role.setId(id);
@@ -126,6 +134,7 @@ public class RoleManageController {
         return SuccessJson.getJson("修改成功");
     }
 
+    @RequiresPermissions("role:delete")
     @BusinessLog(operation = "删除角色")
     @RequestMapping("/role_delete")
     @ResponseBody
@@ -135,6 +144,7 @@ public class RoleManageController {
         return SuccessJson.getJson("删除成功");
     }
 
+    @RequiresPermissions("role:permission")
     @RequestMapping("/role_permission")
     @ResponseBody
     public String operationList(@RequestParam(value = "roleId") int roleId) throws BusinessException{
@@ -150,6 +160,7 @@ public class RoleManageController {
         return object.toJSONString();
     }
 
+    @RequiresPermissions("role:permission")
     @RequestMapping("/change_permission")
     @ResponseBody
     public String changePermission(@RequestParam(value = "roleId") Integer roleId,

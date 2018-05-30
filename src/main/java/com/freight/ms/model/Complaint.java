@@ -36,7 +36,7 @@ public class Complaint {
      * 表 : complaint
      * 对应字段 : status
      */
-    private String status;
+        private Integer status;
 
     /**
      * 处理投诉的管理系统用户id
@@ -56,10 +56,14 @@ public class Complaint {
 
     private Date updateTime;
 
+    private String orderNo;
+
+    private String adminName;
+
     /**
      *
      */
-    public Complaint(Integer id, Integer orderId, Integer type, String reason, String status, Integer adminId, String process, Date createTime, Date updateTime) {
+    public Complaint(Integer id, Integer orderId, Integer type, String reason, Integer status, Integer adminId, String process, Date createTime, Date updateTime) {
         this.id = id;
         this.orderId = orderId;
         this.type = type;
@@ -155,7 +159,7 @@ public class Complaint {
      *
      * @return complaint.status：处理状态（1：待处理，2：已处理）
      */
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
@@ -164,8 +168,8 @@ public class Complaint {
      *
      * @param status  处理状态（1：待处理，2：已处理）
      */
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     /**
@@ -218,5 +222,21 @@ public class Complaint {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
 }

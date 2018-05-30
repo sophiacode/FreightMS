@@ -10,6 +10,7 @@ var initTable = function() {
         pagination: true,
         sortable: false,
         queryParamsType:'limit',
+        queryParams: queryParams,
         sidePagination: "server",
         pageNumber:1,
         pageSize: 10,
@@ -43,7 +44,21 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        var queryParams = {
+            type: $('#type').val(),
+            operation: $("#operation").val(),
+            username: $("#username").val(),
+            status: $("#status").val(),
+            createStartTime: $("#createStartTime").val(),
+            createEndTime: $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+        return queryParams;
+    }
 };
 
 var initDateTimePicker = function() {
@@ -54,16 +69,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        type : $('#type').val(),
-        operation: $("#operation").val(),
-        username: $("#username").val(),
-        status: $("#status").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_LOG_LIST, query: queryParams});
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_LOG_LIST});
 };
 
 var reset = function() {

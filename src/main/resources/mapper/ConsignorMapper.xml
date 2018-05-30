@@ -7,7 +7,7 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
-    <result column="name" jdbcType="VARCHAR" property="telephone" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="profile_picture" jdbcType="VARCHAR" property="profilePicture" />
@@ -196,6 +196,14 @@
         and status = #{status,jdbcType=INTEGER}
       </if>
 
+      <if test="minPoint != null and minPoint != ''">
+        and point &gt;= #{minPoint, jdbcType=INTEGER}
+      </if>
+
+      <if test="maxPoint != null and maxPoint != ''">
+        and point &lt;= #{maxPoint, jdbcType=INTEGER}
+      </if>
+
       <if test="createStartTime != null and createStartTime != ''">
         and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
       </if>
@@ -209,7 +217,32 @@
   </select>
 
   <select id="getCount" resultType="Integer">
-    select count(*) from consignor;
+    select count(*) from consignor
+    <where>
+      <if test="telephone != null and telephone != ''">
+        and telephone = #{telephone,jdbcType=VARCHAR}
+      </if>
+
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+
+      <if test="minPoint != null and minPoint != ''">
+        and point &gt;= #{minPoint, jdbcType=INTEGER}
+      </if>
+
+      <if test="maxPoint != null and maxPoint != ''">
+        and point &lt;= #{maxPoint, jdbcType=INTEGER}
+      </if>
+
+      <if test="createStartTime != null and createStartTime != ''">
+        and create_time &gt;= CONCAT(#{createStartTime},' 00:00:00')
+      </if>
+
+      <if test="createEndTime != null and createEndTime != ''">
+        and create_time &lt;= CONCAT(#{createEndTime},' 23:59:59')
+      </if>
+    </where>
   </select>
 
   <select id="getCountByTime" resultType="Integer">

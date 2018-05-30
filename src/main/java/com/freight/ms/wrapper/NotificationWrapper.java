@@ -1,9 +1,5 @@
 package com.freight.ms.wrapper;
 
-/**
- * Created by wyq on 2018/4/20.
- */
-
 import com.freight.ms.model.Notification;
 import com.freight.ms.util.DateUtil;
 

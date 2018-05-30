@@ -9,6 +9,7 @@ var initTable = function() {
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams : queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -37,7 +38,20 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params){
+        return {
+            name : $("#name").val(),
+            pointStart : $("#pointStart").val(),
+            pointEnd : $("#pointEnd").val(),
+            status : $("#status").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -48,16 +62,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        name : $("#name").val(),
-        pointStart : $("#pointStart").val(),
-        pointEnd : $("#pointEnd").val(),
-        status : $("#status").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_GOODS_LIST, query: queryParams}); //TODO:修改URL
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_GOODS_LIST});
 };
 
 var reset = function() {
@@ -116,7 +122,7 @@ var deleteGoods = function() {
     for(i in selected){
         idArray.push(selected[i].id);
 
-        str += selected[i].name; //TODO:修改字段
+        str += selected[i].name;
         if(i != selected.length - 1){
             str += "、";
         }
@@ -142,7 +148,7 @@ var deleteGoods = function() {
     });
 
     layer.confirm(str, {
-        btn: ['确认','取消'] //按钮
+        btn: ['确认','取消']
     }, function(){
         $.ajax();
     }, function(){

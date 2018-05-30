@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by wyq on 2018/4/2.
- */
-
 public interface UserService {
+
+    User findUserByName(String name);
 
     User findUserByUsername(String username);
 
@@ -31,4 +29,6 @@ public interface UserService {
     void changeStatus(List<Integer> list);
 
     void setRole(int userId, int roleId);
+
+    void changePassword(Integer id, String oldPassword, String newPassword);
 }

@@ -13,15 +13,14 @@ import com.freight.ms.service.UserService;
 import com.freight.ms.util.JsonUtil;
 import com.freight.ms.util.PasswordUtil;
 import com.freight.ms.wrapper.UserManageWrapper;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
-
-/**
- * Created by wyq on 2018/4/2.
- */
 
 @Service("UserService")
 public class UserServiceImpl implements UserService{
@@ -33,6 +32,10 @@ public class UserServiceImpl implements UserService{
 
     @Resource
     private OperationService operationService;
+
+    public User findUserByName(String name){
+        return userMapper.selectByName(name);
+    }
 
     public User findUserByUsername(String username){
         return userMapper.selectByUsername(username);
@@ -78,7 +81,7 @@ public class UserServiceImpl implements UserService{
             }
         }
 
-        return JsonUtil.getTableListJson(userMapper.getCount(),
+        return JsonUtil.getTableListJson(userMapper.getCount(paramMap),
                 new UserManageWrapper(userList).wrap());
     }
 
@@ -88,6 +91,12 @@ public class UserServiceImpl implements UserService{
         }
 
         user = new PasswordUtil().encryptPassword(user);
+        if(user.getType() == UserEnum.USER_TYPE_ADMIN.getCode()){
+            user.setRoleId(1);
+        }else if(user.getType() == UserEnum.USER_TYPE_NORMAL.getCode()){
+            user.setRoleId(2);
+        }
+
         try{
             userMapper.insertSelective(user);
         }catch (Exception e){
@@ -102,6 +111,14 @@ public class UserServiceImpl implements UserService{
 
         if(user.getPassword() != null){
             user = new PasswordUtil().encryptPassword(user);
+        }
+
+        if(user.getType() != null){
+            if(user.getType() == UserEnum.USER_TYPE_ADMIN.getCode()){
+                user.setRoleId(1);
+            }else if(user.getType() == UserEnum.USER_TYPE_NORMAL.getCode()){
+                user.setRoleId(2);
+            }
         }
 
         try{
@@ -162,7 +179,19 @@ public class UserServiceImpl implements UserService{
         User user = userMapper.selectByPrimaryKey(id);
         if(user == null){
             throw new BusinessException(BusinessEnumException.REQUEST_NULL);
+        }
 
+        PasswordUtil passwordUtil = new PasswordUtil();
+        if(!passwordUtil.checkPassword(user, oldPassword)){
+            throw new BusinessException(BusinessEnumException.USER_PASSWORD_ERROR);
+        }
+
+        user.setPassword(newPassword);
+        user = passwordUtil.encryptPassword(user);
+        try{
+            userMapper.updateByPrimaryKeySelective(user);
+        }catch (Exception e){
+            throw new BusinessException(BusinessEnumException.USER_PASSWORD_CHANGE_FAIL);
         }
     }
 }

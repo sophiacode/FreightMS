@@ -1,11 +1,8 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/28.
- */
 public enum DriverEnum {
-    DRIVER_STATUS_OK(0, "正常"),
-    DRIVER_STATUS_FREEZE(1, "冻结"),
+    DRIVER_STATUS_OK(1, "正常"),
+    DRIVER_STATUS_FREEZE(2, "冻结"),
     DRIVER_AUTH_YET(1, "未认证"),
     DRIVER_AUTH_DOING(2, "认证申请中"),
     DRIVER_AUTH_SUCCESS(3, "认证通过"),

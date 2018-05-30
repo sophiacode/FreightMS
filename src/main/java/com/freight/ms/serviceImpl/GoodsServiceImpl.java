@@ -37,7 +37,7 @@ public class GoodsServiceImpl implements GoodsService{
 
     public String findGoods(Map<String, Object> paramMap){
         List<Goods> goodsList = goodsMapper.selectByParams(paramMap);
-        return JsonUtil.getTableListJson(goodsMapper.getCount(),
+        return JsonUtil.getTableListJson(goodsMapper.getCount(paramMap),
                 new ExchangeWrapper(goodsList).wrap());
     }
 

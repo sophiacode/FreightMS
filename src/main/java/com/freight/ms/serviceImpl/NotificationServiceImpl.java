@@ -34,7 +34,7 @@ public class NotificationServiceImpl implements NotificationService{
             }
         }
 
-        return JsonUtil.getTableListJson(notificationMapper.getCount(),
+        return JsonUtil.getTableListJson(notificationMapper.getCount(paramMap),
                 new NotificationWrapper(notificationList).wrap());
     }
 

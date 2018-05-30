@@ -9,6 +9,7 @@ var initTable = function() {
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams: queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -31,16 +32,28 @@ var initTable = function() {
             field: 'content',
             title: '内容'
         },{
-            field: 'author_id',
+            field: 'adminName',
             title: '作者'
         },{
             field: 'status',
             title: '状态'
         },{
-            field: 'banner',
-            title: '宣传图'
+            field: 'createTime',
+            title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        return {
+            title : $("#title").val(),
+            authorName : $("#authorName").val(),
+            status: $("#status").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -51,15 +64,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        title : $("#title").val(),
-        authorName : $("#authorName").val(),
-        status: $("#status").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_ACTIVITY_LIST, query: queryParams});
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_ACTIVITY_LIST});
 };
 
 var reset = function() {

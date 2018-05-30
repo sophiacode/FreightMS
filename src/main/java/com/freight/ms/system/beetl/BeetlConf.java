@@ -12,10 +12,6 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 
 import java.io.IOException;
 
-/**
- * Created by wyq on 2018/3/24.
- */
-
 @Configuration
 public class BeetlConf {
     @Bean(initMethod = "init", name = "beetlConfig")

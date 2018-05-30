@@ -1,8 +1,5 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/22.
- */
 public enum ConsignorEnum {
     CONSIGNOR_STATUS_OK(1, "正常"),
     CONSIGNOR_STATUS_FREEZE(2, "冻结");

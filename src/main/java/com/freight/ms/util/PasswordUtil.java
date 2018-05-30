@@ -6,9 +6,6 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
-/**
- * Created by wyq on 2018/4/9.
- */
 public class PasswordUtil {
     private RandomNumberGenerator randomNumberGenerator =
             new SecureRandomNumberGenerator();
@@ -25,5 +22,15 @@ public class PasswordUtil {
         user.setPassword(newPassword);
 
         return user;
+    }
+
+    public boolean checkPassword(User user, String password) {
+        String p = new SimpleHash(
+                algorithmName,
+                password,
+                ByteSource.Util.bytes(user.getCredentialsSalt()),
+                hashIterations).toHex();
+
+        return p.equals(user.getPassword());
     }
 }

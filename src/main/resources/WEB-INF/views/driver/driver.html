@@ -30,8 +30,8 @@
                                 <label class="control-label" for="status">状态</label>
                                 <select class="form-control" id="status">
                                     <option value="">全部</option>
-                                    <option value="0">正常</option>
-                                    <option value="1">冻结</option>
+                                    <option value="1">正常</option>
+                                    <option value="2">冻结</option>
                                 </select>
                             </div>
 
@@ -51,7 +51,7 @@
                                 <select class="form-control" id="onlineState">
                                     <option value="">全部</option>
                                     <option value="1">在线</option>
-                                    <option value="2">离线</option>
+                                    <option value="2">不在线</option>
                                 </select>
                             </div>
 
@@ -100,14 +100,23 @@
             </div>
         </div>
         <div class="btn-group" id="toolbar">
+            <% if(shiro.hasPermission("driver:change_status")){ %>
             <button id="btn_freeze" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-plus"></span> 冻结/解除冻结
+                <span class="glyphicon glyphicon-minus"></span> 冻结/解除冻结
             </button>
+            <% } %>
 
+            <% if(shiro.hasPermission("driver:auth")){ %>
             <button id="btn_auth" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-plus"></span> 认证管理
+                <span class="glyphicon glyphicon-user"></span> 认证管理
             </button>
+            <% } %>
 
+            <% if(shiro.hasPermission("driver:location")){ %>
+            <button id="btn_map" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-map-marker"></span> 位置查询
+            </button>
+            <% } %>
         </div>
         <table id="driverTable"></table>
     </div>

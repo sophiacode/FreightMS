@@ -50,7 +50,17 @@ public interface OrderMapper {
 
     List<Order> selectByParams(Map<String, Object> paramMap);
 
-    int getCount();
+    int getCount(Map<String, Object> paramMap);
+
+    int getTotal(Map<String, Object> map);
+
+    int getProcess(Map<String, Object> map);
+
+    int getFinish(Map<String, Object> map);
+
+    int getCancel(Map<String, Object> map);
+
+    Double getPrice(Map<String, Object> map);
 
     Order selectByOrderNo(String orderNo);
 }

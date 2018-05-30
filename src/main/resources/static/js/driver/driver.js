@@ -9,6 +9,7 @@ var initTable = function() {
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams : queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -54,8 +55,26 @@ var initTable = function() {
         }, {
             field: 'licenseNumber',
             title: '车牌号'
+        }, {
+            field: 'createTime',
+            title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        return {
+            telephone : $("#telephone").val(),
+            name : $("#name").val(),
+            status: $("#status").val(),
+            authState: $("#authState").val(),
+            onlineState: $("#onlineState").val(),
+            workState : $("#workState").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -66,18 +85,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        telephone : $("#telephone").val(),
-        name : $("#name").val(),
-        status: $("#status").val(),
-        authState: $("#authState").val(),
-        onlineState: $("#onlineState").val(),
-        workState : $("#workState").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_DRIVER_LIST, query: queryParams});
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_DRIVER_LIST});
 };
 
 var reset = function() {
@@ -110,9 +119,9 @@ var changeStatus = function() {
         idArray.push(selected[i].id);
     }
 
-    $.ajaxSetup({
+    $.ajax({
         url:URL_DRIVER_STATUS,
-        async:true,
+        async:false,
         traditional:true,
         contentType: "application/json",
         data: {idArray : idArray},
@@ -127,8 +136,6 @@ var changeStatus = function() {
             layer.msg(json['msg'], { icon: 2} );
         }
     });
-
-    $.ajax();
 };
 
 var showAuth = function() {
@@ -148,6 +155,29 @@ var showAuth = function() {
     })
 };
 
+var showMap = function() {
+    var selected = table.bootstrapTable('getSelections');
+    if(selected.length < 1){
+        layer.msg("请先选择至少一条记录", {icon : 2});
+        return;
+    }
+
+    var idArray = new Array();
+    var i;
+    for(i in selected){
+        idArray.push(selected[i].id);
+    }
+
+    layerIndex = layer.open({
+        type: 2,
+        title: '位置查询',
+        maxmin: true,
+        shadeClose: true,
+        area: ['1000px', '600px'],
+        content: URL_DRIVER_MAP_VIEW + "/" + idArray
+    })
+};
+
 $(function () {
     table = $('#driverTable');
 
@@ -158,4 +188,5 @@ $(function () {
     $('#btn_reset').click(reset);
     $("#btn_freeze").click(changeStatus);
     $("#btn_auth").click(showAuth);
+    $("#btn_map").click(showMap);
 });

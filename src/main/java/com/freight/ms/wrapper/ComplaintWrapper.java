@@ -19,6 +19,8 @@ public class ComplaintWrapper extends BaseWrapper{
 
     @Override
     protected void wrapMap(Map<String, Object> map) {
+        map.put("type", ConstantFactory.getComplaintType( (Integer)map.get("type")));
+        map.put("status", ConstantFactory.getComplaintStatus( (Integer)map.get("status")));
         map.put("createTime", DateUtil.format((Date) map.get("createTime"), "yyyy.MM.dd"));
     }
 }

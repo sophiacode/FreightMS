@@ -50,5 +50,7 @@ public interface ComplaintMapper {
 
     List<Complaint> selectByParams(Map<String, Object> paramMap);
 
-    int getCount();
+    int getCount(Map<String, Object> paramMap);
+
+    int getCountByTime(Map<String, Object> map);
 }

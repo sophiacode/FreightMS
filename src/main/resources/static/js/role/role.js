@@ -9,6 +9,7 @@ var initTable = function() {
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams: queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -37,7 +38,18 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params){
+        return {
+            name : $("#name").val(),
+            identifier : $("#identifier").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -48,14 +60,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        name : $("#name").val(),
-        identifier : $("#identifier").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_ROLE_LIST, query: queryParams});
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_ROLE_LIST});
 };
 
 var reset = function() {
@@ -89,6 +95,12 @@ var showEdit = function() {
         return;
     }
 
+    console.log(selected[0].id);
+    if(selected[0].id == 1 || selected[0].id == 2){
+        layer.msg("超级管理员与访客是系统固定角色，不允许修改", {icon : 2});
+        return;
+    }
+
     layerIndex = layer.open({
         type: 2,
         title: '修改角色',
@@ -106,12 +118,17 @@ var showPermission = function() {
         return;
     }
 
+    if(selected[0].id == 1 || selected[0].id == 2){
+        layer.msg("超级管理员与访客是系统固定角色，不允许重新分配权限", {icon : 2});
+        return;
+    }
+
     layerIndex = layer.open({
         type: 2,
         title: '分配权限',
         maxmin: true,
         shadeClose: true,
-        area: ['800px', '520px'],
+        area: ['400px', '520px'],
         content: URL_ROLE_MANAGE + "/permission" + "/" + selected[0].id
     })
 };
@@ -127,6 +144,11 @@ var deleteRole = function() {
     var str = "确定要删除角色";
     var i;
     for(i in selected){
+        if(selected[i].id == 1 || selected[i].id == 2){
+            layer.msg("超级管理员与访客是系统固定角色，不允许删除", {icon : 2});
+            return;
+        }
+
         idArray.push(selected[i].id);
 
         str += selected[i].name; //TODO:修改字段

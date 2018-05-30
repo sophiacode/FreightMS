@@ -3,12 +3,13 @@ var table;
 
 var initTable = function() {
     table.bootstrapTable({
-        url: URL_COUPON_LIST,//TODO:修改URL
+        url: URL_COUPON_LIST,
         method: 'get',
         toolbar: '#toolbar',
         cache: false,
         pagination: true,
         sortable: false,
+        queryParams : queryParams,
         queryParamsType:'limit',
         sidePagination: "server",
         pageNumber:1,
@@ -40,7 +41,17 @@ var initTable = function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    })
+    });
+
+    function queryParams(params) {
+        return {
+            name : $("#name").val(),
+            createStartTime : $("#createStartTime").val(),
+            createEndTime : $("#createEndTime").val(),
+            limit: params.limit,
+            offset: params.offset
+        };
+    }
 };
 
 var initDateTimePicker = function() {
@@ -51,13 +62,8 @@ var initDateTimePicker = function() {
 };
 
 var search = function() {
-    var queryParams = {
-        name : $("#name").val(),
-        createStartTime : $("#createStartTime").val(),
-        createEndTime : $("#createEndTime").val()
-    };
-
-    table.bootstrapTable('refresh', {url:URL_COUPON_LIST, query: queryParams}); //TODO:修改URL
+    table.bootstrapTable('refreshOptions',{pageNumber:1});
+    table.bootstrapTable('refresh', {url:URL_COUPON_LIST});
 };
 
 var reset = function() {
@@ -100,6 +106,23 @@ var showEdit = function() {
     })
 };
 
+var showRelease = function() {
+    var selected = table.bootstrapTable('getSelections');
+    if(selected.length != 1){
+        layer.msg("请先选择一条记录", {icon : 2});
+        return;
+    }
+
+    layerIndex = layer.open({
+        type: 2,
+        title: '发放优惠券',
+        maxmin: true,
+        shadeClose: true,
+        area: ['500px', '550px'],
+        content: URL_COUPON_RELEASE_VIEW + "/" + selected[0].id
+    })
+};
+
 var deleteCoupon = function() {
     var selected = table.bootstrapTable('getSelections');
     if(selected.length == 0){
@@ -113,7 +136,7 @@ var deleteCoupon = function() {
     for(i in selected){
         idArray.push(selected[i].id);
 
-        str += selected[i].name; //TODO:修改字段
+        str += selected[i].name;
         if(i != selected.length - 1){
             str += "、";
         }
@@ -121,7 +144,7 @@ var deleteCoupon = function() {
     str += "吗？";
 
     $.ajaxSetup({
-        url: URL_COUPON_DELETE,//TODO:URL
+        url: URL_COUPON_DELETE,
         async:true,
         traditional:true,
         contentType: "application/json",
@@ -158,4 +181,5 @@ $(function () {
     $('#btn_add').click(showAdd);
     $('#btn_edit').click(showEdit);
     $('#btn_delete').click(deleteCoupon);
+    $("#btn_release").click(showRelease);
 });

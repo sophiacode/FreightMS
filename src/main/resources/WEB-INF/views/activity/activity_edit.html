@@ -5,8 +5,8 @@
 <div class="row">
     <div class="col-sm-12">
         <form role="form" id="activityInfoForm">
-            <input type="hidden" id="id" value="{activity.id}">
-            <input type="hidden" id="statusValue" value="{activity.status}">
+            <input type="hidden" id="id" value="${activity.id}">
+            <input type="hidden" id="statusValue" value="${activity.status}">
 
             <div class="row">
                 <div class="col-sm-12">
@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label for="content">内容</label>
-                        <textarea class="form-control" rows="5" name="content" id="content" value="${activity.content}"></textarea>
+                        <textarea class="form-control" rows="5" name="content" id="content">${activity.content}</textarea>
                     </div>
                 </div>
             </div>

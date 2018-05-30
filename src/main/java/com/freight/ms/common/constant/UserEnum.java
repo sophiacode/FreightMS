@@ -1,8 +1,5 @@
 package com.freight.ms.common.constant;
 
-/**
- * Created by wyq on 2018/4/9.
- */
 public enum UserEnum{
     USER_SEX_MAN(1, "男"),
     USER_SEX_WOMAN(2, "女"),

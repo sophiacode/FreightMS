@@ -19,6 +19,8 @@ public class OrderWrapper extends BaseWrapper{
 
     @Override
     protected void wrapMap(Map<String, Object> map) {
+        map.put("orderStatus", ConstantFactory.getOrderStatus( (Integer)map.get("orderStatus")));
+        map.put("payStatus", ConstantFactory.getOrderPayStatus( (Integer)map.get("payStatus")));
         map.put("createTime", DateUtil.format((Date) map.get("createTime"), "yyyy.MM.dd"));
     }
 }

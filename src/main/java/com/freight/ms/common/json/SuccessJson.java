@@ -2,9 +2,6 @@ package com.freight.ms.common.json;
 
 import com.alibaba.fastjson.JSONObject;
 
-/**
- * Created by wyq on 2018/4/12.
- */
 public class SuccessJson {
     public static String getJson(String msg){
         JSONObject object = new JSONObject();
